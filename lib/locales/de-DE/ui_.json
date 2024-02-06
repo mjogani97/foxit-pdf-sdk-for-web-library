@@ -1,8 +1,8 @@
 {
   "retry": {
-    "Password": "Kennwort",
-    "inputPassword": "Bitte geben Sie das Kennwort ein:",
-    "invalidPassword": "Ungültiges Kennwort"
+    "Password": "Passwort",
+    "inputPassword": "Bitte geben Sie das Passwort ein:",
+    "invalidPassword": "Ungültiges Passwort"
   },
   "alert": {
     "incorrect-filetype": "Falscher Dateityp!",
@@ -10,6 +10,7 @@
     "formatError": "Das Dateiformat ist möglicherweise ungültig oder beschädigt.",
     "securityError": "Das aktuelle PDF-Dokument wurde von einem nicht unterstützten Sicherheitsprogramm verschlüsselt.",
     "unsupportedStamp": "Dieser Dateityp wird derzeit nicht unterstützt.",
+    "smallFile": "Es sollte weniger als 16 MB betragen.",
     "browserNotSupportDownload": "Ihr Browser unterstützt keinen Dateidownload. Bitte versuchen Sie es im Desktop-Browser erneut.",
     "imageInvalid": "Bild ungültig.",
     "browserRestriction": "Diese Aktion wird gespeichert, kann in Foxit PDF Editor Cloud aber aufgrund von Einschränkungen der Browserplattform nicht ausgeführt werden.",
@@ -221,7 +222,7 @@
         "title": "Text hinzufügen"
       },
       "comboField": {
-        "title": "Kombinationsfeld hinzufügen"
+        "title": "Komb.feld hinzufügen"
       },
       "predefinedText": {
         "text": "Vordefinierter Text",
@@ -430,7 +431,7 @@
           "fieldset-author": "Autor",
           "fieldset-commentType": "Kommentar",
           "fieldset-original-author": "Nur nach ursprünglichem Autor filtern",
-          "clear-selection-btn": "Auswahl aufheben"
+          "clear-selection-btn": "Alles löschen"
         }
       },
       "dropdown": {
@@ -460,6 +461,7 @@
       "page-title": "Seite {{pageNumber}}",
       "group-title": "{{groupName}} {{count}}",
       "comment-dropdown": {
+        "reply": "Antworten",
         "copy-text": "Text kopieren",
         "edit-text": "Bearbeiten",
         "delete": "Löschen",
@@ -810,7 +812,7 @@
     "shadingStyleGradientStopsDialog": {
       "gradientStops": "Gradientenbegrenzungen",
       "color": "Farbe: ",
-      "location": "Ort: "
+      "location": "Speicherort: "
     },
     "measure": {
       "title": "Messen",
@@ -929,7 +931,9 @@
       "dashType": "Strichtyp",
       "lineCap": "Linienende",
       "lineJoin": "Linienverbindung",
-      "miterLimit": "Gehrungsgrenze"
+      "miterLimit": "Gehrungsgrenze",
+      "sample": "Beispiel",
+      "opacity": "Deckkraft:"
     },
     "shadingStyle": {
       "gradientStops": "Gradientenbegrenzungen",
@@ -1142,6 +1146,7 @@
     },
     "warning": "Warnung",
     "error": {
+      "pleaseUncheckMultiLine": "Das Format für mehrzeiligen Text kann nicht angewendet werden. Wenn Sie das Format anwenden möchten, wechseln Sie zur Registerkarte „Optionen“ und deaktivieren Sie „Mehrzeilig“.",
       "noRedactionLicense": "Das aktuelle Modul ist nicht lizenziert.",
       "noRedactionApplyPermission": "Keine Bearbeitung gestattet",
       "fileFormatError": "Das Dateiformat ist falsch",
@@ -1175,6 +1180,7 @@
       "name": "Name:",
       "issue": "Ausgestellt von:",
       "usage": "Nutzung:",
+      "extUsage": "Erweiterte Schlüsselverwendung:",
       "from": "Gültig ab:",
       "to": "Gültig bis:",
       "email": "E-Mail-Adresse:",
@@ -1226,7 +1232,7 @@
       "height": "Höhe",
       "catagoryHolder": "Wählen Sie eine Kategorie aus oder geben Sie sie ein.",
       "selectSource": "Datei",
-      "selectLocal": "Durchsuchen ...",
+      "selectLocal": "Durchsuchen",
       "addLink": "Datei-URL eingeben",
       "categoryPlaceholder": "<Benennung einer neuen Kategorie>",
       "namePlaceholder": "Neuer Stempel",
@@ -1393,14 +1399,14 @@
     "localAddr": "Lokale Datei",
     "ftpAddr": "FTP-Adresse",
     "anonymous": "Anonym anmelden",
-    "needUP": "Benutzername und Kennwort erforderlich",
+    "needUP": "Benutzername und Passwort erforderlich",
     "username": "Benutzername",
-    "password": "Kennwort",
+    "password": "Passwort",
     "rightTitle": "Felder auswählen",
     "show": "Anzeigen",
     "hide": "Ausblenden",
     "selectAll": "Alles auswählen",
-    "deselectAll": "Auswahl aufheben",
+    "deselectAll": "Alles löschen",
     "showHideTitle": "Feld anzeigen/ausblenden",
     "page": "Seitennummer",
     "zoom": "Zoomfaktor",
@@ -1577,6 +1583,7 @@
     "ok": "OK",
     "cancel": "Abbrechen",
     "alert-title": "",
+    "alert-message": "",
     "prompt-title": "",
     "prompt-message": "",
     "confirm-title": "",
@@ -1585,27 +1592,27 @@
   },
   "signDocument": {
     "nohandlers": "Bitte registrieren Sie zuerst die Signierungsanwender (Call PDFUI.registerSignatureHandler(...)).",
-    "ap-title": "Signaturformat-Config",
+    "ap-title": "Signaturformat konfigurieren",
     "title": "Dokument signieren",
     "sign-as": "Signieren als",
-    "property-title": "Text für Signatur",
-    "location": "Ort",
+    "property-title": "Text konfigurieren",
+    "location": "Speicherort",
     "reason": "Grund",
     "lock-document": "Dokument nach der Signierung sperren",
     "appearance": "Darstellung",
     "background": "Hintergrund",
     "image-setting": "Bildeinstellung",
-    "text-setting": "Texteinstellung",
+    "text-setting": "Text konfigurieren",
     "signed-by": "Digital signiert von",
     "name": "Name",
-    "DN": "AN",
-    "tag": "Bild mit Tags versehen",
+    "DN": "Ausgezeichneter Name",
+    "tag": "Bild",
     "date": "Datum",
     "version": "Version",
-    "label": "Bezeichnung",
+    "label": "Bezeichnungen",
     "draw": "Zeichnen",
     "no-left": "Keine",
-    "owner": "Besitzer",
+    "owner": "Name",
     "permission": "Zulässige Aktionen nach der Signierung",
     "noSpecified": "Standard beibehalten",
     "permNone": "Keine Änderungen zugelassen",
@@ -1613,7 +1620,8 @@
     "permAnnot": "Kommentieren, Formulare ausfüllen, vorhandene Signaturfelder signieren",
     "sign": "Signieren",
     "showSignProperty": "Signatureigenschaften anzeigen...",
-    "certifyDoc": "Dokument zertifizieren"
+    "certifyDoc": "Dokument zertifizieren",
+    "notSupportPagingSeal": "Das zu signierende Dokument eignet sich nicht für Paginierungssiegel."
   },
   "verifySign": {
     "title": "Ergebnis der Signaturüberprüfung",
@@ -1651,6 +1659,7 @@
     "verifyUnknown": "Der geänderte Status des Dokuments ist unbekannt.",
     "changeLegal": "Das Dokument wurde außerhalb des Bereichs der Signatur geändert, aber die Änderung ist zulässig.",
     "changeIllegal": "Das Dokument wurde außerhalb des Bereichs der Signatur geändert und die Änderung macht die Signatur ungültig.",
+    "errorByteRange": "Es gibt einige Fehler in der Formatierung oder in der Signatur enthaltenen Informationen",
     "issuerInvalid_mac": "Die Identität des Unterzeichners ist ungültig.",
     "issuerInvalid": "Das Zertifikat des Unterzeichners ist ungültig",
     "issuerRevoke": "Die Identität des Unterzeichners war zu diesem Zeitpunkt ungültig, da das Zertifikat nach der Überprüfung widerrufen wurde.",
@@ -1719,7 +1728,7 @@
     "signedByLabel": "Signiert von:",
     "reasonLabel": "Grund:",
     "dateLabel": "Datum:",
-    "locationLabel": "Ort:",
+    "locationLabel": "Speicherort:",
     "validitySummary": "Prüfungszusammenfassung:",
     "validatedSigningTime": "Die Signatur wurde zur folgenden Signierzeit validiert:\n {{verifyTime}}",
     "validatedCurrentTime": "Die Signatur wurde zur aktuellen Zeit validiert:\n {{verifyTime}}",
@@ -1736,8 +1745,7 @@
     "timestampDetailTitle": "Zeitstempeldetails:",
     "timestampDes": "Der Zeitstempel ist in der Signatur eingebettet. Zeitstempel werden wie so unterzeichnet, wie Dokumente unterzeichnet werden. Damit die Signatur eines Zeitstempels gültig ist, müssen Sie der Zeitstempelbehörde, die den Zeitstempel unterzeichnet hat, vertrauen.",
     "timeStampShowCertificateDes": "Klicken Sie auf „Zertifikat anzeigen“, um die Details zur Überprüfung der Zeitstempelsignatur anzuzeigen. Klicken Sie auf „Zu vertrauenswürdigen Zertifikaten hinzufügen“, um ihm zu vertrauen.",
-    "timestampAuthority": "Zeitstempelbehörde:",
-    "errorByteRange": "Es gibt einige Fehler in der Formatierung oder den in der Signatur enthaltenen Informationen"
+    "timestampAuthority": "Zeitstempelbehörde:"
   },
   "certificate": {
     "manageTrustDlgTitle": "Signaturvertrauen verwalten",
@@ -1754,7 +1762,16 @@
     "trustForLabel": "Wenn die Signatur validiert wurde, diesem Zertifikat für Folgendes vertrauen:",
     "validatingSignaturesLabel": "Signaturen werden geprüft",
     "validatingCertifiedDocumentLabel": "Validieren von zertifizierten Dokumenten",
-    "addToTrustedCertificatesBtn": "Zu vertrauenswürdigen Zertifikaten hinzufügen"
+    "addToTrustedCertificatesBtn": "Zu vertrauenswürdigen Zertifikaten hinzufügen",
+    "summary": "Zusammenfassung",
+    "revocation": "Widerruf",
+    "notPerformed": "Es wurden keine Widerrufsüberprüfungen durchgeführt",
+    "uncheck": "Es konnte nicht festgestellt werden, ob das ausgewählte Zertifikat gültig ist.",
+    "details": "Details",
+    "detailsInfo": "Das ausgewählte Zertifikat ist entweder ein Vertrauensanker oder ein Zertifikat oberhalb des Vertrauensankers oder ein Zertifikat oberhalb des Vertrauensankers in der Zertifikatskette (Einzelheiten finden Sie auf der Registerkarte Vertrauen). Für solche Zertifikate werden keine Sperrprüfungen durchgeführt, sie gelten grundsätzlich als vertrauenswürdig.",
+    "notTrust": "Das ausgewählte Zertifikat ist nicht mit einem Zertifikat verkettet, das als vertrauenswürdiger Anker bestimmt ist (Details finden Sie auf der Registerkarte \"Vertrauen\"). Für dieses Zertifikat wurden daher keine Widerrufsüberprüfungen durchgeführt.",
+    "signerDetail": "Details zum Unterzeichner",
+    "checkRevocation": "Widerrufsüberprüfung"
   },
   "phantompdfOnlineTitle": "PDF-Editor",
   "portfolio": {
@@ -1926,7 +1943,7 @@
     "title": "Strukturelemente",
     "description": "Struktur",
     "selectAll": "Alles auswählen",
-    "clearAll": "Auswahl aufheben"
+    "clearAll": "Alles löschen"
   },
   "const": {
     "annotType": {
@@ -2131,7 +2148,87 @@
       "newCode": "Schwärzungscode"
     }
   },
+  "popupNote": {
+    "close": "Notizfenster schließen",
+    "closeAll": "Alle Popups schließen"
+  },
   "esign": {
     "tabTitle": "Elektronische Signatur"
+  },
+  "ai": {
+    "product": "KI-Assistent"
+  },
+  "colorPicker": {
+    "Title": "Farbwähler",
+    "Ok": "OK",
+    "No": "Abbrechen",
+    "customColor": "Benutzerdefinierte Farbe",
+    "customColorPropTitle": "Ändern Sie die ausgewählte benutzerdefinierte Farbe, indem Sie der Farbpalette folgen",
+    "customBorderColor": "Rahmenfarbe",
+    "customFillColor": "Füllfarbe",
+    "noFillColor": "Keine Füllfarbe",
+    "editColor": "Farbe bearbeiten"
+  },
+  "lang": {
+    "ar-001": "Arabisch",
+    "ar-SA": "Arabisch Saudi-Arabien",
+    "bn-BD": "Bangla Bangladesch",
+    "bn-IN": "Bangla Indien",
+    "ca-ES": "Katalanisch",
+    "cs-CZ": "Tschechische Republik",
+    "da-DK": "Dänisch Dänemark",
+    "de-AT": "Deutsch Österreich",
+    "de-CH": "Deutschland Schweiz",
+    "de-DE": "Deutsch",
+    "el-GR": "Griechisch",
+    "en-AU": "Englisch Australien",
+    "en-CA": "Deutsch Kanada",
+    "en-GB": "Englisch Vereinigtes Königreich",
+    "en-IE": "Englisch Irland",
+    "en-IN": "Deutsch Indien",
+    "en-NZ": "Englisch Neuseeland",
+    "en-US": "Englisch Vereinigte Staaten",
+    "en-ZA": "Englisch Südafrika",
+    "es-AR": "Spanisch Argentinien",
+    "es-CL": "Spanisch Chile",
+    "es-CO": "Spanisch Kolumbien",
+    "es-ES": "Spanisch",
+    "es-MX": "Spanisch Mexiko",
+    "es-US": "Spanien Vereinigte Staaten",
+    "fi-FI": "Finnisch Finnland",
+    "fr-BE": "Französisch Belgien",
+    "fr-CA": "Französisch Kanada",
+    "fr-CH": "Französisch Schweiz",
+    "fr-FR": "Französisch",
+    "he-IL": "Hebräisch Israel",
+    "hi-IN": "Hindi Indien",
+    "hu-HU": "Ungarisch Ungarn",
+    "hr-HR": "Kroatisch",
+    "id-ID": "Indonesisch",
+    "it-CH": "Italienische Schweiz",
+    "it-IT": "Italienisch",
+    "ja-JP": "Japanisch",
+    "ko-KR": "Koreanisch",
+    "ms-MY": "Malaiisch",
+    "nb-NO": "Norwegisch Bokmål",
+    "nl-BE": "Deutsch Belgien",
+    "nl-NL": "Niederländisch Die Niederlande",
+    "no-NO": "Norwegisch Norwegen",
+    "pl-PL": "Polnisch Polen",
+    "pt-BR": "Portugiesisch Brasilien",
+    "pt-PT": "Portugiesisch Portugal",
+    "ro-RO": "Rumänisch Rumänien",
+    "ru-RU": "Russisch",
+    "sk-SK": "Slowakei Slowakei",
+    "sv-SE": "Schwedisch Schweden",
+    "ta-IN": "Tamilisch Indien",
+    "ta-LK": "Tamilisch Sri Lanka",
+    "th-TH": "Thailändisch",
+    "tr-TR": "Türkische Türkei",
+    "uk-UA": "Ukrainisch",
+    "vi-VN": "Vietnamesisch",
+    "zh-CN": "Chinesisch",
+    "zh-HK": "Chinesisch Hongkong",
+    "zh-TW": "Chinesisch Taiwan"
   }
 }

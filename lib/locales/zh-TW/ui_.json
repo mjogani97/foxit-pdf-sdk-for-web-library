@@ -10,6 +10,7 @@
     "formatError": "檔案格式可能無效或損壞。",
     "securityError": "目前的 PDF 檔案是由一些不支援的安全性處理常式所加密。",
     "unsupportedStamp": "不支援此檔案類型。",
+    "smallFile": "應該小於16MB。",
     "browserNotSupportDownload": "您的瀏覽器不支持檔案下載。請在桌面瀏覽器中重試。",
     "imageInvalid": "圖片無效。",
     "browserRestriction": "此操作將被保存，但由於瀏覽器平台的限制，無法在 Foxit PDF Editor Cloud 中執行。",
@@ -460,6 +461,7 @@
       "page-title": "頁碼{{pageNumber}}",
       "group-title": "{{groupName}} {{count}}",
       "comment-dropdown": {
+        "reply": "回覆",
         "copy-text": "複製文本",
         "edit-text": "編輯",
         "delete": "刪除",
@@ -929,7 +931,9 @@
       "dashType": "虛線樣式",
       "lineCap": "線條端點",
       "lineJoin": "線條聯結",
-      "miterLimit": "斜接限制"
+      "miterLimit": "斜接限制",
+      "sample": "範例",
+      "opacity": "不透明度:"
     },
     "shadingStyle": {
       "gradientStops": "漸層停駐點",
@@ -1142,6 +1146,7 @@
     },
     "warning": "警告",
     "error": {
+      "pleaseUncheckMultiLine": "無法套用格式至多行文字，若要套用格式化，請移至「選項」索引標籤並取消核取「多行」。",
       "noRedactionLicense": "當前模塊未獲得許可",
       "noRedactionApplyPermission": "無可應用的密文",
       "fileFormatError": "檔案格式不正確",
@@ -1175,6 +1180,7 @@
       "name": "名稱：",
       "issue": "核發者：",
       "usage": "用途：",
+      "extUsage": "擴展密鑰用途:",
       "from": "有效期間開始於：",
       "to": "有效期間結束於：",
       "email": "電子郵件地址：",
@@ -1577,6 +1583,7 @@
     "ok": "確定",
     "cancel": "取消",
     "alert-title": "",
+    "alert-message": "",
     "prompt-title": "",
     "prompt-message": "",
     "confirm-title": "",
@@ -1613,7 +1620,8 @@
     "permAnnot": "新增註解、填寫表單、簽署已存在的簽名欄位",
     "sign": "簽名",
     "showSignProperty": "顯示簽名內容...",
-    "certifyDoc": "認證文件"
+    "certifyDoc": "認證文件",
+    "notSupportPagingSeal": "簽署文件不支援分頁封印。"
   },
   "verifySign": {
     "title": "驗證簽名的結果",
@@ -1754,7 +1762,16 @@
     "trustForLabel": "如果簽名成功，則執行下列操作時信任此憑證：",
     "validatingSignaturesLabel": "驗證簽名",
     "validatingCertifiedDocumentLabel": "驗證經過認證的文件",
-    "addToTrustedCertificatesBtn": "新增至信任的憑證"
+    "addToTrustedCertificatesBtn": "新增至信任的憑證",
+    "summary": "摘要",
+    "revocation": "撤銷",
+    "notPerformed": "未執行撤銷檢查",
+    "uncheck": "無法判斷選取的憑證是否有效",
+    "details": "詳細資料",
+    "detailsInfo": "選取的憑證是信任錨點，或在憑證鏈接中位於信任錨點上方的憑證 (請參閱「信任索引標籤」中的詳細資訊)。未對這類憑證進行任何撤銷檢查，這些憑證原本就視為值得信任。",
+    "notTrust": "選取的憑證未鏈接至指定為信任錨點的憑證 (請參閱「信任索引標籤」中的詳細資訊)。結果會是未對此憑證執行撤銷檢查。",
+    "signerDetail": "簽署者詳細資訊",
+    "checkRevocation": "檢查撤銷"
   },
   "phantompdfOnlineTitle": "PDF Editor",
   "portfolio": {
@@ -2131,7 +2148,87 @@
       "newCode": "密文代碼"
     }
   },
+  "popupNote": {
+    "close": "關閉彈出視窗備註",
+    "closeAll": "關閉所有彈出視窗"
+  },
   "esign": {
     "tabTitle": "電子簽名"
+  },
+  "ai": {
+    "product": "AI助手"
+  },
+  "colorPicker": {
+    "Title": "顏色選擇器",
+    "Ok": "確定",
+    "No": "取消",
+    "customColor": "自訂色彩",
+    "customColorPropTitle": "按照以下的調色板修改所選的自定義顏色",
+    "customBorderColor": "框線色彩",
+    "customFillColor": "色彩填滿",
+    "noFillColor": "無填滿色彩",
+    "editColor": "編輯色彩"
+  },
+  "lang": {
+    "ar-001": "阿拉伯文",
+    "ar-SA": "阿拉伯語沙烏地阿拉伯",
+    "bn-BD": "孟加拉孟加拉国",
+    "bn-IN": "孟加拉印度",
+    "ca-ES": "加泰羅尼亞文",
+    "cs-CZ": "捷克共和國",
+    "da-DK": "丹麥 丹麥",
+    "de-AT": "德國奧地利",
+    "de-CH": "德語瑞士",
+    "de-DE": "德文",
+    "el-GR": "希臘文",
+    "en-AU": "英語澳大利亞",
+    "en-CA": "英語加拿大",
+    "en-GB": "英國英語",
+    "en-IE": "英語愛爾蘭",
+    "en-IN": "英語印度",
+    "en-NZ": "英文紐西蘭",
+    "en-US": "英語 美國",
+    "en-ZA": "英語南非",
+    "es-AR": "西班牙語阿根廷",
+    "es-CL": "西班牙語智利",
+    "es-CO": "西班牙哥倫比亞",
+    "es-ES": "西班牙文",
+    "es-MX": "西班牙語墨西哥",
+    "es-US": "西班牙美國",
+    "fi-FI": "芬蘭芬蘭",
+    "fr-BE": "法國比利時",
+    "fr-CA": "加拿大法語區域",
+    "fr-CH": "法國瑞士",
+    "fr-FR": "法文",
+    "he-IL": "希伯來以色列",
+    "hi-IN": "印度印地語",
+    "hu-HU": "匈牙利匈牙利",
+    "hr-HR": "克羅埃西亞文",
+    "id-ID": "印尼文",
+    "it-CH": "瑞士意大利語區",
+    "it-IT": "義大利文",
+    "ja-JP": "日文",
+    "ko-KR": "韓文",
+    "ms-MY": "馬來文",
+    "nb-NO": "挪威博克馬爾語",
+    "nl-BE": "荷蘭比利時",
+    "nl-NL": "荷蘭荷蘭",
+    "no-NO": "挪威挪威",
+    "pl-PL": "波蘭波蘭",
+    "pt-BR": "巴西葡萄牙語",
+    "pt-PT": "葡萄牙葡萄牙語",
+    "ro-RO": "羅馬尼亞 羅馬尼亞",
+    "ru-RU": "俄文",
+    "sk-SK": "斯洛伐克斯洛伐克",
+    "sv-SE": "瑞典瑞典",
+    "ta-IN": "泰米爾納德邦印度",
+    "ta-LK": "泰米爾斯里蘭卡",
+    "th-TH": "泰文",
+    "tr-TR": "土耳其土耳其",
+    "uk-UA": "烏克蘭文",
+    "vi-VN": "越南文",
+    "zh-CN": "中文",
+    "zh-HK": "中文香港",
+    "zh-TW": "中文台灣"
   }
 }

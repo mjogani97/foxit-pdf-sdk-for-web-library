@@ -28,7 +28,7 @@
     "snapshotServer": "Vergewissern Sie sich, dass PDFViewer.options.snapshotServer richtig konfiguriert ist und der entsprechende Server bereit ist."
   },
   "tip": {
-    "inputPassword": "Bitte geben Sie das Kennwort ein:"
+    "inputPassword": "Bitte geben Sie das Passwort ein:"
   },
   "contextmenu": {
     "annot": {

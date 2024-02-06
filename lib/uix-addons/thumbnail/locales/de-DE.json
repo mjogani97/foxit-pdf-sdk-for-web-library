@@ -58,7 +58,7 @@
     "removing": "Miniaturansichten werden entfernt ..."
   },
   "retry": {
-    "title": "Die Datei „${filename}“ ist geschützt. Geben Sie das Kennwort zum Öffnen des Dokuments ein.",
+    "title": "Die Datei „${filename}“ ist geschützt. Geben Sie das Passwort zum Öffnen des Dokuments ein.",
     "notSupport": "Foxit PDF Editor unterstützt dieses Dateiformat nicht. Öffnen Sie die Datei direkt und drucken Sie sie mit dem Foxit PDF Editor-Drucker."
   },
   "zoom": {

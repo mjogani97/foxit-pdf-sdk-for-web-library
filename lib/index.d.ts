@@ -1,5 +1,5 @@
 import * as EventEmitter from 'eventemitter3';
-import i18next from 'i18next';
+import * as i18next from 'i18next';
 
 declare type TypedArray =
   | Uint8Array
@@ -93,6 +93,19 @@ declare module __internal__ {
     setSubAction(index: number, action: Action): Promise<object>;
   }
 
+  class EmbeddedGotoAction extends Action {
+    getDestination(): object;
+    getNewWindowFlag(): number;
+    getTargetFileInfo(): Promise<object>;
+    getSubAction(index: number): Action;
+    getSubActionCount(): number;
+    getType(): string;
+    insertSubAction(index: number, action: Action): Promise<object>;
+    removeAllSubActions(): Promise<void>;
+    removeSubAction(index: number): Promise<void>;
+    setSubAction(index: number, action: Action): Promise<object>;
+  }
+
   class GoToAction extends Action {
     getDestination(): object;
     setDestination(destination: {
@@ -141,9 +154,22 @@ declare module __internal__ {
 
   class ResetFormAction extends Action {
     getFieldNames(): string[];
-    getFlags(): boolean;
+    getFlags(): number;
     setFieldNames(fieldNames: string[]): Promise<Action>;
     setFlags(flags: 0 | 1): Promise<Action>;
+    getSubAction(index: number): Action;
+    getSubActionCount(): number;
+    getType(): string;
+    insertSubAction(index: number, action: Action): Promise<object>;
+    removeAllSubActions(): Promise<void>;
+    removeSubAction(index: number): Promise<void>;
+    setSubAction(index: number, action: Action): Promise<object>;
+  }
+
+  class SubmitFormAction extends Action {
+    getFieldNames(): string[];
+    getFlags(): number;
+    getURL(): string;
     getSubAction(index: number): Action;
     getSubActionCount(): number;
     getType(): string;
@@ -166,67 +192,73 @@ declare module __internal__ {
   }
 
   enum Annot_Flags {
-    invisible,
-    hidden,
-    print,
-    noZoom,
-    noRotate,
-    noView,
-    readOnly,
-    locked,
-    toggleNoView,
-    lockedContents,
-  }
+    invisible = 1,
+    hidden = 2,
+    print = 4,
+    noZoom = 8,
 
+    noRotate = 16,
+    noView = 32,
+    readOnly = 64,
+    locked = 128,
+
+    toggleNoView = 256,
+    lockedContents = 512,
+  }
   enum Annot_Type {
-    unKnownType,
-    text,
-    link,
-    freeText,
-    line,
-    square,
-    circle,
-    polygon,
-    polyline,
-    highlight,
-    underline,
-    squiggly,
-    strikeOut,
-    stamp,
-    caret,
-    ink,
-    psInk,
-    fileAttachment,
-    widget,
-    screen,
-    popup,
-    redact,
-  }
+    unKnownType = 'unknowntype',
+    text = 'text',
+    link = 'link',
+    freeText = 'freetext',
 
+    line = 'line',
+    square = 'square',
+    circle = 'circle',
+    polygon = 'polygon',
+    polyline = 'polyline',
+    highlight = 'highlight',
+    underline = 'underline',
+    squiggly = 'squiggly',
+
+    strikeOut = 'strikeout',
+    stamp = 'stamp',
+    caret = 'caret',
+    ink = 'ink',
+
+    psInk = 'psink',
+    fileAttachment = 'fileattachment',
+    widget = 'widget',
+    screen = 'screen',
+    popup = 'popup',
+    redact = 'redact',
+  }
   enum Annot_Unit_Type {
-    inch,
-    custom,
-    mi,
-    pt,
-    ft,
-    yd,
-    km,
-    m,
-    cm,
-    mm,
-    pica,
-  }
+    inch = 'inch',
+    custom = 'custom',
+    mi = 'mi',
+    pt = 'pt',
 
+    ft = 'ft',
+    yd = 'yd',
+    km = 'km',
+    m = 'm',
+
+    cm = 'cm',
+    mm = 'mm',
+    pica = 'pica',
+  }
   enum MARKUP_ANNOTATION_STATE {
-    MARKED,
-    UNMARKED,
-    ACCEPTED,
-    REJECTED,
-    CANCELLED,
-    COMPLETED,
-    DEFERRED,
-    FUTURE,
-    NONE,
+    MARKED = 'marked',
+    UNMARKED = 'unmarked',
+    ACCEPTED = 'accepted',
+    REJECTED = 'rejected',
+
+    CANCELLED = 'cancelled',
+    COMPLETED = 'completed',
+    DEFERRED = 'deferred',
+    FUTURE = 'future',
+
+    NONE = 'none',
   }
 
   export interface IAnnotationSummary {
@@ -238,7 +270,6 @@ declare module __internal__ {
     date: string;
     flags: string;
     indensity: number;
-    name: string;
     objectNumber: number;
     page: number;
     rect: string;
@@ -549,12 +580,18 @@ declare module __internal__ {
   }
 
   class Circle extends Markup {
+    enableCaption(enable: boolean): Promise<void>;
     exportToJSON(): object;
+    getCaptionColor(): number;
     getFillColor(): number;
     getInnerRect(): PDFRect;
     getMeasureConversionFactor(): number;
     getMeasureRatio(): string;
     getMeasureUnit(): string;
+    hasCaption(): boolean;
+    setCaptionColor(
+      captionColor: number | [string, number, number, number] | string
+    ): Promise<boolean>;
     setFillColor(
       fillColor: number | ['T'] | [string, number, number, number] | string
     ): Promise<boolean>;
@@ -1258,6 +1295,7 @@ declare module __internal__ {
   class Line extends Markup {
     enableCaption(enable: boolean): Promise<void>;
     exportToJSON(): object;
+    getCaptionColor(): number;
     getCaptionOffset(): { x: number; y: number };
     getEndingStyle(): number;
     getEndPoint(): { x: number; y: number };
@@ -1274,6 +1312,9 @@ declare module __internal__ {
     getStartStyle(): number;
     getStyleFillColor(): number;
     hasCaption(): boolean;
+    setCaptionColor(
+      captionColor: number | [string, number, number, number] | string
+    ): Promise<boolean>;
     setCaptionOffset(x: number, y: number): Promise<void>;
     setEndingStyle(isBeginning: boolean, endingStyle: number): Promise<void>;
     setEndPoint(point: { x: number; y: number }): Promise<void>;
@@ -1728,10 +1769,15 @@ declare module __internal__ {
   class Polygon extends Markup {
     enableCaption(enable: boolean): Promise<void>;
     exportToJSON(): Record<string, any>;
+    getCaptionColor(): number;
     getFillColor(): number;
     getMeasureRatio(): string;
+    getMeasureUnit(): string;
     getVertexes(): Array<{ x: number; y: number }>;
     hasCaption(): boolean;
+    setCaptionColor(
+      captionColor: number | [string, number, number, number] | string
+    ): Promise<boolean>;
     setFillColor(
       fillColor: number | ['T'] | [string, number, number, number] | string
     ): Promise<boolean>;
@@ -1741,6 +1787,7 @@ declare module __internal__ {
       realValue: string;
       realUnit: string;
     }): void;
+    setMeasureUnit(unit: string): Promise<void>;
     setVertexes(vertexes: Array<{ x: number; y: number }>): Promise<void>;
     updateVertexes(
       index: number,
@@ -1877,12 +1924,17 @@ declare module __internal__ {
   class PolyLine extends Markup {
     enableCaption(enable: boolean): Promise<void>;
     exportToJSON(): Record<string, any>;
+    getCaptionColor(): number;
     getEndingStyle(): number;
     getMeasureRatio(): string;
+    getMeasureUnit(): string;
     getStartStyle(): number;
     getStyleFillColor(): number;
     getVertexes(): Array<{ x: number; y: number }>;
     hasCaption(): boolean;
+    setCaptionColor(
+      captionColor: number | [string, number, number, number] | string
+    ): Promise<boolean>;
     setEndingStyle(isBeginning: boolean, endingStyle: number): Promise<void>;
     setMeasureRatio(measurementRatio: {
       userSpaceValue: number;
@@ -1890,6 +1942,7 @@ declare module __internal__ {
       realValue: string;
       realUnit: string;
     }): void;
+    setMeasureUnit(unit: string): Promise<void>;
     setStyleFillColor(
       styleFillColor: number | ['T'] | [string, number, number, number] | string
     ): Promise<boolean>;
@@ -2644,6 +2697,7 @@ declare module __internal__ {
       type?: 'canvas' | 'image' | 'buffer'
     ): Promise<HTMLCanvasElement | HTMLImageElement | ArrayBuffer>;
     getRotation(): number;
+    setImage(url: string): void;
     setRotation(rotation: number): void;
     addMarkedState(stateName: string): Promise<Note>;
     addReply(content: string): Promise<Note>;
@@ -3262,673 +3316,727 @@ declare module __internal__ {
   }
 
   enum Action_Trigger {
-    click,
-    keyStroke,
-    format,
-    validate,
-    calculate,
-    mouseEnter,
-    mouseExit,
-    mouseDown,
-    mouseUp,
-    onFocus,
-    onBlur,
-  }
+    click = -1,
+    keyStroke = 7,
+    format = 8,
+    validate = 9,
 
+    calculate = 10,
+    mouseEnter = 11,
+    mouseExit = 12,
+    mouseDown = 13,
+
+    mouseUp = 14,
+    onFocus = 15,
+    onBlur = 16,
+  }
   enum Action_Type {
-    goto,
-    launch,
-    uri,
-    named,
-    submitForm,
-    resetForm,
-    javaScript,
-    importData,
-    hide,
-  }
+    goto = 'TypeGoto',
+    launch = 'TypeLaunch',
+    uri = 'TypeURI',
+    named = 'TypeNamed',
+    submitForm = 'TypeSubmitForm',
+    resetForm = 'TypeResetForm',
+    javaScript = 'TypeJavaScript',
+    importData = 'TypeImportData',
 
+    hide = 'TypeHide',
+    gotoE = 'TypeGoToE',
+  }
   enum Additional_Permission {
-    download,
+    download = 1,
   }
-
   enum Alignment {
     left,
     center,
     right,
   }
-
   enum AnnotUpdatedType {
-    contentUpdated,
-    borderInfoUpdated,
-    borderStyleUpdated,
-    borderWidthUpdated,
-    borderColorUpdated,
-    modifiedDateTimeUpdated,
-    uniqueIDUpdated,
-    flagsUpdated,
-    rectUpdated,
-    innerRectUpdated,
-    iconNameUpdated,
-    rotationUpdated,
-    defaultAppearanceUpdated,
-    calloutLineEndingStyleUpdated,
-    calloutLinePointsUpdated,
-    fillColorUpdated,
-    textColorUpdated,
-    alignmentUpdated,
-    inkListUpdated,
-    endPointUpdated,
-    startPointUpdated,
-    endingStyleUpdated,
-    enableCaptionUpdated,
-    leaderCaptionOffsetUpdated,
-    styleFillColorUpdated,
-    leaderLineLengthUpdated,
-    leaderLineExtendUpdated,
-    leaderLineOffsetUpdated,
-    measureRatioUpdated,
-    measureUnitUpdated,
-    measureConversionFactorUpdated,
-    removeAction,
-    actionDataUpdated,
-    addAction,
-    highlightingModeUpdated,
-    subjectUpdated,
-    titleUpdated,
-    createDateTimeUpdated,
-    opacityUpdated,
-    intentUpdated,
-    vertexesUpdated,
-    applyFillColorUpdated,
-    overlayTextUpdated,
-    overlayTexAlignmentUpdated,
-    repeatUpdated,
-    autoFontSizeUpdated,
-    redactDefaultAppearanceUpdated,
-    redactOpacityUpdated,
-    quadPointsUpdated,
-    reviewStateUpdated,
-    markedStateUpdated,
-    statesCleared,
-    replyAdded,
-    richTextUpdated,
-    richTextRemoved,
-    addDictionary,
-    formFieldValueUpdated,
-    formFieldsMaxLengthUpdated,
-    formFieldItemsUpdated,
-    formFieldIconUpdated,
-    formFieldInsertedItem,
-    formFieldExportValueUpdated,
-    formFieldMKPropertyUpdated,
-    formFieldAlternateName,
-    formFieldActionUpdated,
-  }
+    contentUpdated = 'content-updated',
+    borderInfoUpdated = 'borderInfo-updated',
+    borderStyleUpdated = 'borderStyle-updated',
+    borderWidthUpdated = 'borderWidth-updated',
 
+    borderColorUpdated = 'borderColor-updated',
+    captionColorUpdated = 'captionColor-updated',
+    modifiedDateTimeUpdated = 'modifiedDateTime-updated',
+    uniqueIDUpdated = 'uniqueID-updated',
+
+    flagsUpdated = 'flags-updated',
+    rectUpdated = 'rect-updated',
+    innerRectUpdated = 'innerRect-updated',
+    iconNameUpdated = 'iconName-updated',
+
+    rotationUpdated = 'rotation-updated',
+    defaultAppearanceUpdated = 'defaultAppearance-updated',
+    calloutLineEndingStyleUpdated = 'calloutLineEndingStyle-updated',
+    calloutLinePointsUpdated = 'calloutLinePoints-updated',
+
+    fillColorUpdated = 'fillColor-updated',
+    textColorUpdated = 'textColor-updated',
+    alignmentUpdated = 'alignment-updated',
+    inkListUpdated = 'inkList-updated',
+
+    endPointUpdated = 'endPoint-updated',
+    startPointUpdated = 'startPoint-updated',
+    endingStyleUpdated = 'endingStyle-updated',
+    enableCaptionUpdated = 'enableCaption-updated',
+
+    leaderCaptionOffsetUpdated = 'leaderCaptionOffset-updated',
+    styleFillColorUpdated = 'styleFillColor-updated',
+    leaderLineLengthUpdated = 'leaderLineLength-updated',
+    leaderLineExtendUpdated = 'leaderLineExtend-updated',
+
+    leaderLineOffsetUpdated = 'leaderLineOffset-updated',
+    measureRatioUpdated = 'measureRatio-updated',
+    measureUnitUpdated = 'measureUnit-updated',
+    measureConversionFactorUpdated = 'measureConversionFactor-updated',
+
+    removeAction = 'remove-action',
+    actionDataUpdated = 'actionData-updated',
+    addAction = 'add-action',
+    moveAction = 'move-action',
+
+    highlightingModeUpdated = 'highlightingMode-updated',
+    subjectUpdated = 'subject-updated',
+    titleUpdated = 'title-updated',
+    createDateTimeUpdated = 'createDateTime-updated',
+
+    opacityUpdated = 'opacity-updated',
+    intentUpdated = 'intent-updated',
+    vertexesUpdated = 'vertexes-updated',
+    applyFillColorUpdated = 'applyFillColor-updated',
+
+    overlayTextUpdated = 'overlayText-updated',
+    overlayTexAlignmentUpdated = 'overlayTextAlignment-updated',
+    repeatUpdated = 'repeat-updated',
+    autoFontSizeUpdated = 'autoFontSize-updated',
+
+    redactDefaultAppearanceUpdated = 'redactDefaultAppearance-update',
+    redactOpacityUpdated = 'redactOpacity-updated',
+    quadPointsUpdated = 'quadPoints-updated',
+    reviewStateUpdated = 'review-state-updated',
+
+    markedStateUpdated = 'marked-state-updated',
+    statesCleared = 'state-cleared',
+    replyAdded = 'add-replies',
+    richTextUpdated = 'rich-text-updated',
+
+    richTextRemoved = 'rich-text-removed',
+    addDictionary = 'add-dictionary',
+    imageUpdated = 'image-updated',
+    formFieldValueUpdated = 'form-field-value',
+
+    formFieldsMaxLengthUpdated = 'maxLength',
+    formFieldItemsUpdated = 'setItems',
+    formFieldIconUpdated = 'icon',
+    formFieldInsertedItem = 'insertItemAt',
+
+    formFieldExportValueUpdated = 'form-field-export-value',
+    formFieldMKPropertyUpdated = 'form-field-mk-property',
+    formFieldAlternateName = 'form-field-alternate-name',
+    formFieldMappingName = 'form-field-mapping-name',
+
+    formFieldActionUpdated = 'form-field-action',
+  }
   enum Border_Style {
-    solid,
-    dashed,
-    underline,
-    beveled,
-    inset,
-    cloudy,
-    noBorder,
-  }
+    solid = 0,
+    dashed = 1,
+    underline = 2,
+    beveled = 3,
 
+    inset = 4,
+    cloudy = 5,
+    noBorder = 6,
+  }
   enum Box_Type {
-    MediaBox,
-    CropBox,
-    TrimBox,
-    ArtBox,
-    BleedBox,
-  }
+    MediaBox = 0,
+    CropBox = 1,
+    TrimBox = 2,
+    ArtBox = 3,
 
+    BleedBox = 4,
+  }
   enum Calc_Margin_Mode {
-    CalcContentsBox,
-    CalcDetection,
+    CalcContentsBox = 0,
+    CalcDetection = 1,
   }
-
   enum Cipher_Type {
-    cipherNone,
-    cipherRC4,
-    cipherAES,
+    cipherNone = 0,
+    cipherRC4 = 1,
+    cipherAES = 2,
   }
-
   enum DataEvents {
-    annotationUpdated,
-    annotationAppearanceUpdated,
-    annotationReplyAdd,
-    annotationReplyAdded,
-    annotationReviewStateAnnotAdd,
-    annotationReviewStateAnnotAdded,
-    annotationMarkedStateAnnotAdd,
-    annotationMarkedStateAnnotAdded,
-    annotationStatesCleared,
-    annotationRemoved,
-    annotationMovedPosition,
-    annotationPositionMoved,
-    annotationAdded,
-    annotationImported,
-    actionUpdated,
-    actionAdd,
-    actionAdded,
-    layerVisibleChange,
-    layerVisibleChanged,
-    bookmarkAdded,
-    bookmarkUpdated,
-    bookmarkRemoved,
-    stateAnnotNameUpdated,
-    pageInfoChange,
-    pageInfoChanged,
-    pageRotationChange,
-    pageRotationChanged,
-    imageAdded,
-    watermarkAdded,
-    graphicsUpdated,
-    docPasswordChanged,
-    drmEncryptSuccess,
-    drmEncryptSucceeded,
-    drmEncryptFailed,
-    removePwdAndPerm,
-    pwdAndPermRemoved,
-    pageMoved,
-    pageRemoved,
-    pageAdded,
-    insertPages,
-    pagesInserted,
-    applyRedaction,
-    redactionApplied,
-    removeReviewState,
-    reviewStateRemoved,
-    formValueChanged,
-    metaDataChanged,
-    docModified,
-    flattened,
-    headerFooterUpdated,
-    headerFooterAdded,
-    pagesMoved,
-    pagesRemoved,
-    pagesRotated,
-    pageMeasureScaleRatioChanged,
-    pagesBoxChanged,
-  }
+    annotationUpdated = 'annotation-updated',
+    annotationAppearanceUpdated = 'annotation-appearance-updated',
+    annotationReplyAdded = 'annotation-reply-add',
+    annotationReviewStateAnnotAdded = 'annotation-review-state-annot-add',
+    annotationMarkedStateAnnotAdded = 'annotation-marked-state-annot-add',
+    annotationStatesCleared = 'annotation-states-cleared',
+    annotationRemoved = 'annotation-removed',
+    annotationPositionMoved = 'annotation-moved-position',
 
+    annotationAdded = 'annotation-add',
+    annotationImported = 'annotation-imported',
+    actionUpdated = 'action-updated',
+    actionAdded = 'action-add',
+    layerVisibleChanged = 'layer-visible-change',
+    bookmarkAdded = 'bookmark-added',
+    bookmarkUpdated = 'bookmark-updated',
+    bookmarkRemoved = 'bookmark-removed',
+
+    stateAnnotNameUpdated = 'state-annot-name-updated',
+    pageInfoChanged = 'page-info-change',
+    pageRotationChanged = 'page-rotation-change',
+    imageAdded = 'image-added',
+
+    watermarkAdded = 'watermark-added',
+    watermarkRemoved = 'watermark-removed',
+    graphicsUpdated = 'graphics-updated',
+    docPasswordChanged = 'doc-password-changed',
+    drmEncryptSucceeded = 'drm-encrypt-success',
+    drmEncryptFailed = 'drm-encrypt-failed',
+    pwdAndPermRemoved = 'remove-password-and-permission',
+    pageMoved = 'page-moved',
+
+    pageRemoved = 'page-removed',
+    pageAdded = 'page-added',
+    pagesInserted = 'import-pages',
+    redactionApplied = 'apply-redaction',
+    reviewStateRemoved = 'remove-review-state',
+    formValueChanged = 'form-value-changed',
+    metaDataChanged = 'meta-data-changed',
+    docModified = 'doc-modified',
+
+    flattened = 'flattened',
+    headerFooterUpdated = 'headerFooterUpdated',
+    headerFooterAdded = 'headerFooterAdded',
+    pagesMoved = 'pages-moved',
+
+    pagesRemoved = 'pages-removed',
+    pagesRotated = 'pages-rotated',
+    pageMeasureScaleRatioChanged = ' page-measure-scale-ratio-changed',
+    pagesBoxChanged = 'pages-box-changed',
+    objectStartEdit = 'object-start-edit',
+    objectEndEdit = 'object-end-edit',
+    objectSelectionChanged = 'object-selection-changed',
+    objectAdded = 'object-added',
+
+    objectPropertyChanged = 'object-property-changed',
+    paragraphTextOnActivate = 'paragraph-text-on-activate',
+    paragraphTextOnDeactivate = 'paragraph-text-on-deactivate',
+    paragraphTextEnterEdit = 'paragraph-text-enter-edit',
+
+    paragraphTextExitEdit = 'paragraph-text-exit-edit',
+    paragraphTextOnChar = 'paragraph-text-on-char',
+  }
   enum date_Format {
-    MSlashD,
-    MSlashDSlashYY,
-    MSlashDSlashYYYY,
-    MMSlashDDSlashYY,
-    MMSlashDDSlashYYYY,
-    DSlashMSlashYY,
-    DSlashMSlashYYYY,
-    DDSlashMMSlashYY,
-    DDSlashMMSlashYYYY,
-    MMSlashYY,
-    MMSlashYYYY,
-    MDotDDotYY,
-    MDotDDotYYYY,
-    MMDotDDDotYY,
-    MMDotDDDotYYYY,
-    MMDotYY,
-    DDotMDotYYYY,
-    DDDotMMDotYY,
-    DDDotMMDotYYYY,
-    YYHyphenMMHyphenDD,
-    YYYYHyphenMMHyphenDD,
-  }
+    MSlashD = 0,
+    MSlashDSlashYY = 1,
+    MSlashDSlashYYYY = 2,
+    MMSlashDDSlashYY = 3,
 
+    MMSlashDDSlashYYYY = 4,
+    DSlashMSlashYY = 5,
+    DSlashMSlashYYYY = 6,
+    DDSlashMMSlashYY = 7,
+
+    DDSlashMMSlashYYYY = 8,
+    MMSlashYY = 9,
+    MMSlashYYYY = 10,
+    MDotDDotYY = 11,
+
+    MDotDDotYYYY = 12,
+    MMDotDDDotYY = 13,
+    MMDotDDDotYYYY = 14,
+    MMDotYY = 15,
+
+    DDotMDotYYYY = 16,
+    DDDotMMDotYY = 17,
+    DDDotMMDotYYYY = 18,
+    YYHyphenMMHyphenDD = 19,
+
+    YYYYHyphenMMHyphenDD = 20,
+  }
   enum Ending_Style {
     None,
     Square,
     Circle,
     Diamond,
+
     OpenArrow,
     ClosedArrow,
     Butt,
     ReverseOpenArrow,
+
     ReverseClosedArrow,
     Slash,
   }
-
   enum Error_Code {
-    success,
-    file,
-    format,
-    password,
-    handle,
-    certificate,
-    unknown,
-    invalidLicense,
-    param,
-    unsupported,
-    outOfMemory,
-    securityHandler,
-    notParsed,
-    notFound,
-    invalidType,
-    conflict,
-    unknownState,
-    dataNotReady,
-    invalidData,
-    xFALoadError,
-    notLoaded,
-    invalidState,
-    notCDRM,
-    canNotConnectToServer,
-    invalidUserToken,
-    noRights,
-    rightsExpired,
-    deviceLimitation,
-    canNotRemoveSecurityFromServer,
-    canNotGetACL,
-    canNotSetACL,
-    isAlreadyCPDF,
-    isAlreadyCDRM,
-    canNotUploadDocInfo,
-    canNotUploadCDRMInfo,
-    invalidWrapper,
-    canNotGetClientID,
-    canNotGetUserToken,
-    invalidACL,
-    invalidClientID,
-    OCREngineNotInit,
-    diskFull,
-    OCRTrialIsEnd,
-    filePathNotExist,
-    complianceEngineNotInit,
-    complianceEngineInvalidUnlockCode,
-    complianceEngineInitFailed,
-    timeStampServerMgrNotInit,
-    LTVVerifyModeNotSet,
-    LTVRevocationCallbackNotSet,
-    LTVCannotSwitchVersion,
-    LTVCannotCheckDTS,
-    LTVCannotLoadDSS,
-    LTVCannotLoadDTS,
-    needSigned,
-    complianceResourceFile,
-    timeStampServerMgrNoDefaltServer,
-    defaultTimeStampServer,
-    noConnectedPDFModuleRight,
-    noXFAModuleRight,
-    noRedactionModuleRight,
-    noRMSModuleRight,
-    noOCRModuleRight,
-    noComparisonModuleRight,
-    noComplianceModuleRight,
-    noOptimizerModuleRight,
-    noConversionModuleRight,
-  }
+    success = 0,
+    file = 1,
+    format = 2,
+    password = 3,
 
+    handle = 4,
+    certificate = 5,
+    unknown = 6,
+    invalidLicense = 7,
+
+    param = 8,
+    unsupported = 9,
+    outOfMemory = 10,
+    securityHandler = 11,
+
+    notParsed = 12,
+    notFound = 13,
+    invalidType = 14,
+    conflict = 15,
+
+    unknownState = 16,
+    dataNotReady = 17,
+    invalidData = 18,
+    xFALoadError = 19,
+
+    notLoaded = 20,
+    invalidState = 21,
+    notCDRM = 22,
+    canNotConnectToServer = 23,
+
+    invalidUserToken = 24,
+    noRights = 25,
+    rightsExpired = 26,
+    deviceLimitation = 27,
+
+    canNotRemoveSecurityFromServer = 28,
+    canNotGetACL = 29,
+    canNotSetACL = 30,
+    isAlreadyCPDF = 31,
+
+    isAlreadyCDRM = 32,
+    canNotUploadDocInfo = 33,
+    canNotUploadCDRMInfo = 34,
+    invalidWrapper = 35,
+
+    canNotGetClientID = 36,
+    canNotGetUserToken = 37,
+    invalidACL = 38,
+    invalidClientID = 39,
+
+    OCREngineNotInit = 40,
+    diskFull = 41,
+    OCRTrialIsEnd = 42,
+    filePathNotExist = 43,
+
+    complianceEngineNotInit = 44,
+    complianceEngineInvalidUnlockCode = 45,
+    complianceEngineInitFailed = 46,
+    timeStampServerMgrNotInit = 47,
+
+    LTVVerifyModeNotSet = 48,
+    LTVRevocationCallbackNotSet = 49,
+    LTVCannotSwitchVersion = 50,
+    LTVCannotCheckDTS = 51,
+
+    LTVCannotLoadDSS = 52,
+    LTVCannotLoadDTS = 53,
+    needSigned = 54,
+    complianceResourceFile = 55,
+
+    timeStampServerMgrNoDefaltServer = 56,
+    defaultTimeStampServer = 57,
+    noConnectedPDFModuleRight = 58,
+    noXFAModuleRight = 59,
+
+    noRedactionModuleRight = 60,
+    noRMSModuleRight = 61,
+    noOCRModuleRight = 62,
+    noComparisonModuleRight = 63,
+
+    noComplianceModuleRight = 64,
+    noOptimizerModuleRight = 65,
+    noConversionModuleRight = 66,
+  }
   enum File_Type {
-    fdf,
-    xfdf,
-    xml,
-    csv,
-    txt,
-  }
+    fdf = 0,
+    xfdf = 1,
+    xml = 2,
+    csv = 3,
 
+    txt = 4,
+  }
   enum FileAttachment_Icon {
-    graph,
-    pushPin,
-    paperclip,
-    tag,
+    graph = 'Graph',
+    pushPin = 'PushPin',
+    paperclip = 'Paperclip',
+    tag = 'Tag',
   }
-
   enum Flatten_Option {
-    all,
-    field,
-    annot,
+    all = 0x0000,
+    field = 0x0001,
+    annot = 0x0002,
   }
-
   enum Font_Charset {
-    ANSI,
-    Default,
-    Symbol,
-    Shift_JIS,
-    Hangeul,
-    GB2312,
-    ChineseBig5,
-    Thai,
-    EastEurope,
-    Russian,
-    Greek,
-    Turkish,
-    Hebrew,
-    Arabic,
-    Baltic,
-  }
+    ANSI = 0,
+    Default = 1,
+    Symbol = 12,
+    Shift_JIS = 128,
 
+    Hangeul = 129,
+    GB2312 = 134,
+    ChineseBig5 = 136,
+    Thai = 222,
+
+    EastEurope = 238,
+    Russian = 204,
+    Greek = 161,
+    Turkish = 162,
+
+    Hebrew = 177,
+    Arabic = 178,
+    Baltic = 186,
+  }
   enum Font_CIDCharset {
-    Unknown,
-    GB1,
-    CNS1,
-    JAPAN1,
-    KOREA1,
-    UNICODE,
-  }
+    Unknown = 0,
+    GB1 = 1,
+    CNS1 = 2,
+    JAPAN1 = 3,
 
+    KOREA1 = 4,
+    UNICODE = 5,
+  }
   enum Font_Descriptor_Flags {
-    FixedPitch,
-    Serif,
-    Symbolic,
-    Script,
-    Nonsymbolic,
-    Italic,
-    AllCap,
-    SmallCap,
-    ForceBold,
-  }
+    FixedPitch = 1,
+    Serif = 2,
+    Symbolic = 4,
+    Script = 8,
 
+    Nonsymbolic = 32,
+    Italic = 64,
+    AllCap = 65536,
+    SmallCap = 131072,
+
+    ForceBold = 262144,
+  }
   enum Font_StandardID {
-    Courier,
-    CourierB,
-    CourierBI,
-    CourierI,
-    Helvetica,
-    HelveticaB,
-    HelveticaBI,
-    HelveticaI,
-    Times,
-    TimesB,
-    TimesBI,
-    TimesI,
-    Symbol,
-    ZapfDingbats,
-  }
+    Courier = 0,
+    CourierB = 1,
+    CourierBI = 2,
+    CourierI = 3,
 
+    Helvetica = 4,
+    HelveticaB = 5,
+    HelveticaBI = 6,
+    HelveticaI = 7,
+
+    Times = 8,
+    TimesB = 9,
+    TimesBI = 10,
+    TimesI = 11,
+
+    Symbol = 12,
+    ZapfDingbats = 13,
+  }
   enum Font_Style {
-    normal,
-    italic,
-    bold,
+    normal = 0,
+    italic = 1,
+    bold = 2,
   }
-
   enum Font_Styles {
-    x0001,
-    x0002,
-    x0004,
-    x0008,
-    x0020,
-    x0040,
-    x10000,
-    x20000,
-    x40000,
-  }
+    FixedPitch = 1,
+    Serif = 2,
+    Symbolic = 4,
+    Script = 8,
 
+    NonSymbolic = 0x0020,
+    Italic = 64,
+    AllCap = 65536,
+    SmallCap = 131072,
+
+    Bold = 0x40000,
+  }
   enum Graphics_FillMode {
-    None,
-    Alternate,
-    Winding,
+    None = 0,
+    Alternate = 1,
+    Winding = 2,
   }
-
   enum Graphics_ObjectType {
-    All,
-    Text,
-    Path,
-    Image,
-    Shading,
-    FormXObject,
-  }
+    All = 0,
+    Text = 1,
+    Path = 2,
+    Image = 3,
 
+    Shading = 4,
+    FormXObject = 5,
+  }
   enum Highlight_Mode {
-    none,
-    invert,
-    outline,
-    push,
-    toggle,
-  }
+    none = 0,
+    invert = 1,
+    outline = 2,
+    push = 3,
 
+    toggle = 4,
+  }
   enum MK_Properties {
-    borderColor,
-    fillColor,
-    normalCaption,
+    borderColor = 'borderColor',
+    fillColor = 'fillColor',
+    normalCaption = 'normalCaption',
   }
-
+  enum NewWindowFlag {
+    NewWindowFlagFalse = 0,
+    NewWindowFlagTrue = 1,
+    NewWindowFlagNone = 2,
+  }
   enum Note_Icon {
-    Check,
-    Circle,
-    Comment,
-    Cross,
-    Help,
-    Insert,
-    Key,
-    NewParagraph,
-    Note,
-    Paragraph,
-    RightArrow,
-    RightPointer,
-    Star,
-    UpArrow,
-    UpLeftArrow,
-  }
+    Check = 'Check',
+    Circle = 'Circle',
+    Comment = 'Comment',
+    Cross = 'Cross',
 
+    Help = 'Help',
+    Insert = 'Insert',
+    Key = 'Key',
+    NewParagraph = 'NewParagraph',
+
+    Note = 'Note',
+    Paragraph = 'Paragraph',
+    RightArrow = 'RightArrow',
+    RightPointer = 'RightPointer',
+
+    Star = 'Star',
+    UpArrow = 'UpArrow',
+    UpLeftArrow = 'UpLeftArrow',
+  }
   enum page_Number_Format {
-    default,
-    numberOfCount,
-    numberSlashCount,
-    pageNumber,
-    pageNumberOfCount,
-  }
+    default = 0,
+    numberOfCount = 1,
+    numberSlashCount = 2,
+    pageNumber = 3,
 
+    pageNumberOfCount = 4,
+  }
   enum Point_Type {
-    moveTo,
-    lineTo,
-    lineToCloseFigure,
-    bezierTo,
-    bezierToCloseFigure,
-  }
+    moveTo = 1,
+    lineTo = 2,
+    lineToCloseFigure = 3,
+    bezierTo = 4,
 
+    bezierToCloseFigure = 5,
+  }
   enum POS_TYPE {
-    FIRST,
-    LAST,
-    AFTER,
-    BEFORE,
+    FIRST = 0,
+    LAST = 1,
+    AFTER = 2,
+    BEFORE = 3,
   }
-
   enum Position {
-    topLeft,
-    topCenter,
-    topRight,
-    centerLeft,
-    center,
-    centerRight,
-    bottomLeft,
-    bottomCenter,
-    bottomRight,
-  }
+    topLeft = 'TopLeft',
+    topCenter = 'TopCenter',
+    topRight = 'TopRight',
+    centerLeft = 'CenterLeft',
 
+    center = 'Center',
+    centerRight = 'CenterRight',
+    bottomLeft = 'BottomLeft',
+    bottomCenter = 'BottomCenter',
+
+    bottomRight = 'BottomRight',
+  }
   enum PosType {
-    first,
-    last,
-    after,
-    before,
+    first = 0,
+    last = 1,
+    after = 2,
+    before = 3,
   }
-
   enum Range_Filter {
     all,
     even,
     odd,
   }
-
   enum Relationship {
-    firstChild,
-    lastChild,
-    previousSibling,
-    nextSibling,
-    firstSibling,
-    lastSibling,
-  }
+    firstChild = 0,
+    lastChild = 1,
+    previousSibling = 2,
+    nextSibling = 3,
 
+    firstSibling = 4,
+    lastSibling = 5,
+  }
   enum Rendering_Content {
     page,
     annot,
     form,
   }
-
   enum Rendering_Usage {
-    print,
-    view,
+    print = 'print',
+    view = 'view',
   }
-
   enum Rotation {
-    rotation0,
-    rotation1,
-    rotation2,
-    rotation3,
+    rotation0 = 0,
+    rotation1 = 1,
+    rotation2 = 2,
+    rotation3 = 3,
   }
-
   enum Rotation_Degree {
-    rotation0,
-    rotation90,
-    rotation180,
-    rotation270,
+    rotation0 = 0,
+    rotation90 = 90,
+    rotation180 = 180,
+    rotation270 = 270,
   }
-
   enum Saving_Flag {
-    normal,
-    incremental,
-    noOriginal,
-    XRefStream,
-    linearized,
-    removeRedundantObjects,
-  }
+    normal = 0,
+    incremental = 0x0001,
+    noOriginal = 0x0002,
+    XRefStream = 0x0008,
 
+    linearized = 0x1000,
+    removeRedundantObjects = 0x0010,
+  }
   enum Search_Flag {
-    caseSensitive,
-    wholeWord,
-    consecutively,
+    caseSensitive = 1,
+    wholeWord = 2,
+    consecutively = 4,
   }
-
   enum Signature_Ap_Flags {
-    showTagImage,
-    showLabel,
-    showReason,
-    showDate,
-    showDistinguishName,
-    showLocation,
-    showSigner,
-    showBitmap,
-    showText,
-  }
+    showTagImage = 1,
+    showLabel = 2,
+    showReason = 4,
+    showDate = 8,
 
+    showDistinguishName = 16,
+    showLocation = 32,
+    showSigner = 64,
+    showBitmap = 128,
+
+    showText = 256,
+  }
   enum Signature_State {
-    verifyChange,
-    verifyIncredible,
-    verifyNoChange,
-    stateVerifyIssueUnknown,
-    verifyIssueValid,
-    verifyIssueUnknown,
-    verifyIssueRevoke,
-    verifyIssueExpire,
-    verifyIssueUncheck,
-    verifyIssueCurrent,
-    verifyTimestampNone,
-    verifyTimestampDoc,
-    verifyTimestampValid,
-    verifyTimestampInvalid,
-    verifyTimestampExpire,
-    verifyTimestampIssueUnknown,
-    verifyTimestampIssueValid,
-    verifyTimestampTimeBefore,
-    verifyChangeLegal,
-    verifyChangeIllegal,
-  }
+    VerifyErrorByteRange = 64,
+    verifyChange = 128,
+    verifyIncredible = 256,
+    verifyNoChange = 1024,
 
+    stateVerifyIssueUnknown = 2048,
+    verifyIssueValid = 4096,
+    verifyIssueUnknown = 8192,
+    verifyIssueRevoke = 16384,
+
+    verifyIssueExpire = 32768,
+    verifyIssueUncheck = 65536,
+    verifyIssueCurrent = 131072,
+    verifyTimestampNone = 262144,
+
+    verifyTimestampDoc = 524288,
+    verifyTimestampValid = 1048576,
+    verifyTimestampInvalid = 2097152,
+    verifyTimestampExpire = 4194304,
+
+    verifyTimestampIssueUnknown = 8388608,
+    verifyTimestampIssueValid = 16777216,
+    verifyTimestampTimeBefore = 33554432,
+    verifyChangeLegal = 134217728,
+
+    verifyChangeIllegal = 268435456,
+  }
   enum Sound_Icon {
-    speaker,
-    mic,
-    ear,
+    speaker = 'Speaker',
+    mic = 'Mic',
+    ear = 'Ear',
   }
-
   enum STAMP_TEXT_TYPE {
-    CUSTOM_TEXT,
-    NAME,
-    NAME_DATE_TIME,
-    DATE_TIME,
-    DATE,
-  }
+    CUSTOM_TEXT = 'type here to insert text',
+    NAME = 'author name',
+    NAME_DATE_TIME = 'author name, date and time',
+    DATE_TIME = 'date and time',
 
+    DATE = 'date',
+  }
   enum Standard_Font {
-    courier,
-    courierBold,
-    courierBoldOblique,
-    courierOblique,
-    helvetica,
-    helveticaBold,
-    helveticaBoldOblique,
-    helveticaOblique,
-    timesRoman,
-    timesBold,
-    timesBoldItalic,
-    timesItalic,
-    symbol,
-    zapfDingbats,
-  }
+    courier = 0,
+    courierBold = 1,
+    courierBoldOblique = 2,
+    courierOblique = 3,
 
+    helvetica = 4,
+    helveticaBold = 5,
+    helveticaBoldOblique = 6,
+    helveticaOblique = 7,
+
+    timesRoman = 8,
+    timesBold = 9,
+    timesBoldItalic = 10,
+    timesItalic = 11,
+
+    symbol = 12,
+    zapfDingbats = 13,
+  }
   enum Text_Mode {
-    Fill,
-    Stroke,
-    FillStroke,
-    Invisible,
-    FillClip,
-    StrokeClip,
-    FillStrokeClip,
-    Clip,
-  }
+    Fill = 0,
+    Stroke = 1,
+    FillStroke = 2,
+    Invisible = 3,
 
+    FillClip = 4,
+    StrokeClip = 5,
+    FillStrokeClip = 6,
+    Clip = 7,
+  }
   enum User_Permissions {
-    print,
-    modify,
-    extract,
-    annotForm,
-    fillForm,
-    extractAccess,
-    assemble,
-    printHigh,
-  }
+    print = 0b100,
+    modify = 0b1000,
+    extract = 0b10000,
+    annotForm = 0b100000,
 
+    fillForm = 0b100000000,
+    extractAccess = 0b1000000000,
+    assemble = 0b10000000000,
+    printHigh = 0b100000000000,
+  }
   enum Watermark_Flag {
-    asContent,
-    asAnnot,
-    onTop,
-    unprintable,
-    display,
-  }
+    asContent = 0,
+    asAnnot = 1,
+    onTop = 2,
+    unprintable = 4,
 
+    display = 8,
+  }
   enum ZoomMode {
-    ZoomXYZ,
-    ZoomFitPage,
-    ZoomFitHorz,
-    ZoomFitRect,
+    ZoomXYZ = 'ZoomXYZ',
+    ZoomFitPage = 'ZoomFitPage',
+    ZoomFitHorz = 'ZoomFitHorz',
+    ZoomFitRect = 'ZoomFitRect',
   }
 
   enum Field_Flag {
-    ReadOnly,
-    Required,
-    NoExport,
-    Hidden,
-    ButtonNoToggleToOff,
-    ButtonRadiosInUnison,
-    TextMultiline,
-    TextPassword,
-    TextDoNotSpellCheck,
-    TextDoNotScroll,
-    TextComb,
-    ComboEdit,
-    ChoiceMultiSelect,
-    CommitOnSelChange,
-  }
+    ReadOnly = 1,
+    Required = 2,
+    NoExport = 4,
+    ButtonNoToggleToOff = 16384,
 
+    ButtonRadiosInUnison = 33554432,
+    TextMultiline = 4096,
+    TextPassword = 8192,
+    TextDoNotSpellCheck = 4194304,
+
+    TextDoNotScroll = 8388608,
+    TextComb = 16777216,
+    ComboEdit = 262144,
+    ChoiceMultiSelect = 2097152,
+
+    CommitOnSelChange = 67108864,
+  }
   enum Field_Type {
-    Unknown,
-    PushButton,
-    CheckBox,
-    RadioButton,
-    Text,
-    ListBox,
-    ComboBox,
-    Sign,
-    Barcode,
+    Unknown = 0,
+    PushButton = 1,
+    CheckBox = 2,
+    RadioButton = 3,
+
+    Text = 6,
+    ListBox = 5,
+    ComboBox = 4,
+    Sign = 7,
+
+    Barcode = 8,
   }
 
   class PDFControl {
@@ -3957,6 +4065,7 @@ declare module __internal__ {
     getDAFontSize(): number;
     getFillColor(): number;
     getFlags(): number;
+    getMappingName(): string;
     getMaxLength(): number;
     getName(): string;
     getOptions(): Array<{ label: string; value: string }>;
@@ -3964,6 +4073,7 @@ declare module __internal__ {
     getValue(): string;
     setAction(trigger: number, action: string | Action): Promise<void>;
     setAlignment(alignment: number): Promise<void>;
+    setAlternateName(alternateName: string): void;
     setBorderColor(
       borderColor: number | [string, number, number, number] | string
     ): Promise<boolean>;
@@ -3972,6 +4082,7 @@ declare module __internal__ {
       fillColor: number | ['T'] | [string, number, number, number] | string
     ): Promise<void>;
     setFlags(flags: number): void;
+    setMappingName(mappingName: string): void;
     setMaxLength(maxLength: number): void;
     setOptions(
       options: Array<{
@@ -4007,8 +4118,10 @@ declare module __internal__ {
   class PDFSignature extends PDFField {
     getByteRange(): number[];
     getFilter(): string;
+    getImage(): Promise<string | void>;
     getSignInfo(): Record<string, any>;
     getSubfilter(): string;
+    isLast(): Promise<boolean>;
     isSigned(): boolean;
     getAlignment(): number;
     getAlternateName(): string;
@@ -4019,6 +4132,7 @@ declare module __internal__ {
     getDAFontSize(): number;
     getFillColor(): number;
     getFlags(): number;
+    getMappingName(): string;
     getMaxLength(): number;
     getName(): string;
     getOptions(): Array<{ label: string; value: string }>;
@@ -4026,6 +4140,7 @@ declare module __internal__ {
     getValue(): string;
     setAction(trigger: number, action: string | Action): Promise<void>;
     setAlignment(alignment: number): Promise<void>;
+    setAlternateName(alternateName: string): void;
     setBorderColor(
       borderColor: number | [string, number, number, number] | string
     ): Promise<boolean>;
@@ -4034,6 +4149,7 @@ declare module __internal__ {
       fillColor: number | ['T'] | [string, number, number, number] | string
     ): Promise<void>;
     setFlags(flags: number): void;
+    setMappingName(mappingName: string): void;
     setMaxLength(maxLength: number): void;
     setOptions(
       options: Array<{
@@ -4300,7 +4416,106 @@ declare module __internal__ {
       annotJsons: object,
       headerIndex: number
     ): Promise<Annot[]>;
+    addAnnots(
+      annotJsonArray: Array<{
+        page: number;
+        replies?: object[] | string[];
+        states?: object[] | string[];
+        groupElements?: object[];
+        type?: Annot_Type;
+        rect?: {
+          left?: number;
+          bottom?: number;
+          right?: number;
+          top?: number;
+        };
+        borderInfo?: {
+          width?: number;
+          style?: number;
+          cloudIntensity?: number;
+          dashPhase?: number;
+          dashes?: number[];
+        };
+        alignment?: number;
+        buffer?: Uint8Array;
+        calloutLinePoints?: number[];
+        calloutLineEndingStyle?: number;
+        color?: string;
+        contents?: string;
+        coords?: Array<{
+          left: number;
+          top: number;
+          right: number;
+          bottom: number;
+        }>;
+        creationTimestamp?: number;
+        date?: number;
+        dicts?: object;
+        defaultAppearance?: {
+          textColor?: number;
+          textSize?: number;
+        };
+        endCharIndex?: number;
+        endPoint?: {
+          x?: number;
+          y?: number;
+        };
+        flags?: number;
+        measure?: {
+          unit?: string;
+          ratio?: {
+            userSpaceValue?: number;
+            userSpaceUnit?: string;
+            realValue?: number;
+            realUnit?: string;
+          };
+        };
+        endStyle?: Ending_Style;
+        fileName?: string;
+        contentType?: string;
+        fillColor?: string;
+        iconInfo?: {
+          annotType?: string;
+          category?: string;
+          name?: string;
+          fileType?: string;
+          url?: string;
+        };
+        icon?: string;
+        iconCategory?: string;
+        inkList?: Array<{ x: number; y: number; type: 1 | 2 | 3 }>;
+        intent?: string;
+        multiBuffer?: Uint8Array;
+        name?: string;
+        noPopup?: boolean;
+        opacity?: number;
+        startCharIndex?: number;
+        startStyle?: number;
+        startPoint?: {
+          x?: number;
+          y?: number;
+        };
+        length?: number;
+        styleFillColor?: string;
+        subject?: string;
+        title?: string;
+        vertexes?: Array<{ x: number; y: number }>;
+        rotation?: number;
+        richText?: object[];
+      }>
+    ): Promise<Annot[]>;
+    addEmbeddedFile(
+      key: string,
+      fileSpec: {
+        name?: string;
+        data: File | Blob | ArrayBuffer | TypedArray | DataView;
+        description?: string;
+        creationDate?: number;
+        modificationDate?: number;
+      }
+    ): Promise<boolean>;
     addHeaderFooter(headerfooter: HeaderFooter): Promise<object>;
+    addPagingSealSignature(info: Object): Promise<number>;
     addWatermark(watermarkConfig: {
       pageStart: number;
       pageEnd: number;
@@ -4329,6 +4544,7 @@ declare module __internal__ {
       };
     }): void;
     applyRedaction(): Promise<false | Array<Array<Annot>>>;
+    checkPassword(password: string): Promise<number>;
     createRootBookmark(): Promise<PDFBookmark>;
     drmEncrypt(drmOptions: {
       isEncryptMetadata?: boolean;
@@ -4358,14 +4574,25 @@ declare module __internal__ {
       width: number; // Media box height of current page
       height: number; // Media box height of current page
     }>;
+    getAllPagingSealSignatures(
+      pagingSigObjNum?: number
+    ): Promise<Array<number>>;
     getAnnots(): Promise<Annot[]>;
-    getBookmarksJson(): Promise<Object>;
     getComparisonFilterCountSummary(): {
       Images: number;
       Formatting: number;
       Text: number;
       Annotation: number;
     };
+    getEmbeddedFile(
+      key: string
+    ): Promise<{
+      name: string;
+      data: Blob;
+      description: string;
+      creationDate: number;
+      modificationDate: number;
+    }>;
     getEmbeddedFileNames(): string[];
     getFile(options?: { flags?: number; fileName?: string }): Promise<File>;
     getFontsInfo(): Promise<Array<Record<string, any>>>;
@@ -4380,7 +4607,6 @@ declare module __internal__ {
     getPageLabels(pageIndexes: number[]): Promise<string[]>;
     getPasswordType(): Promise<number>;
     getPDFForm(): PDFForm;
-    getPermission(): Promise<number>;
     getPermissions(): number;
     getRootBookmark(): Promise<PDFBookmark>;
     getStream(
@@ -4395,6 +4621,7 @@ declare module __internal__ {
     getTextSearch(pattern: string, flags: number): DocTextSearch;
     getUserPermissions(): number;
     hasForm(): Promise<boolean>;
+    hasOwnerPassword(): boolean;
     importAnnotsFromFDF(
       fdf: File | Blob | ArrayBuffer | TypedArray | DataView,
       escape?: boolean
@@ -4446,16 +4673,29 @@ declare module __internal__ {
     movePagesTo(pageRange: number[][], destIndex: number): Promise<string[]>;
     movePageTo(pageIndex: number, destIndex: number): Promise<boolean>;
     removeAllEmbeddedFiles(): Promise<boolean>;
+    removeAllWatermarks(): Promise<boolean>;
     removeEmbeddedFileByName(name: string): Promise<boolean>;
     removeHeaderFooter(): Promise<void>;
     removePage(pageIndex: number): Promise<boolean>;
     removePages(pageRange: string[][]): Promise<boolean>;
+    removePagingSealSignature(info: Object): Promise<void>;
+    removeSignature(fieldName: string): Promise<boolean>;
     rotatePages(pageRange: number[][], rotation: number): Promise<void>;
     searchText(
       pages: number[],
       words: string[],
       options?: { wholeWordsOnly?: boolean; caseSensitive?: boolean }
     ): object;
+    setEmbeddedFile(
+      key: string,
+      fileSpec: {
+        name?: string;
+        data?: File | Blob | ArrayBuffer | TypedArray | DataView;
+        description?: string;
+        creationDate?: number;
+        modificationDate?: number;
+      }
+    ): Promise<boolean>;
     setLayerNodeVisible(
       layerId: string | number,
       visiable: boolean
@@ -4488,6 +4728,7 @@ declare module __internal__ {
         subfilter: object;
         rect?: PDFRect;
         pageIndex?: number;
+        pagingSigConfig?: object;
         rotation?: 0 | 90 | 180 | 270;
         flag?: number;
         signer?: string;
@@ -4514,6 +4755,7 @@ declare module __internal__ {
       ) => Promise<ArrayBuffer>
     ): Promise<ArrayBuffer>;
     updateHeaderFooter(headerFooter: HeaderFooter): Promise<void>;
+    updatePagingSealSignature(info: Object): Promise<number>;
     verifySignature(
       field: PDFField,
       VerifyHandler: (
@@ -4528,107 +4770,88 @@ declare module __internal__ {
   }
 
   class PDFPage {
-    addAnnot(
-      annotJson: {
-        type: Annot_Type;
-        rect: {
-          left: number;
-          bottom: number;
-          right: number;
-          top: number;
+    addAnnot(annotJson: {
+      type: Annot_Type;
+      rect: {
+        left: number;
+        bottom: number;
+        right: number;
+        top: number;
+      };
+      borderInfo?: {
+        width?: number;
+        style?: number;
+        cloudIntensity?: number;
+        dashPhase?: number;
+        dashes?: number[];
+      };
+      alignment?: number;
+      buffer?: Uint8Array;
+      calloutLinePoints?: number[];
+      calloutLineEndingStyle?: number;
+      color?: string;
+      contents?: string;
+      coords?: Array<{
+        left: number;
+        top: number;
+        right: number;
+        bottom: number;
+      }>;
+      creationTimestamp?: number;
+      date?: number;
+      dicts?: object;
+      defaultAppearance?: {
+        textColor?: number;
+        textSize?: number;
+      };
+      endCharIndex?: number;
+      endPoint?: {
+        x?: number;
+        y?: number;
+      };
+      flags?: number;
+      measure?: {
+        unit?: string;
+        ratio?: {
+          userSpaceValue?: number;
+          userSpaceUnit?: string;
+          realValue?: number;
+          realUnit?: string;
         };
-        borderInfo?: {
-          width?: number;
-          style?: number;
-          cloudIntensity?: number;
-          dashPhase?: number;
-          dashes?: number[];
-        };
-        alignment?: number;
-        buffer?: Uint8Array;
-        calloutLinePoints?: number[];
-        calloutLineEndingStyle?: number;
-        color?: string;
-        contents?: string;
-        coords?: Array<{
-          left: number;
-          top: number;
-          right: number;
-          bottom: number;
-        }>;
-        creationTimestamp?: number;
-        date?: number;
-        dicts?: object;
-        defaultAppearance?: {
-          textColor?: number;
-          textSize?: number;
-        };
-        endCharIndex?: number;
-        endPoint?: {
-          x?: number;
-          y?: number;
-        };
-        measure?: {
-          unit?: string;
-          ratio?: {
-            userSpaceValue?: number;
-            userSpaceUnit?: string;
-            realValue?: number;
-            realUnit?: string;
-          };
-        };
-        endStyle?: Ending_Style;
-        fileName?: string;
-        contentType?: string;
-        fillColor?: string;
-        iconInfo?: {
-          annotType?: string;
-          category?: string;
-          name?: string;
-          fileType?: string;
-          url?: string;
-        };
-        icon?: string;
-        iconCategory?: string;
-        inkList?: Array<{ x: number; y: number; type: 1 | 2 | 3 }>;
-        intent?: string;
-        multiBuffer?: Uint8Array;
+      };
+      endStyle?: Ending_Style;
+      fileName?: string;
+      contentType?: string;
+      fillColor?: string;
+      iconInfo?: {
+        annotType?: string;
+        category?: string;
         name?: string;
-        noPopup?: boolean;
-        opacity?: number;
-        startCharIndex?: number;
-        startStyle?: number;
-        startPoint?: {
-          x?: number;
-          y?: number;
-        };
-        length?: number;
-        styleFillColor?: string;
-        subject?: string;
-        title?: string;
-        vertexes?: Array<{ x: number; y: number }>;
-        rotation?: number;
-        richText?: string[];
-      },
-      richTextData?: {
-        content?: string;
-        richTextStyle?: {
-          font?: {
-            name?: string;
-            styles?: number;
-            charset?: number;
-          };
-          textSize?: number;
-          textAlignment?: number;
-          textColor?: number;
-          isBold?: boolean;
-          isItalic?: boolean;
-          isUnderline?: boolean;
-          isStrikethrough?: boolean;
-          cornerMarkStyle?: number;
-        };
-      }
-    ): Promise<Annot[]>;
+        fileType?: string;
+        url?: string;
+      };
+      icon?: string;
+      iconCategory?: string;
+      inkList?: Array<{ x: number; y: number; type: 1 | 2 | 3 }>;
+      intent?: string;
+      multiBuffer?: Uint8Array;
+      name?: string;
+      noPopup?: boolean;
+      opacity?: number;
+      startCharIndex?: number;
+      startStyle?: number;
+      startPoint?: {
+        x?: number;
+        y?: number;
+      };
+      length?: number;
+      styleFillColor?: string;
+      subject?: string;
+      title?: string;
+      vertexes?: Array<{ x: number; y: number }>;
+      rotation?: number;
+      richText?: object[];
+    }): Promise<Annot[]>;
     addAnnotGroup(
       annotJsons: Array<object>,
       headerIndex: number
@@ -4808,12 +5031,7 @@ declare module __internal__ {
       },
       contentsFlags?: string[],
       usage?: string
-    ): Promise<{
-      width: number;
-      height: number;
-      buffer?: ArrayBuffer;
-      image?: Blob;
-    }>;
+    ): Promise<{ width: number; height: number; buffer: ArrayBuffer }>;
     reverseDeviceOffset(
       offset: number[],
       scale?: number,
@@ -4824,7 +5042,11 @@ declare module __internal__ {
       scale?: number,
       rotate?: number
     ): number[];
-    reverseDeviceRect(pdfRect: DeviceRect, scale?: number): PDFRect;
+    reverseDeviceRect(
+      pdfRect: DeviceRect,
+      scale?: number,
+      rotate?: number
+    ): PDFRect;
     setMeasureScaleRatio(
       storeInPage: boolean,
       unitName: string,
@@ -4884,6 +5106,21 @@ declare module __internal__ {
     setRect(rect: PDFRect): void;
   }
 
+  const isDesktop: boolean;
+  const isMobile: boolean;
+  const isTablet: boolean;
+
+  class LoggerFactory {
+    static setLogLevel(level: string): void;
+    static toggleLogger(logOff: boolean): void;
+  }
+  enum Log_Levels {
+    LEVEL_DEBUG,
+    LEVEL_INFO,
+    LEVEL_WARN,
+    LEVEL_ERROR,
+  }
+
   class Color {
     asArray(): [number, number, number, number];
     clone(): Color;
@@ -4900,6 +5137,13 @@ declare module __internal__ {
   function getRanges(intervals: Array<[number, number] | number>): number[];
 
   function getUnitByName(unitName: string): Unit;
+
+  function setThemeColor(
+    colorInfo: Array<{
+      dom: HTMLElement | string;
+      colors: Object;
+    }>
+  ): void;
 
   export interface StampInfo {
     category: string;
@@ -5166,30 +5410,30 @@ declare module __internal__ {
     registerLostConnectionListener(receiver: () => void): void;
     registerMessageReceiver(receiver: (data: string) => void): void;
   }
-
   enum COLLABORATION_ACTION {
-    CREATE_ANNOT,
-    REMOVE_ANNOT,
-    UPDATE_ANNOT,
-    ADD_REPLY,
-    REMOVE_REPLY,
-    ADD_REVIEW_STATE,
-    ADD_MARKED_STATE,
-    UPDATE_ANNOT_CONTENT,
-    PPO_REMOVE_PAGE,
-    PPO_REMOVE_PAGES,
-    PPO_INSERT_PAGE,
-    PPO_ROTATE_PAGE,
-    PPO_MOVE_PAGE,
-    MOVE_ANNOTS_BETWEEN_PAGES,
-    IMPORT_ANNOTATIONS_FILE,
+    CREATE_ANNOT = 'create-annots',
+    REMOVE_ANNOT = 'remove-annots',
+    UPDATE_ANNOT = 'update-annots',
+    ADD_REPLY = 'add-reply',
+
+    REMOVE_REPLY = 'remove-reply',
+    ADD_REVIEW_STATE = 'add-review-state',
+    ADD_MARKED_STATE = 'add-marked-state',
+    UPDATE_ANNOT_CONTENT = 'update-comment-content',
+
+    PPO_REMOVE_PAGE = 'ppo-remove-page',
+    PPO_REMOVE_PAGES = 'ppo-remove-pages',
+    PPO_INSERT_PAGE = 'ppo-insert-page',
+    PPO_ROTATE_PAGE = 'ppo-rotate-page',
+
+    PPO_MOVE_PAGE = 'ppo-move-page',
+    MOVE_ANNOTS_BETWEEN_PAGES = 'move-annotations-between-pages',
+    IMPORT_ANNOTATIONS_FILE = 'import-annotations-file',
   }
 
   class AnnotRender {
-    active(): Promise<void>;
     getAnnot(): Annot;
     getComponent(): AnnotComponent;
-    unActive(): Promise<void>;
   }
 
   class ViewerAnnotManager {
@@ -5245,6 +5489,11 @@ declare module __internal__ {
         | {
             type: 'text' | 'image';
             content: string;
+            pageStart: number;
+            pageEnd: number;
+            isMultiline?: boolean;
+            rowSpace?: number;
+            columnSpace?: number;
             watermarkSettings?: {
               position?: Position;
               offsetX?: number;
@@ -5266,6 +5515,11 @@ declare module __internal__ {
         | Array<{
             type: 'text' | 'image';
             content: string;
+            pageStart: number;
+            pageEnd: number;
+            isMultiline?: boolean;
+            rowSpace?: number;
+            columnSpace?: number;
             watermarkSettings?: {
               position?: Position;
               offsetX?: number;
@@ -5293,7 +5547,6 @@ declare module __internal__ {
     getPDFDoc(): PDFDoc;
     getPDFPage(): Promise<PDFPage>;
     getScale(): number;
-    getSignaturePDFRect(): void;
     getSnapshot(
       left: number,
       top: number,
@@ -5316,7 +5569,8 @@ declare module __internal__ {
   }
 
   export interface HandStateHandlerConfig {
-    enableTextSelectionTool: boolean;
+    enablePasting?: boolean;
+    enableTextSelectionTool?: boolean;
   }
 
   class IStateHandler {
@@ -5435,14 +5689,14 @@ declare module __internal__ {
   }
 
   enum DiffColor {
-    RED,
-    GREEN,
-    BLUE,
-    MAGENTA,
-    YELLOW,
-    CYAN,
-  }
+    RED = 0xff0000,
+    GREEN = 0x00ff00,
+    BLUE = 0x0000ff,
+    MAGENTA = 0xff00ff,
 
+    YELLOW = 0xffff00,
+    CYAN = 0x00ffff,
+  }
   type BlendColorResolver = (
     options: BlendColorResolverOptions
   ) => number | Color;
@@ -5452,130 +5706,151 @@ declare module __internal__ {
   ) => void;
 
   enum ANNOTATION_PERMISSION {
-    fully,
-    playable,
-    adjustable,
-    deletable,
-    modifiable,
-    attachmentDownloadable,
-    replyable,
-    editable,
-  }
+    fully = 'fully',
+    playable = 'playable',
+    adjustable = 'adjustable',
+    deletable = 'deletable',
 
+    modifiable = 'modifiable',
+    attachmentDownloadable = 'attachmentDownloadable',
+    replyable = 'replyable',
+    editable = 'editable',
+  }
   enum MouseEventObjectType {
-    annotation,
+    annotation = 'annotation',
   }
-
   enum OPEN_FILE_TYPE {
-    FROM_FILE,
-    FROM_URL,
+    FROM_FILE = 'from-file',
+    FROM_URL = 'from-url',
   }
-
   enum PagePointType {
-    viewport,
-    page,
-    pdf,
+    viewport = 'viewport',
+    page = 'offset-page',
+    pdf = 'pdf',
   }
-
+  enum PROGRESS_STATUS {
+    PROGRESSING = 'Progressing',
+    SUCCESS = 'Success',
+    FAIL = 'Fail',
+  }
   enum SNAP_MODE {
-    EndPoint,
-    MidPoint,
-    IntersectionPoint,
-    NearestPoint,
+    EndPoint = 'end-point',
+    MidPoint = 'mid-point',
+    IntersectionPoint = 'intersection-point',
+    NearestPoint = 'nearest-point',
   }
-
   enum STATE_HANDLER_NAMES {
-    STATE_HANDLER_HAND,
-    STATE_HANDLER_CREATE_CARET,
-    STATE_HANDLER_CREATE_ARROW,
-    STATE_HANDLER_CREATE_AREA_HIGHLIGHT,
-    STATE_HANDLER_CREATE_CIRCLE,
-    STATE_HANDLER_CREATE_FILE_ATTACHMENT,
-    STATE_HANDLER_CREATE_HIGHLIGHT,
-    STATE_HANDLER_CREATE_IMAGE,
-    STATE_HANDLER_CREATE_LINK,
-    STATE_HANDLER_CREATE_LINE,
-    STATE_HANDLER_CREATE_DISTANCE,
-    STATE_HANDLER_CREATE_PERIMETER,
-    STATE_HANDLER_CREATE_AREA,
-    STATE_HANDLER_CREATE_CIRCLE_AREA,
-    STATE_HANDLER_CREATE_PENCIL,
-    STATE_HANDLER_CREATE_POLYGON_CLOUD,
-    STATE_HANDLER_CREATE_POLYGON,
-    STATE_HANDLER_CREATE_POLYLINE,
-    STATE_HANDLER_CREATE_REPLACE,
-    STATE_HANDLER_CREATE_SQUARE,
-    STATE_HANDLER_CREATE_SQUIGGLY,
-    STATE_HANDLER_CREATE_STAMP,
-    STATE_HANDLER_CREATE_STRIKE_OUT,
-    STATE_HANDLER_CREATE_TEXT,
-    STATE_HANDLER_CREATE_UNDERLINE,
-    STATE_HANDLER_MARQUEE,
-    STATE_HANDLER_ERASER,
-    STATE_HANDLER_LOUPE,
-    STATE_HANDLER_SELECT_TEXT_ANNOTATION,
-    STATE_HANDLER_SELECT_TEXT_IMAGE,
-    STATE_HANDLER_SELECT_ANNOTATION,
-    STATE_HANDLER_CREATE_FREETEXT_BOX,
-    STATE_HANDLER_CREATE_FREETEXT_CALLOUT,
-    STATE_HANDLER_CREATE_FREETEXT_TYPEWRITER,
-    STATE_HANDLER_CREATE_FIELD_TEXT,
-    STATE_HANDLER_CREATE_FIELD_SIGNATURE,
-    STATE_HANDLER_CREATE_FIELD_PUSH_BUTTON,
-    STATE_HANDLER_CREATE_RADIO_BUTTON,
-    STATE_HANDLER_SNAPSHOT_TOOL,
-  }
+    STATE_HANDLER_HAND = 'hand',
+    STATE_HANDLER_CREATE_CARET = 'createCaret',
+    STATE_HANDLER_CREATE_ARROW = 'createArrow',
+    STATE_HANDLER_CREATE_AREA_HIGHLIGHT = 'createAreaHighlight',
+    STATE_HANDLER_CREATE_CIRCLE = 'createCircle',
+    STATE_HANDLER_CREATE_FILE_ATTACHMENT = 'createFileAttachment',
+    STATE_HANDLER_CREATE_HIGHLIGHT = 'createHighlight',
+    STATE_HANDLER_CREATE_IMAGE = 'createImage',
 
+    STATE_HANDLER_CREATE_LINK = 'createLink',
+    STATE_HANDLER_CREATE_LINE = 'createLine',
+    STATE_HANDLER_CREATE_DISTANCE = 'createDistance',
+    STATE_HANDLER_CREATE_PERIMETER = 'createPerimeter',
+
+    STATE_HANDLER_CREATE_AREA = 'createArea',
+    STATE_HANDLER_CREATE_CIRCLE_AREA = 'createCircleArea',
+    STATE_HANDLER_CREATE_PENCIL = 'createPencil',
+    STATE_HANDLER_CREATE_POLYGON_CLOUD = 'createPolygonCloud',
+
+    STATE_HANDLER_CREATE_POLYGON = 'createPolygon',
+    STATE_HANDLER_CREATE_POLYLINE = 'createPolyline',
+    STATE_HANDLER_CREATE_REPLACE = 'createReplace',
+    STATE_HANDLER_CREATE_SQUARE = 'createSquare',
+
+    STATE_HANDLER_CREATE_SQUIGGLY = 'createSquiggly',
+    STATE_HANDLER_CREATE_STAMP = 'createStamp',
+    STATE_HANDLER_CREATE_STRIKE_OUT = 'createStrikeOut',
+    STATE_HANDLER_CREATE_TEXT = 'createText',
+
+    STATE_HANDLER_CREATE_UNDERLINE = 'createUnderline',
+    STATE_HANDLER_MARQUEE = 'marquee',
+    STATE_HANDLER_ERASER = 'eraser',
+    STATE_HANDLER_LOUPE = 'loupe',
+
+    STATE_HANDLER_SELECT_TEXT_ANNOTATION = 'select-text-annotation',
+    STATE_HANDLER_SELECT_TEXT_IMAGE = 'select-text-image',
+    STATE_HANDLER_SELECT_ANNOTATION = 'select-annotation',
+    STATE_HANDLER_CREATE_FREETEXT_BOX = 'createFreeTextBox',
+
+    STATE_HANDLER_CREATE_FREETEXT_CALLOUT = 'createFreeTextCallout',
+    STATE_HANDLER_CREATE_FREETEXT_TYPEWRITER = 'createFreeTextTypewriter',
+    STATE_HANDLER_CREATE_FIELD_TEXT = 'CreateTextStateHandler',
+    STATE_HANDLER_CREATE_FIELD_SIGNATURE = 'CreateSignStateHandler',
+
+    STATE_HANDLER_CREATE_FIELD_PUSH_BUTTON = 'CreatePushButtonStateHandler',
+    STATE_HANDLER_CREATE_FIELD_CHECK_BOX = 'CreateCheckBoxStateHandler',
+    STATE_HANDLER_CREATE_RADIO_BUTTON = 'CreateRadioButtonStateHandler',
+    STATE_HANDLER_CREATE_FIELD_COMBO_BOX = 'CreateComboBoxStateHandler',
+
+    STATE_HANDLER_CREATE_FIELD_LIST_BOX = 'CreateListBoxStateHandler',
+    STATE_HANDLER_CREATE_FIELD_DATE = 'CreateDateStateHandler',
+    STATE_HANDLER_CREATE_FIELD_IMAGE = 'CreateImageStateHandler',
+    STATE_HANDLER_SNAPSHOT_TOOL = 'snapshot-tool',
+  }
   enum ViewerEvents {
-    jrLicenseSuccess,
-    beforeOpenFile,
-    beforeLoadPDFDoc,
-    openFileSuccess,
-    openFileFailed,
-    willCloseDocument,
-    renderFileSuccess,
-    renderFileFailed,
-    beforeRenderPage,
-    renderPageSuccess,
-    zoomToSuccess,
-    zoomToFailed,
-    startChangeViewMode,
-    changeViewModeSuccess,
-    changeViewModeFailed,
-    pageLayoutRedraw,
-    copyTextSuccess,
-    copyTextFailed,
-    tapPage,
-    tapAnnotation,
-    pressPage,
-    pressAnnotation,
-    rightClickPage,
-    rightClickAnnotation,
-    doubleTapPage,
-    doubleTapAnnotation,
-    activeAnnotationBefore,
-    activeAnnotation,
-    activeAnnotationAfter,
-    unActiveAnnotation,
-    updateActiveAnnotation,
-    removeActiveAnnotationBefore,
-    removeActiveAnnotationSuccess,
-    removeActiveAnnotationFailed,
-    switchStateHandler,
-    pageNumberChange,
-    afterDocumentRotation,
-    snapModeChanged,
-    distanceAnnotCreationStart,
-    updateDistanceAnnot,
-    distanceAnnotCreationEnd,
-    disableScroll,
-    selectText,
-    annotationPermissionChanged,
-    mouseEnter,
-    mouseLeave,
-    focusOnControl,
-    tapField,
-    tapGraphicsObject,
+    jrLicenseSuccess = 'jr-license-success',
+    beforeOpenFile = 'before-open-file',
+    beforeLoadPDFDoc = 'before-load-pdf-document',
+    openFileSuccess = 'open-file-success',
+
+    openFileFailed = 'open-file-failed',
+    willCloseDocument = 'will-close-document',
+    renderFileSuccess = 'render-file-success',
+    renderFileFailed = 'render-file-error',
+
+    beforeRenderPage = 'before-render-page',
+    renderPageSuccess = 'render-page-success',
+    zoomToSuccess = 'zoom-to-success',
+    zoomToFailed = 'zoom-to-failed',
+
+    startChangeViewMode = 'start-change-view-mode',
+    changeViewModeSuccess = 'change-view-mode-success',
+    changeViewModeFailed = 'change-view-mode-failed',
+    pageLayoutRedraw = 'page-layout-redraw',
+    copyTextSuccess = 'copy-text-success',
+    copyTextFailed = 'copy-text-failed',
+    tapPage = 'tap-page',
+    tapAnnotation = 'tap-annotation',
+
+    pressPage = 'press-page',
+    pressAnnotation = 'press-annotation',
+    rightClickPage = 'right-click-page',
+    rightClickAnnotation = 'right-click-annotation',
+
+    doubleTapPage = 'double-tap-page',
+    doubleTapAnnotation = 'double-tap-annotation',
+    activeAnnotationBefore = 'active-annotation-before',
+    activeAnnotation = 'active-annotation',
+
+    activeAnnotationAfter = 'active-annotation-after',
+    unActiveAnnotation = 'unactive-annotation',
+    updateActiveAnnotation = 'update-action-annotation',
+    removeActiveAnnotationBefore = 'remove-action-annotation-before',
+    removeActiveAnnotationSuccess = 'remove-action-annotation-success',
+    removeActiveAnnotationFailed = 'remove-action-annotation-failed',
+    switchStateHandler = 'switch-state-handler',
+    pageNumberChange = 'page-number-change',
+    afterDocumentRotation = 'after-document-rotation',
+    snapModeChanged = 'snap-mode-changed',
+    distanceAnnotCreationStart = 'distance-creation-start',
+    updateDistanceAnnot = 'update-distance-annot',
+
+    distanceAnnotCreationEnd = 'distance-creation-end',
+    selectText = 'select-text',
+    annotationPermissionChanged = 'annotation-premission-changed',
+    mouseEnter = 'mouse-enter',
+
+    mouseLeave = 'mouse-leave',
+    focusOnControl = 'focus-on-control',
+    tapField = 'tap-field',
+    tapGraphicsObject = 'tap-graphics-object',
   }
 
   class Activatable {
@@ -5586,9 +5861,28 @@ declare module __internal__ {
     protected doDeactive(): void;
   }
 
+  export interface AnnotComponentConfig {
+    enableDiagonally: boolean;
+    enableFrame: boolean;
+    moveable: boolean;
+    resizable: boolean;
+    rotatable: boolean;
+  }
+
   export interface AnnotTooltip {
     hide(): void;
     show(clientX: number, clientY: number): void;
+  }
+
+  class CustomOptionsUpdater extends Disposable {
+    updateGetAnnotComponentConfig(
+      getAnnotComponentConfigCallback: (
+        annotComponent: AnnotComponent,
+        props: Array<String>
+      ) => AnnotComponentConfig
+    ): void;
+    addDestroyHook(hooks: Array<Disposable | Function>): Function;
+    destroy(): void;
   }
 
   export interface OpenFileParameter {
@@ -5614,11 +5908,13 @@ declare module __internal__ {
     rendering(): void;
   }
 
-  export interface PrintProgressBar {
-    close(): void;
-    show(): void;
-    updateProgress(current: number, total: number): void;
+  export interface ProgressComponent {
+    hide(): void;
+    show(coverOn?: HTMLElement | Component): void;
+    updateProgress(progress: number | Object, status: string): void;
   }
+
+  export interface RegisterPrintHandlerCallback {}
 
   class ScrollWrap extends Disposable {
     getHeight(): number;
@@ -5635,6 +5931,8 @@ declare module __internal__ {
     addDestroyHook(hooks: Array<Disposable | Function>): Function;
     destroy(): void;
   }
+
+  export interface SubmitFormActionCallback {}
 
   class TextSelectionTool extends Disposable {
     copy(): Promise<void>;
@@ -5770,7 +6068,7 @@ declare module __internal__ {
     setRate(rate: number): void;
     setSpeechSynthesis(speechSynthesis: PDFTextToSpeechSynthesis): void;
     setVolume(volume: number): void;
-    status(): void;
+    get status(): void;
     stop(): void;
     supported(): boolean;
     updatePlayingOptions(options: Partial<ReadAloudOptions>): boolean;
@@ -5783,9 +6081,9 @@ declare module __internal__ {
   }
 
   enum PDFTextToSpeechSynthesisStatus {
-    playing,
-    paused,
-    stopped,
+    playing = 'playing',
+    paused = 'paused',
+    stopped = 'stopped',
   }
 
   export interface CreateAnnotationService extends Disposable {
@@ -5802,6 +6100,74 @@ declare module __internal__ {
     update(point: DevicePoint, options?: Record<string, any>): void;
     addDestroyHook(hooks: Array<Disposable | Function>): Function;
     destroy(): void;
+  }
+
+  class IndexedDBStorageDriver implements StorageDriver {
+    isClosed: boolean;
+    get<T>(context: StorageContext, key: string): Promise<T | null>;
+    getAll(context: StorageContext): Promise<Record<string, any>>;
+    onChange<T>(
+      callback: (event: StorageDriverChangeEvent<T>) => void
+    ): () => void;
+    onRemove(callback: (event: StorageDriverRemoveEvent) => void): () => void;
+    removeAll(context: StorageContext): Promise<void>;
+    set<T>(context: StorageContext, key: string, value: T): Promise<void>;
+    close(): Promise<void>;
+    remove(context: StorageContext, key: string): Promise<void>;
+  }
+
+  class LocalStorageDriver implements StorageDriver {
+    isClosed: boolean;
+    get<T>(context: StorageContext, key: string): Promise<T | null>;
+    onChange<T>(
+      callback: (event: StorageDriverChangeEvent<T>) => void
+    ): () => void;
+    remove(context: StorageContext, key: string): Promise<void>;
+    removeAll(context: StorageContext): Promise<void>;
+    set<T>(context: StorageContext, key: string, value: T): Promise<void>;
+    close(): Promise<void>;
+    getAll(context: StorageContext): Promise<Record<string, any>>;
+    onRemove(callback: (event: StorageDriverRemoveEvent) => void): () => void;
+  }
+
+  export interface PDFViewerStorageContext extends StorageContext {
+    pdfViewer: PDFViewer;
+  }
+
+  export interface StorageContext {
+    feature: string;
+    id: String;
+  }
+
+  export interface StorageDriver {
+    isClosed: boolean;
+    close(): Promise<void>;
+    get<T>(context: StorageContext, key: string): Promise<T | null>;
+    getAll(context: StorageContext): Promise<Record<string, any>>;
+    onChange<T>(
+      callback: (event: StorageDriverChangeEvent<T>) => void
+    ): () => void;
+    onRemove(callback: (event: StorageDriverRemoveEvent) => void): () => void;
+    remove(context: StorageContext, key: string): Promise<void>;
+    removeAll(context: StorageContext): Promise<void>;
+    set<T>(context: StorageContext, key: string, value: T): Promise<void>;
+  }
+
+  export interface StorageDriverChangeEvent<T> {
+    context: StorageContext;
+    key: string;
+    newValue?: T;
+    oldValue?: T;
+  }
+
+  export interface StorageDriverRemoveEvent {
+    context: StorageContext;
+    key?: string;
+  }
+
+  enum StorageFeature {
+    MEASUREMENT = 'measurement',
+    STAMP = 'stamp',
   }
 
   class IContextMenu {
@@ -5918,20 +6284,10 @@ declare module __internal__ {
     switchTo(name: string): void;
   }
 
-  const isDesktop: boolean;
-  const isMobile: boolean;
-  const isTablet: boolean;
-
-  class LoggerFactory {
-    static setLogLevel(level: string): void;
-    static toggleLogger(logOff: boolean): void;
-  }
-
-  enum Log_Levels {
-    LEVEL_DEBUG,
-    LEVEL_INFO,
-    LEVEL_WARN,
-    LEVEL_ERROR,
+  class ActionCallbackManager {
+    setEmbeddedGotoCallback(
+      callback: (EmbeddedGotoAction) => Promise<void>
+    ): void;
   }
 
   class ActivationGroup {
@@ -6002,6 +6358,7 @@ declare module __internal__ {
         workerPath?: string;
         enginePath?: string;
         fontPath?: string;
+        fontInfoPath?: string;
         readBlock?: number;
         brotli?: {
           core?: boolean;
@@ -6014,7 +6371,7 @@ declare module __internal__ {
       defaultScale?: number | string;
       scaleFrequency?: number;
       tileSize?: number;
-      tileCache?: boolean;
+      tileCache?: boolean | number;
       getTileSize?: Function;
       annotRenderingMode?: object;
       i18n?: typeof i18next;
@@ -6038,6 +6395,11 @@ declare module __internal__ {
         PDFPageRendering?: PDFPageRendering;
         AnnotTooltip?: AnnotTooltip;
         beforeRenderPDFDoc?: (pdfDoc: PDFDoc) => Promise<void>;
+        getAnnotComponentConfig?: (
+          annotComponent: AnnotComponent,
+          props: Array<String>
+        ) => object;
+        storageDriver?: StorageDriver;
       };
       StateHandlers?: IStateHandler[];
       enableShortcutKey?: boolean;
@@ -6053,6 +6415,7 @@ declare module __internal__ {
       viewerUI?: IViewerUI;
       snapshotServer?: SnapshotServer;
       showMeasurementInfoPanel?: boolean;
+      instanceId?: String;
     });
 
     element: HTMLElement;
@@ -6077,25 +6440,6 @@ declare module __internal__ {
       }
     ): void;
     close(before?: Function, after?: Function): Promise<void>;
-    collaborate(
-      action: string | COLLABORATION_ACTION,
-      data:
-        | Function
-        | Object
-        | AddReplyOperationData
-        | AddReviewStateOperationData
-        | CreateAnnotationOperationData
-        | PPOInsertPageOperationData
-        | PPOMovePageOperationData
-        | PPORemovePageOperationData
-        | PPORotatePageOperationData
-        | RemoveAnnotationOperationData
-        | RemoveReplyOperationData
-        | UpdateAnnotationOperationData
-        | UpdateAnnotContentOperationData
-        | ImportAnnotationsFileCollaborationData
-        | AddMarkedStateCollaborationData
-    ): void;
     compareDocuments(
       baseDocId: string,
       otherDocId: string,
@@ -6135,7 +6479,7 @@ declare module __internal__ {
       pdfEngine?: any
     ): Promise<PDFDoc>;
     copyAnnots(annots: Array<Annot>): object[];
-    copySnapshot(dataURL: string): void;
+    copySnapshot(dataURL: string): Promise<boolean>;
     createNewDoc(
       title: string,
       author: string,
@@ -6146,6 +6490,7 @@ declare module __internal__ {
       pdfEngine?: any
     ): Promise<PDFDoc>;
     deactivateElement(element: Activatable): void;
+    getActionCallbackManager(): ActionCallbackManager;
     getAllActivatedElements(): Activatable[];
     getAnnotAuthorityManager(): AnnotationAuthorityManager;
     getAnnotManager(): ViewerAnnotManager;
@@ -6154,11 +6499,13 @@ declare module __internal__ {
       name: string | number
     ): AnnotRender | null;
     getCurrentPDFDoc(): PDFDoc | null;
+    getCustomOptionsUpdater(): CustomOptionsUpdater;
     getDefaultAnnotConfig(): (type: string, intent: string) => object;
     getEnableJS(): boolean;
     getEventEmitter(): EventEmitter;
     getFormHighlightColor(): { color: number; colorRequired: number };
     getInkSignList(type: string): object[];
+    getInstanceId(): string | undefined;
     getOverlayComparisonOptionsService(): OverlayComparisonOptionsService;
     getOverlayComparisonService(): OverlayComparisonService;
     getPDFDocFromImageFile(): void;
@@ -6172,12 +6519,17 @@ declare module __internal__ {
     getViewModeManager(): ViewModeManager;
     highlightForm(highlight: boolean): void;
     init(selector: string | HTMLElement): void;
-    initAnnotationIcons(icons: {
-      url: string;
-      fileType: string;
-      width: number;
-      height: number;
-    }): Promise<void>;
+    initAnnotationIcons(
+      icons: Array<{
+        annotType?: string;
+        category: string;
+        name: string;
+        fileType: string;
+        url: string;
+        width?: number;
+        height?: number;
+      }>
+    ): Promise<void>;
     isShortcutKeyEnabled(): boolean;
     killFocus(): Promise<boolean>;
     loadPDFDocByFile(
@@ -6257,7 +6609,6 @@ declare module __internal__ {
       handler: Function | object,
       preventDefaultImplementation?: boolean
     ): void;
-    openFileByShareId(shareId: string): Promise<PDFDoc>;
     openPDFByFile(
       file: File | Blob | ArrayBuffer | TypedArray | DataView,
       options?: {
@@ -6351,7 +6702,7 @@ declare module __internal__ {
             }
         >;
         printType: string[];
-        progress: PrintProgressBar | boolean;
+        progress: ProgressComponent | boolean;
         quality: number;
         showHeaderFooter: boolean;
       },
@@ -6372,7 +6723,7 @@ declare module __internal__ {
       options: {
         type: number;
         pageRange: string;
-        progress: PrintProgressBar | boolean;
+        progress: ProgressComponent | boolean;
       },
       callback: (
         data:
@@ -6382,12 +6733,9 @@ declare module __internal__ {
       ) => void
     ): Promise<void>;
     redraw(force?: boolean): Promise<void>;
-    registerCollabDataHandler(
-      action: string | (() => CollaborationDataHandler<CollaborationData>),
-      handler: (
-        data: CollaborationData,
-        handlerObj: CollaborationDataHandler<CollaborationData>
-      ) => Promise<void>
+    registerPrintHandler(handler: RegisterPrintHandlerCallback): void;
+    registerProgressHandler(
+      callback: (taskType, progress, status) => void
     ): void;
     registerSignatureHandler(
       filter: string,
@@ -6525,8 +6873,447 @@ declare module __internal__ {
     annot: Annot
   ) => Promise<string[] | null | undefined>;
 
-  type CustomScrollWrap = DivScrollWrap;
-  const CustomScrollWrap: typeof DivScrollWrap;
+  class FindReplaceAddon {
+    activate(): Promise<void>;
+    deactivate(): Promise<void>;
+    find(find: string, options?: Object): Promise<boolean>;
+    replace(find: string, replace: string, options?: Object): Promise<void>;
+    replaceAll(
+      find: string,
+      replace: string,
+      options?: Object
+    ): Promise<number>;
+  }
+
+  class FindReplaceController extends Controller {
+    protected component: Component;
+    destroy(): void;
+    getComponentByName(name: string): void;
+    handle(): void;
+    static extend(prototype: object, statics: object): void;
+    static getName(): string;
+    protected mounted(): void;
+    protected postlink(): void;
+    protected prelink(): void;
+    protected static services(): Record<
+      string,
+      new <T>(...args: unknown[]) => T
+    >;
+    addDestroyHook(hooks: Array<Disposable | Function>): Function;
+  }
+
+  class AddImageAdvController extends Controller {
+    protected component: Component;
+    destroy(): void;
+    getComponentByName(name: string): void;
+    handle(): void;
+    static extend(prototype: object, statics: object): void;
+    static getName(): string;
+    protected mounted(): void;
+    protected postlink(): void;
+    protected prelink(): void;
+    protected static services(): Record<
+      string,
+      new <T>(...args: unknown[]) => T
+    >;
+    addDestroyHook(hooks: Array<Disposable | Function>): Function;
+  }
+
+  class AddShapesController extends Controller {
+    protected component: Component;
+    destroy(): void;
+    getComponentByName(name: string): void;
+    handle(): void;
+    static extend(prototype: object, statics: object): void;
+    static getName(): string;
+    protected mounted(): void;
+    protected postlink(): void;
+    protected prelink(): void;
+    protected static services(): Record<
+      string,
+      new <T>(...args: unknown[]) => T
+    >;
+    addDestroyHook(hooks: Array<Disposable | Function>): Function;
+  }
+
+  class AddTextController extends Controller {
+    protected component: Component;
+    destroy(): void;
+    getComponentByName(name: string): void;
+    handle(): void;
+    static extend(prototype: object, statics: object): void;
+    static getName(): string;
+    protected mounted(): void;
+    protected postlink(): void;
+    protected prelink(): void;
+    protected static services(): Record<
+      string,
+      new <T>(...args: unknown[]) => T
+    >;
+    addDestroyHook(hooks: Array<Disposable | Function>): Function;
+  }
+
+  class EditObjectController extends Controller {
+    protected component: Component;
+    destroy(): void;
+    getComponentByName(name: string): void;
+    handle(): void;
+    static extend(prototype: object, statics: object): void;
+    static getName(): string;
+    protected mounted(): void;
+    protected postlink(): void;
+    protected prelink(): void;
+    protected static services(): Record<
+      string,
+      new <T>(...args: unknown[]) => T
+    >;
+    addDestroyHook(hooks: Array<Disposable | Function>): Function;
+  }
+
+  class EditTextController extends Controller {
+    protected component: Component;
+    destroy(): void;
+    getComponentByName(name: string): void;
+    handle(): void;
+    static extend(prototype: object, statics: object): void;
+    static getName(): string;
+    protected mounted(): void;
+    protected postlink(): void;
+    protected prelink(): void;
+    protected static services(): Record<
+      string,
+      new <T>(...args: unknown[]) => T
+    >;
+    addDestroyHook(hooks: Array<Disposable | Function>): Function;
+  }
+
+  export interface ImageGraphicObject extends PageGraphicsObject {
+    type: string;
+    setProperties(
+      properties: Partial<ImageGraphicObjectProperties>
+    ): Promise<void>;
+  }
+
+  export interface ImageGraphicObjectProperties
+    extends PageGraphicsObjectProperties {}
+
+  class JoinSplitController extends Controller {
+    protected component: Component;
+    destroy(): void;
+    getComponentByName(name: string): void;
+    handle(): void;
+    static extend(prototype: object, statics: object): void;
+    static getName(): string;
+    protected mounted(): void;
+    protected postlink(): void;
+    protected prelink(): void;
+    protected static services(): Record<
+      string,
+      new <T>(...args: unknown[]) => T
+    >;
+    addDestroyHook(hooks: Array<Disposable | Function>): Function;
+  }
+
+  export interface PageGraphicsObject {
+    type: string;
+    setProperties(
+      properties: Partial<
+        | TextGraphicObjectProperties
+        | PathGraphicObjectProperties
+        | ImageGraphicObjectProperties
+        | ShadingGraphicObjectProperties
+      >
+    ): void;
+  }
+
+  export interface PageGraphicsObjectProperties {}
+
+  export interface PathGraphicObject extends PageGraphicsObject {
+    type: string;
+    setProperties(
+      properties: Partial<PathGraphicObjectProperties>
+    ): Promise<void>;
+  }
+
+  export interface PathGraphicObjectProperties
+    extends PageGraphicsObjectProperties {
+    shapeStyleDashType: number;
+    shapeStyleFillColor: string;
+    shapeStyleLineCap: number;
+    shapeStyleLineColor: string;
+    shapeStyleLineJoin: number;
+    shapeStyleLineWidth: number;
+    shapeStyleMiterLimit: number;
+  }
+
+  export interface ShadingGraphicObject extends PageGraphicsObject {
+    type: string;
+    setProperties(
+      properties: Partial<ShadingGraphicObjectProperties>
+    ): Promise<void>;
+  }
+
+  export interface ShadingGraphicObjectProperties
+    extends PageGraphicsObjectProperties {
+    shadingStyleColor: Array<{ color: string; offset: number }>;
+  }
+
+  export interface TextGraphicObject extends PageGraphicsObject {
+    type: string;
+    setProperties(
+      properties: Partial<TextGraphicObjectProperties>
+    ): Promise<void>;
+  }
+
+  export interface TextGraphicObjectProperties
+    extends PageGraphicsObjectProperties {
+    fontBold: boolean;
+    fontCharacterSpacing: number;
+    fontColor: string;
+    fontFamily: string;
+    fontItalic: boolean;
+    fontSize: number;
+  }
+
+  class PageEditorAddon {
+    activate(type: string): Promise<void>;
+    deactivate(): Promise<void>;
+    getActiveObject(): Promise<PageGraphicsObject | undefined>;
+    onClick(
+      pageIndex: number,
+      point: Object,
+      isPDFPoint: boolean
+    ): Promise<void>;
+  }
+
+  export interface DigitalStampSize {
+    height: number;
+    width: number;
+  }
+
+  export interface DigitalStampTemplate {
+    height: number;
+    name: string;
+    pdfPath: string;
+    width: number;
+  }
+
+  export interface IdentityInfo {
+    associationName: string;
+    name: string;
+    organizationName: string;
+    surname: string;
+    title: string;
+  }
+
+  class AddCirclePathObjectController extends Controller {
+    protected component: Component;
+    destroy(): void;
+    getComponentByName(name: string): void;
+    handle(): void;
+    static extend(prototype: object, statics: object): void;
+    static getName(): string;
+    protected mounted(): void;
+    protected postlink(): void;
+    protected prelink(): void;
+    protected static services(): Record<
+      string,
+      new <T>(...args: unknown[]) => T
+    >;
+    addDestroyHook(hooks: Array<Disposable | Function>): Function;
+  }
+
+  class AddLinePathObjectController extends Controller {
+    protected component: Component;
+    destroy(): void;
+    getComponentByName(name: string): void;
+    handle(): void;
+    static extend(prototype: object, statics: object): void;
+    static getName(): string;
+    protected mounted(): void;
+    protected postlink(): void;
+    protected prelink(): void;
+    protected static services(): Record<
+      string,
+      new <T>(...args: unknown[]) => T
+    >;
+    addDestroyHook(hooks: Array<Disposable | Function>): Function;
+  }
+
+  class AddRoundRectPathObjectController extends Controller {
+    protected component: Component;
+    destroy(): void;
+    getComponentByName(name: string): void;
+    handle(): void;
+    static extend(prototype: object, statics: object): void;
+    static getName(): string;
+    protected mounted(): void;
+    protected postlink(): void;
+    protected prelink(): void;
+    protected static services(): Record<
+      string,
+      new <T>(...args: unknown[]) => T
+    >;
+    addDestroyHook(hooks: Array<Disposable | Function>): Function;
+  }
+
+  class AddSquarePathObjectController extends Controller {
+    protected component: Component;
+    destroy(): void;
+    getComponentByName(name: string): void;
+    handle(): void;
+    static extend(prototype: object, statics: object): void;
+    static getName(): string;
+    protected mounted(): void;
+    protected postlink(): void;
+    protected prelink(): void;
+    protected static services(): Record<
+      string,
+      new <T>(...args: unknown[]) => T
+    >;
+    addDestroyHook(hooks: Array<Disposable | Function>): Function;
+  }
+
+  class EditAllObjectsController extends Controller {
+    protected component: Component;
+    destroy(): void;
+    getComponentByName(name: string): void;
+    handle(): void;
+    static extend(prototype: object, statics: object): void;
+    static getName(): string;
+    protected mounted(): void;
+    protected postlink(): void;
+    protected prelink(): void;
+    protected static services(): Record<
+      string,
+      new <T>(...args: unknown[]) => T
+    >;
+    addDestroyHook(hooks: Array<Disposable | Function>): Function;
+  }
+
+  class AddTextStateController extends Controller {
+    protected component: Component;
+    destroy(): void;
+    getComponentByName(name: string): void;
+    handle(): void;
+    static extend(prototype: object, statics: object): void;
+    static getName(): string;
+    protected mounted(): void;
+    protected postlink(): void;
+    protected prelink(): void;
+    protected static services(): Record<
+      string,
+      new <T>(...args: unknown[]) => T
+    >;
+    addDestroyHook(hooks: Array<Disposable | Function>): Function;
+  }
+
+  class BoldStyleController extends Controller {
+    protected component: Component;
+    destroy(): void;
+    getComponentByName(name: string): void;
+    handle(): void;
+    static extend(prototype: object, statics: object): void;
+    static getName(): string;
+    protected mounted(): void;
+    protected postlink(): void;
+    protected prelink(): void;
+    protected static services(): Record<
+      string,
+      new <T>(...args: unknown[]) => T
+    >;
+    addDestroyHook(hooks: Array<Disposable | Function>): Function;
+  }
+
+  class ItalicStyleController extends Controller {
+    protected component: Component;
+    destroy(): void;
+    getComponentByName(name: string): void;
+    handle(): void;
+    static extend(prototype: object, statics: object): void;
+    static getName(): string;
+    protected mounted(): void;
+    protected postlink(): void;
+    protected prelink(): void;
+    protected static services(): Record<
+      string,
+      new <T>(...args: unknown[]) => T
+    >;
+    addDestroyHook(hooks: Array<Disposable | Function>): Function;
+  }
+
+  class CustomDynamicStampAddon extends UIXAddon {
+    getDynamicStamp(): Promise<object[]>;
+    removeDynamicStamp(arr: object[]): void;
+    setDynamicStamp(stampInfo: object[]): void;
+    afterMounted(root: Component): void;
+    beforeMounted(root: Component): void;
+    destroy(): Promise<void> | void;
+    fragments(): UIFragmentOptions[];
+    getI18NResources(): object;
+    getName(): string;
+    init(pdfui: PDFUI): void;
+    pdfViewerCreated(pdfviewer: PDFUI): void;
+    protected receiveAction(actionName: string, args: any[]): void;
+    protected static initOnLoad(): void;
+  }
+
+  class DigitalStampUIXAddon extends UIXAddon {
+    getDigitalStampTemplate(): DigitalStampTemplate[];
+    getIdentityInfo(): IdentityInfo;
+    removeDigitalStampTemplates(names: string[]): Promise<void>;
+    resetIdentityInfo(): Promise<void>;
+    setDefaultSize(size: DigitalStampSize): void;
+    setDigitalStampTemplates(templates: DigitalStampTemplate[]): Promise<void>;
+    setIdentityInfo(info: IdentityInfo): Promise<void>;
+    setTimeFormatOfDigitalStamp(timeFormat: string): Promise<void>;
+    afterMounted(root: Component): void;
+    beforeMounted(root: Component): void;
+    destroy(): Promise<void> | void;
+    fragments(): UIFragmentOptions[];
+    getI18NResources(): object;
+    getName(): string;
+    init(pdfui: PDFUI): void;
+    pdfViewerCreated(pdfviewer: PDFUI): void;
+    protected receiveAction(actionName: string, args: any[]): void;
+    protected static initOnLoad(): void;
+  }
+
+  class PrintUIXAddon {
+    showPrintDialog(): Promise<void>;
+  }
+
+  class ReadAloudAddon {
+    onActivationChange(callback: (isActivated: boolean) => void): () => void;
+  }
+
+  class Thumbnail extends UIXAddon {
+    getZoomScale(): number;
+    onSelectThumbnail(
+      callback: (
+        selectedPageIndexes: number[],
+        lastSelectedPageIndexes: number[]
+      ) => void
+    ): () => void;
+    zoomTo(scale: number): boolean;
+    afterMounted(root: Component): void;
+    beforeMounted(root: Component): void;
+    destroy(): Promise<void> | void;
+    fragments(): UIFragmentOptions[];
+    getI18NResources(): object;
+    getName(): string;
+    init(pdfui: PDFUI): void;
+    pdfViewerCreated(pdfviewer: PDFUI): void;
+    protected receiveAction(actionName: string, args: any[]): void;
+    protected static initOnLoad(): void;
+  }
+
+  class UndoRedoAddon {
+    invoke(callback: (pdfDoc: PDFDoc) => void): void;
+    redo(): Promise<void>;
+    undo(): Promise<void>;
+    undoAll(): Promise<void>;
+  }
 
   class ButtonComponent extends Component {
     canBeDisabled: boolean;
@@ -9043,7 +9830,7 @@ declare module __internal__ {
   }
 
   export interface SeniorComponentSuperclassOptions {
-    fragments?: UIFragmentOptions | [];
+    fragments?: Array<UIFragmentOptions>;
     template?: string;
   }
 
@@ -9313,7 +10100,6 @@ declare module __internal__ {
     handle(): void;
     static extend(prototype: object, statics: object): void;
     static getName(): string;
-    protected getPDFUI(): void;
     protected mounted(): void;
     protected postlink(): void;
     protected prelink(): void;
@@ -9333,7 +10119,6 @@ declare module __internal__ {
     handle(): void;
     static extend(prototype: object, statics: object): void;
     static getName(): string;
-    protected getPDFUI(): void;
     protected mounted(): void;
     protected postlink(): void;
     protected prelink(): void;
@@ -9353,7 +10138,6 @@ declare module __internal__ {
     handle(): void;
     static extend(prototype: object, statics: object): void;
     static getName(): string;
-    protected getPDFUI(): void;
     protected mounted(): void;
     protected postlink(): void;
     protected prelink(): void;
@@ -9373,7 +10157,6 @@ declare module __internal__ {
     handle(): void;
     static extend(prototype: object, statics: object): void;
     static getName(): string;
-    protected getPDFUI(): void;
     protected mounted(): void;
     protected postlink(): void;
     protected prelink(): void;
@@ -9391,7 +10174,6 @@ declare module __internal__ {
     handle(): void;
     static extend(prototype: object, statics: object): void;
     static getName(): string;
-    protected getPDFUI(): void;
     protected mounted(): void;
     protected postlink(): void;
     protected prelink(): void;
@@ -9409,7 +10191,6 @@ declare module __internal__ {
     handle(): void;
     static extend(prototype: object, statics: object): void;
     static getName(): string;
-    protected getPDFUI(): void;
     protected mounted(): void;
     protected postlink(): void;
     protected prelink(): void;
@@ -9427,7 +10208,6 @@ declare module __internal__ {
     handle(): void;
     static extend(prototype: object, statics: object): void;
     static getName(): string;
-    protected getPDFUI(): void;
     protected mounted(): void;
     protected postlink(): void;
     protected prelink(): void;
@@ -9445,7 +10225,6 @@ declare module __internal__ {
     handle(): void;
     static extend(prototype: object, statics: object): void;
     static getName(): string;
-    protected getPDFUI(): void;
     protected mounted(): void;
     protected postlink(): void;
     protected prelink(): void;
@@ -9465,7 +10244,6 @@ declare module __internal__ {
     handle(): void;
     static extend(prototype: object, statics: object): void;
     static getName(): string;
-    protected getPDFUI(): void;
     protected mounted(): void;
     protected postlink(): void;
     protected prelink(): void;
@@ -9485,7 +10263,6 @@ declare module __internal__ {
     handle(): void;
     static extend(prototype: object, statics: object): void;
     static getName(): string;
-    protected getPDFUI(): void;
     protected mounted(): void;
     protected postlink(): void;
     protected prelink(): void;
@@ -9505,7 +10282,6 @@ declare module __internal__ {
     handle(): void;
     static extend(prototype: object, statics: object): void;
     static getName(): string;
-    protected getPDFUI(): void;
     protected mounted(): void;
     protected postlink(): void;
     protected prelink(): void;
@@ -9525,7 +10301,6 @@ declare module __internal__ {
     handle(): void;
     static extend(prototype: object, statics: object): void;
     static getName(): string;
-    protected getPDFUI(): void;
     protected mounted(): void;
     protected postlink(): void;
     protected prelink(): void;
@@ -9545,7 +10320,6 @@ declare module __internal__ {
     handle(): void;
     static extend(prototype: object, statics: object): void;
     static getName(): string;
-    protected getPDFUI(): void;
     protected mounted(): void;
     protected postlink(): void;
     protected prelink(): void;
@@ -9565,7 +10339,6 @@ declare module __internal__ {
     handle(): void;
     static extend(prototype: object, statics: object): void;
     static getName(): string;
-    protected getPDFUI(): void;
     protected mounted(): void;
     protected postlink(): void;
     protected prelink(): void;
@@ -9585,7 +10358,6 @@ declare module __internal__ {
     handle(): void;
     static extend(prototype: object, statics: object): void;
     static getName(): string;
-    protected getPDFUI(): void;
     protected mounted(): void;
     protected postlink(): void;
     protected prelink(): void;
@@ -9605,7 +10377,6 @@ declare module __internal__ {
     handle(): void;
     static extend(prototype: object, statics: object): void;
     static getName(): string;
-    protected getPDFUI(): void;
     protected mounted(): void;
     protected postlink(): void;
     protected prelink(): void;
@@ -9625,7 +10396,6 @@ declare module __internal__ {
     handle(): void;
     static extend(prototype: object, statics: object): void;
     static getName(): string;
-    protected getPDFUI(): void;
     protected mounted(): void;
     protected postlink(): void;
     protected prelink(): void;
@@ -9645,7 +10415,6 @@ declare module __internal__ {
     handle(): void;
     static extend(prototype: object, statics: object): void;
     static getName(): string;
-    protected getPDFUI(): void;
     protected mounted(): void;
     protected postlink(): void;
     protected prelink(): void;
@@ -9665,7 +10434,6 @@ declare module __internal__ {
     handle(): void;
     static extend(prototype: object, statics: object): void;
     static getName(): string;
-    protected getPDFUI(): void;
     protected mounted(): void;
     protected postlink(): void;
     protected prelink(): void;
@@ -9685,7 +10453,6 @@ declare module __internal__ {
     handle(): void;
     static extend(prototype: object, statics: object): void;
     static getName(): string;
-    protected getPDFUI(): void;
     protected mounted(): void;
     protected postlink(): void;
     protected prelink(): void;
@@ -9705,7 +10472,6 @@ declare module __internal__ {
     handle(): void;
     static extend(prototype: object, statics: object): void;
     static getName(): string;
-    protected getPDFUI(): void;
     protected mounted(): void;
     protected postlink(): void;
     protected prelink(): void;
@@ -9725,7 +10491,6 @@ declare module __internal__ {
     handle(): void;
     static extend(prototype: object, statics: object): void;
     static getName(): string;
-    protected getPDFUI(): void;
     protected mounted(): void;
     protected postlink(): void;
     protected prelink(): void;
@@ -9745,7 +10510,6 @@ declare module __internal__ {
     handle(): void;
     static extend(prototype: object, statics: object): void;
     static getName(): string;
-    protected getPDFUI(): void;
     protected mounted(): void;
     protected postlink(): void;
     protected prelink(): void;
@@ -9765,7 +10529,6 @@ declare module __internal__ {
     handle(): void;
     static extend(prototype: object, statics: object): void;
     static getName(): string;
-    protected getPDFUI(): void;
     protected mounted(): void;
     protected postlink(): void;
     protected prelink(): void;
@@ -9785,7 +10548,6 @@ declare module __internal__ {
     handle(): void;
     static extend(prototype: object, statics: object): void;
     static getName(): string;
-    protected getPDFUI(): void;
     protected mounted(): void;
     protected postlink(): void;
     protected prelink(): void;
@@ -9805,7 +10567,6 @@ declare module __internal__ {
     handle(): void;
     static extend(prototype: object, statics: object): void;
     static getName(): string;
-    protected getPDFUI(): void;
     protected mounted(): void;
     protected postlink(): void;
     protected prelink(): void;
@@ -9825,7 +10586,6 @@ declare module __internal__ {
     handle(): void;
     static extend(prototype: object, statics: object): void;
     static getName(): string;
-    protected getPDFUI(): void;
     protected mounted(): void;
     protected postlink(): void;
     protected prelink(): void;
@@ -9845,7 +10605,6 @@ declare module __internal__ {
     handle(): void;
     static extend(prototype: object, statics: object): void;
     static getName(): string;
-    protected getPDFUI(): void;
     protected mounted(): void;
     protected postlink(): void;
     protected prelink(): void;
@@ -9865,7 +10624,6 @@ declare module __internal__ {
     handle(): void;
     static extend(prototype: object, statics: object): void;
     static getName(): string;
-    protected getPDFUI(): void;
     protected mounted(): void;
     protected postlink(): void;
     protected prelink(): void;
@@ -9885,7 +10643,6 @@ declare module __internal__ {
     handle(): void;
     static extend(prototype: object, statics: object): void;
     static getName(): string;
-    protected getPDFUI(): void;
     protected mounted(): void;
     protected postlink(): void;
     protected prelink(): void;
@@ -9905,7 +10662,6 @@ declare module __internal__ {
     handle(): void;
     static extend(prototype: object, statics: object): void;
     static getName(): string;
-    protected getPDFUI(): void;
     protected mounted(): void;
     protected postlink(): void;
     protected prelink(): void;
@@ -9925,7 +10681,6 @@ declare module __internal__ {
     handle(): void;
     static extend(prototype: object, statics: object): void;
     static getName(): string;
-    protected getPDFUI(): void;
     protected mounted(): void;
     protected postlink(): void;
     protected prelink(): void;
@@ -9945,7 +10700,6 @@ declare module __internal__ {
     handle(): void;
     static extend(prototype: object, statics: object): void;
     static getName(): string;
-    protected getPDFUI(): void;
     protected mounted(): void;
     protected postlink(): void;
     protected prelink(): void;
@@ -9965,7 +10719,6 @@ declare module __internal__ {
     handle(): void;
     static extend(prototype: object, statics: object): void;
     static getName(): string;
-    protected getPDFUI(): void;
     protected mounted(): void;
     protected postlink(): void;
     protected prelink(): void;
@@ -9985,7 +10738,6 @@ declare module __internal__ {
     handle(): void;
     static extend(prototype: object, statics: object): void;
     static getName(): string;
-    protected getPDFUI(): void;
     protected mounted(): void;
     protected postlink(): void;
     protected prelink(): void;
@@ -10005,7 +10757,6 @@ declare module __internal__ {
     handle(): void;
     static extend(prototype: object, statics: object): void;
     static getName(): string;
-    protected getPDFUI(): void;
     protected mounted(): void;
     protected postlink(): void;
     protected prelink(): void;
@@ -10025,7 +10776,6 @@ declare module __internal__ {
     handle(): void;
     static extend(prototype: object, statics: object): void;
     static getName(): string;
-    protected getPDFUI(): void;
     protected mounted(): void;
     protected postlink(): void;
     protected prelink(): void;
@@ -10043,7 +10793,6 @@ declare module __internal__ {
     handle(): void;
     static extend(prototype: object, statics: object): void;
     static getName(): string;
-    protected getPDFUI(): void;
     protected mounted(): void;
     protected postlink(): void;
     protected prelink(): void;
@@ -10061,7 +10810,6 @@ declare module __internal__ {
     handle(): void;
     static extend(prototype: object, statics: object): void;
     static getName(): string;
-    protected getPDFUI(): void;
     protected mounted(): void;
     protected postlink(): void;
     protected prelink(): void;
@@ -10079,7 +10827,6 @@ declare module __internal__ {
     handle(): void;
     static extend(prototype: object, statics: object): void;
     static getName(): string;
-    protected getPDFUI(): void;
     protected mounted(): void;
     protected postlink(): void;
     protected prelink(): void;
@@ -10097,7 +10844,6 @@ declare module __internal__ {
     handle(): void;
     static extend(prototype: object, statics: object): void;
     static getName(): string;
-    protected getPDFUI(): void;
     protected mounted(): void;
     protected postlink(): void;
     protected prelink(): void;
@@ -10115,7 +10861,6 @@ declare module __internal__ {
     handle(): void;
     static extend(prototype: object, statics: object): void;
     static getName(): string;
-    protected getPDFUI(): void;
     protected mounted(): void;
     protected postlink(): void;
     protected prelink(): void;
@@ -10133,7 +10878,6 @@ declare module __internal__ {
     handle(): void;
     static extend(prototype: object, statics: object): void;
     static getName(): string;
-    protected getPDFUI(): void;
     protected mounted(): void;
     protected postlink(): void;
     protected prelink(): void;
@@ -10151,7 +10895,6 @@ declare module __internal__ {
     handle(): void;
     static extend(prototype: object, statics: object): void;
     static getName(): string;
-    protected getPDFUI(): void;
     protected mounted(): void;
     protected postlink(): void;
     protected prelink(): void;
@@ -10171,7 +10914,6 @@ declare module __internal__ {
     handle(): void;
     static extend(prototype: object, statics: object): void;
     static getName(): string;
-    protected getPDFUI(): void;
     protected mounted(): void;
     protected postlink(): void;
     protected prelink(): void;
@@ -10191,7 +10933,6 @@ declare module __internal__ {
     handle(): void;
     static extend(prototype: object, statics: object): void;
     static getName(): string;
-    protected getPDFUI(): void;
     protected mounted(): void;
     protected postlink(): void;
     protected prelink(): void;
@@ -10211,7 +10952,6 @@ declare module __internal__ {
     handle(): void;
     static extend(prototype: object, statics: object): void;
     static getName(): string;
-    protected getPDFUI(): void;
     protected mounted(): void;
     protected postlink(): void;
     protected prelink(): void;
@@ -10231,7 +10971,6 @@ declare module __internal__ {
     handle(): void;
     static extend(prototype: object, statics: object): void;
     static getName(): string;
-    protected getPDFUI(): void;
     protected mounted(): void;
     protected postlink(): void;
     protected prelink(): void;
@@ -10251,7 +10990,6 @@ declare module __internal__ {
     handle(): void;
     static extend(prototype: object, statics: object): void;
     static getName(): string;
-    protected getPDFUI(): void;
     protected mounted(): void;
     protected postlink(): void;
     protected prelink(): void;
@@ -10271,7 +11009,6 @@ declare module __internal__ {
     handle(): void;
     static extend(prototype: object, statics: object): void;
     static getName(): string;
-    protected getPDFUI(): void;
     protected mounted(): void;
     protected postlink(): void;
     protected prelink(): void;
@@ -10289,7 +11026,6 @@ declare module __internal__ {
     handle(): void;
     static extend(prototype: object, statics: object): void;
     static getName(): string;
-    protected getPDFUI(): void;
     protected mounted(): void;
     protected postlink(): void;
     protected prelink(): void;
@@ -10307,7 +11043,6 @@ declare module __internal__ {
     handle(): void;
     static extend(prototype: object, statics: object): void;
     static getName(): string;
-    protected getPDFUI(): void;
     protected mounted(): void;
     protected postlink(): void;
     protected prelink(): void;
@@ -10327,7 +11062,6 @@ declare module __internal__ {
     handle(): void;
     static extend(prototype: object, statics: object): void;
     static getName(): string;
-    protected getPDFUI(): void;
     protected mounted(): void;
     protected postlink(): void;
     protected prelink(): void;
@@ -10347,7 +11081,6 @@ declare module __internal__ {
     handle(): void;
     static extend(prototype: object, statics: object): void;
     static getName(): string;
-    protected getPDFUI(): void;
     protected mounted(): void;
     protected postlink(): void;
     protected prelink(): void;
@@ -10365,7 +11098,6 @@ declare module __internal__ {
     handle(): void;
     static extend(prototype: object, statics: object): void;
     static getName(): string;
-    protected getPDFUI(): void;
     protected mounted(): void;
     protected postlink(): void;
     protected prelink(): void;
@@ -10383,7 +11115,6 @@ declare module __internal__ {
     handle(): void;
     static extend(prototype: object, statics: object): void;
     static getName(): string;
-    protected getPDFUI(): void;
     protected mounted(): void;
     protected postlink(): void;
     protected prelink(): void;
@@ -10403,7 +11134,6 @@ declare module __internal__ {
     handle(): void;
     static extend(prototype: object, statics: object): void;
     static getName(): string;
-    protected getPDFUI(): void;
     protected mounted(): void;
     protected postlink(): void;
     protected prelink(): void;
@@ -10423,7 +11153,6 @@ declare module __internal__ {
     handle(): void;
     static extend(prototype: object, statics: object): void;
     static getName(): string;
-    protected getPDFUI(): void;
     protected mounted(): void;
     protected postlink(): void;
     protected prelink(): void;
@@ -10441,7 +11170,6 @@ declare module __internal__ {
     handle(): void;
     static extend(prototype: object, statics: object): void;
     static getName(): string;
-    protected getPDFUI(): void;
     protected mounted(): void;
     protected postlink(): void;
     protected prelink(): void;
@@ -10459,7 +11187,6 @@ declare module __internal__ {
     handle(): void;
     static extend(prototype: object, statics: object): void;
     static getName(): string;
-    protected getPDFUI(): void;
     protected mounted(): void;
     protected postlink(): void;
     protected prelink(): void;
@@ -10477,7 +11204,6 @@ declare module __internal__ {
     handle(): void;
     static extend(prototype: object, statics: object): void;
     static getName(): string;
-    protected getPDFUI(): void;
     protected mounted(): void;
     protected postlink(): void;
     protected prelink(): void;
@@ -10502,7 +11228,6 @@ declare module __internal__ {
     handle(): void;
     static extend(prototype: object, statics: object): void;
     static getName(): string;
-    protected getPDFUI(): void;
     protected mounted(): void;
     protected postlink(): void;
     protected prelink(): void;
@@ -10520,7 +11245,6 @@ declare module __internal__ {
     handle(): void;
     static extend(prototype: object, statics: object): void;
     static getName(): string;
-    protected getPDFUI(): void;
     protected mounted(): void;
     protected postlink(): void;
     protected prelink(): void;
@@ -10540,7 +11264,6 @@ declare module __internal__ {
     handle(): void;
     static extend(prototype: object, statics: object): void;
     static getName(): string;
-    protected getPDFUI(): void;
     protected mounted(): void;
     protected postlink(): void;
     protected prelink(): void;
@@ -10556,36 +11279,38 @@ declare module __internal__ {
     ENABLE,
     ACTIVE,
     DEACTIVE,
+
     SHOWN,
     HIDDEN,
     DESTROYED,
     REMOVED,
+
     INSERTED,
     MOUNTED,
     CLOSED,
     EXPAND,
+
     RESIZESTART,
     RESIZE,
     COLLAPSE,
   }
-
   enum FRAGMENT_ACTION {
     BEFORE,
     AFTER,
     APPEND,
     PREPEND,
+
     INSERT,
     FILL,
     REPLACE,
     EXT,
+
     REMOVE,
   }
-
   enum Loading_Mode {
     fromFileObject,
     fromMemory,
   }
-
   const WEBPDF_VIEWER_COMPONENT_NAME = 'pdf-viewer';
 
   class AdaptiveAppearance extends Appearance {
@@ -10682,6 +11407,7 @@ declare module __internal__ {
           | Component
           | HTMLElement
           | Promise<string | Component | HTMLElement>;
+        progress?: ProgressComponent;
       };
     });
 
@@ -10690,11 +11416,11 @@ declare module __internal__ {
     addCssFonts(fonts: string[]): void;
     addUIEventListener(
       type: string | string[] | { [type: string]: () => void },
-      listener: () => void
+      listener: (...args: any[]) => void
     ): () => void;
     addViewerEventListener(
       type: string | string[] | { [type: string]: () => void },
-      listener: () => void
+      listener: (...args: any[]) => void
     ): () => void;
     callAddonAPI(
       addonLibrary: string,
@@ -10703,6 +11429,7 @@ declare module __internal__ {
     ): Promise<any>;
     changeLanguage(language: string): Promise<void>;
     destroy(): Promise<void>;
+    getAddonInstance(addonLibrary: string): UIXAddon | undefined;
     getAllComponentsByName(name: string): Promise<Component[]>;
     getAnnotationIcons(
       annotType: string,
@@ -10728,27 +11455,7 @@ declare module __internal__ {
       animation?: boolean | string
     ): Promise<LoadingComponent>;
     openFormPropertyBoxAfterCreated(isOpen: boolean): void;
-    registerSignatureFlowHandler(
-      handler: (signField: PDFField) => Promise<object>,
-      signField: PDFField,
-      setting: {
-        filter: string;
-        subfilter: string;
-        flag: number;
-        signer: string;
-        reason: string;
-        email: string;
-        image: string;
-        distinguishName: string;
-        location: string;
-        text: string;
-        defaultContentsLength: number;
-        sign: (
-          setting: object,
-          plainBuffer: ArrayBuffer
-        ) => Promise<ArrayBuffer>;
-      }
-    ): void;
+    registerSignatureFlowHandler(signatureHandler: SignatureFlowOptions): void;
     registerSignaturePropertyHandler(
       handler: (signatureInfo: object) => object
     ): void;
@@ -10774,10 +11481,13 @@ declare module __internal__ {
         };
       };
     }): void;
-    removeUIEventListener(type: string | string[], listener: () => void): void;
+    removeUIEventListener(
+      type: string | string[],
+      listener: (...args: any[]) => void
+    ): void;
     removeViewerEventListener(
       type: string | string[],
-      listener: () => void
+      listener: (...args: any[]) => void
     ): Promise<void>;
     setDefaultMeasurementRatio(options: {
       userSpaceScaleValue: number;
@@ -10803,7 +11513,35 @@ declare module __internal__ {
   }
 
   class SeniorComponentFactory {
-    static createSuperClass: any;
+    static createSuperClass(
+      options: SeniorComponentSuperclassOptions
+    ): Class<Component>;
+  }
+
+  export interface SignatureFlowOptions {
+    showSignatureProperty(
+      callback: (signField: PDFField) => Promise<void>
+    ): void;
+    showVerificationInfo(
+      callback: (signField: PDFField) => Promise<void>
+    ): void;
+    sign(callback: (signField: PDFField) => Promise<SignatureInfomation>): void;
+    verify(callback: (signField: PDFField) => Promise<void>): void;
+  }
+
+  export interface SignatureInfomation {
+    defaultContentsLength: number;
+    distinguishName: string;
+    email: string;
+    filter: string;
+    flag: number;
+    image: string;
+    location: string;
+    reason: string;
+    signer: string;
+    subfilter: string;
+    text: string;
+    sign(setting: object, plainBuffer: ArrayBuffer): Promise<ArrayBuffer>;
   }
 
   export interface Snapshot {
@@ -10874,18 +11612,17 @@ declare module __internal__ {
       title: string
     ): Promise<string>;
   }
-
   enum UIEvents {
-    fullscreenchange,
-    appendCommentListComment,
-    appendCommentListReply,
-    destroyCommentListComment,
-    destroyCommentListReply,
-    InkImageSelected,
-    addContentSuccess,
-    initializationCompleted,
-    bookmarkSelected,
-  }
+    fullscreenchange = 'fullscreenchange',
+    appendCommentListComment = 'append-commentlist-comment',
+    appendCommentListReply = 'append-commentlist-reply',
+    destroyCommentListComment = 'destroy-commentlist-comment',
 
+    destroyCommentListReply = 'destroy-commentlist-reply',
+    InkImageSelected = 'ink-image-selected',
+    addContentSuccess = 'add-content-success',
+    initializationCompleted = 'pdfui-intialization-completed',
+    bookmarkSelected = 'bookmark-selected',
+  }
   const modular: Modular;
 }

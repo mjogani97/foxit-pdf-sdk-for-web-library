@@ -1,3 +1,138 @@
+What’s new in Foxit PDF SDK for Web 9.2.0   
+Release Date: November 14, 2023
+
+*****New Features*****
+* Enabled annotation APIs to support undo/redo functionality:Added a new callback addon function "UndoRedoAddon.invoke" to enable annotation APIs to support undo/redo functionality.
+* Support removing watermark:Added new API "pdfdoc.removeAllWatermarks" to remove all watermark in the document.
+* Support to collapse/expand Ribbon bar:New directives, @retractable and @retractable-body, have been added to control the tab component, allowing to toggle on or off the ribbon bar.
+* Support for rendering tile watermark at viewer level:Updated the APIs PDFPageRender:setWatermarkConfig and PDFDocRender:setWatermarkConfig to provide support for rendering tile watermarks.
+* Check a PDF Owner Password:Added new APIs "checkPassword" to check the password type of the current document and "hasOwnerPassword" to check if the current PDF has an owner password.
+* Support non-proportionally resizing stamps:Added a new attribute "enableFrame" to AnnotComponentConfig to allow for resizing stamp UI shape horizontally or vertically.
+* Optimized UIX Addon APIs: This optimization introduced UIExtension.addons to replace the old PDFUI.callAddonAPI class, and added a new API "PDFUI.getAddonInstance" to allow asynchronous retrieval ofaddons instances.
+* Themes color customization: Added a new API 'setThemeColor' to allowing themes customization. 
+* Suport for Rendering Dynamic XFA forms.
+* Support advanced editor on Mobile.
+* Exposed new UI APIs and Events for the Advanced Editor addon.
+* Support for Editing/Deleting Polygon/Polyline with /path entry.
+
+*****Demo*****
+* Demo for the Storage API:New Demo "examples/UIExtension/custom-storage-driver/index.html" showing how to store and retrive data for some opterations. 
+* Show/Hide ribbon bar:New Demo "examples/UIExtension/retractable-tab/" to demostrate how to show/hide the ribbon bar.
+
+*****Bug Fixes*****
+* Fixed the issue of positional inaccuracy after executing pdfviewer.zoomAtPosition.
+* Resolved an error that occurred in specific files after verifying signatures, showing "Uncaught (in promise) RangeError: offset is out of bounds."
+* Fixed the problem where, due to caching issues, subsequently added custom stamps always used the image of the first stamp added.
+* Addressed the issue of ink discontinuity and content loss when writing with a stylus pen.
+* Corrected the lag in drawing with the pencil tool when zooming during editing.
+* Fixed the problem where, in documents with inconsistent page sizes, changing page display or resizing the browser would not center the pages.
+* Resolved a specific document rendering issue, where parsing failed when flipping pages during the rendering process.
+
+==================================================================
+What’s new in Foxit PDF SDK for Web 9.1.0
+Release Date: August 29, 2023
+
+*****New Features*****
+* New capability to render and edit annotations using CA, ca, and BM dictionaries from PDF2.0.
+* Added a backend font-matching strategy for increased font mapping accuracy.
+* Added new APIs to configure properties such as moveable, resizable, rotatable, and enableDiagonally for different annotation UI shapes.
+  Relevant APIs:
+  PDFViewCtrl::interfaces::CustomOptionsUpdater::updateGetAnnotComponentConfig ( )    
+  PDFViewer::constructor [options.customs.getAnnotComponentConfig=function(){}] 
+* All measurement tools now support setting Caption colors and Label text through UI or APIs.
+  Relevant API: ***.setCaptionColor; ***.setContent
+* New APIs setImage added to programmatically set the stamp and screen.
+* New API PDFDoc.AddAnnots added to insert annotations into PDF in batch to improve performance.
+* Added support for paging seal signature to add, update, delete, and sign stamps.
+  Relevant APIs:
+  PDFDoc::addPagingSealSignature; 
+  PDFDoc::getAllPagingSealSignatures; 
+  PDFDoc::removePagingSealSignature; 
+  PDFDoc::updatePagingSealSignature; 
+  PDFDoc::sign()
+* Updated parameters email, reason, and location of PDFDoc.sign to change the default value of the Signer's Contact Information that appears on the Signature Properties window.
+* New APIs for obtaining signature images, detecting the last signature, and removing the signature.
+  Relevant APIs:
+  PDFSignature::getImage
+  PDFDoc::removeSignature
+  PDFSignature::isLast
+* Enabled Page Thumbnails to synchronize with the Page View in Rotate View mode.
+* Added support for displaying and customizing task progress for Signing, Watermarking, Adding Annotations, Form Recognition, and Printing.
+  Relevant APIs:
+  PDFViewer::interfaces:ProgressComponent
+  PDFViewer::registerProgressHandler(callback)     
+  PDFUI::constructor(customs.progress)
+* New API HandStateHandlerConfig::enablePasting to enable or disable paste functionality in the hand state.
+* Exposed UIExtension Controllers for Basic and Advanced Editor.
+* New API PDFViewer:RegisterPrintHandler added to override default print behavior and allow for executing custom print logic.
+* Added support for dark mode at UI.
+* Implemented a built-in and customizable storage driver for saving and retrieving data, enabling users to reuse measurement settings in the last session.
+  Relevant APIs:
+  PDFViewCtrl: Storage
+  PDFViewer::getInstanceId ()     
+  PDFViewer::constructor [options.instanceId]
+* New API PDFViewer::getActionCallbackManager added to open an embedded file associated with a link.
+* New APIs PDFField::getMappingName and PDFField::setMappingName added to form for exporting or importing form data.
+* New API PDFField::setAlternateName added to set alternate text to the form field for enhanced accessibility to the PDF form.
+* New APIs added to programmatically extract, update, and embed files from PDF documents.
+  Relevant APIs:
+  PDFDoc::addEmbeddedFile()
+  PDFDoc::setEmbeddedFile()
+  PDFDoc::getEmbeddedFile()
+*****Enhancements*****
+* Improved Snapping to work with the existing measurements.
+* Enhanced Annotation Undo/Redo functionality for broader editing scenarios.
+* Improved interaction of measurement distance lines for enhanced readability.
+* Enhanced rendering of annotations with Multiply Blend Mode in the Appearance Stream.
+* Updated parameter format of ‘PDFViewer::initAnnotationIcons’ using an array of objects for simplified API use.
+
+*****Demo*****
+* New Demo ”server\signature-server-for-linux" for demonstrating how to configure and start up service for a signature.
+* New Demo “examples/UIExtension/dark/” to demonstrate how to implement dark mode.  
+* New Demo “examples/UIExtension/custom-measurement-properties-dialog/index“ to demonstrate the customization of the right-side measurement properties component.
+* New Vue.js3  example added on the Github.
+* New Next.JS example added on the Github.
+* New Integration demo with low-code platform Mendix. 
+
+*****Bug Fixes*****
+
+* Addressed an issue where transparent annotations with a Multiply blending mode were not rendering correctly in the Appearance stream.
+* [Demo] Fixed a problem with the commentlist-loadmode demo not loading all comments as expected.
+* Resolved crashes occurring during the re-rendering of newly created annotations on specific files.
+* Corrected annotation tooltips that were not displaying completely when hovering the mouse over them.
+* Fixed the issue where the reply function was disabled when the Annotation property was set to Locked.
+* Fixed the content reset issue upon double-clicking a newly created TextBox or Callout.
+* Restored the functionality of the Typewriter tool's plain text paste.
+* Addressed annotation rendering errors when zooming in and out using ctrl+mouse wheel.
+* Fixed the issue of the Annotation CreationDate failing to update with time zone changes.
+* Resolved the issue where creating an ink annotation on mobile via pinch zoom triggered an unintended add annotation event.
+* Fixed the issue where stamps were added but their icons didn't appear in the stamp list.
+* [Demo] Fixed an issue where the ScrollTo method wasn't working as expected while scrolling with the mouse wheel in the basicViewer.
+* [Vue3] Fixed the "L.filter is not a function" error when deploying a Vue3 app to Ngix.
+* Resolved the issue of specific files displaying blank pages upon scrolling.
+* Rectified the problem where "Replace All" was not effectively applying to every page.
+* Rectified the problem where CheckBox and RadioBox annotations created by the SDK were not appearing in other PDF readers.
+* Resolved the issue where exporting and then importing data files through the UI interface with documents having uppercase "PDF" file extensions would result in a "File is corrupted" message.
+* Fixed interdependent calculation errors within specific form fields.
+* Corrected the incorrect rendering of "1 bpp with a mask" images.
+* Fixed an error "Cannot set properties of undefined" when tapping a page on mobile.
+* Resolved the "unknown engine error" when merging documents.
+* Fixed an issue where printing documents containing layer resulted in incorrect output.
+* Eliminated memory leaks in the getFile and getStream functions.
+* Corrected the issue in specific files where text could only be selected on a per-line basis.
+* Fixed the inability to draw dots on the Create Signature panel.
+* Rectified the problem where the text couldn't be edited after applying an Ink signature into text.
+* Addressed the issue where inaccuracies in the handling of existing signatures resulted in incorrect signature validation information within the document after saving.
+* Fixed a situation on Windows where Context Menu events were triggering twice upon mouse release.
+* Addressed the issue of "image size points" being inaccessible when beyond the page mediabox.
+* Fixed the issue where right-clicking on a page in selection mode didn't trigger the expected rightClickPage event.
+* Improved the slow scrolling issue when using the scroll bar on Laptop.
+* Fixed the "undefined" error when partially loading components of the Advanced Editor.
+* Corrected the problem where hiding the Left Side Panel was effective only for the current session, despite executing "component.hide()".
+* Checked: Addressed an SDK JavaScript initialization error caused by attempts to read improperly named properties on the window object, which were added by Chrome extensions.
+* Fixed the content disappearance issue when resizing the Loup Tool window.
+* Resolved the issue where the maxScale setting didn't apply as expected on mobile devices.
+
 What’s new in Foxit PDF SDK for Web 9.0.0
 Release Date: March 07, 2023
 
@@ -5,7 +140,8 @@ NOTE: Microsoft Internet Explorer is no longer be supported starting from this v
 
 *****New Features and Updates*****
 *	Advanced Page Editor on UI
-	This version offers powerful PDF page editing capabilities, allowing you to easily manipulate text blocks with font styles, alignment, and join/split functionality, perform text search and replace operations, and create and customize shape objects with preset paths, shading, and other properties. 
+	This version offers powerful PDF page editing capabilities, allowing you to easily manipulate text 
+	blocks with font styles, alignment, and join/split functionality, perform text search and replace operations, and create and customize shape objects with preset paths, shading, and other properties. 
 *	Image Diff Comparison  
 	Relevant APIs: OverlayComparisonService::compareImageData(), PDFViewer::getOverlayComparisonService(), PDFViewer::getOverlayComparisonOptionsService()
 	This function compares image pixel-by-pixel for differences between two documents, and then generates an output image. You can use relevant APIs to implement the overlay comparison feature for your application. 
@@ -18,16 +154,16 @@ NOTE: Microsoft Internet Explorer is no longer be supported starting from this v
 	Relevant API: PDFDoc::addWatermark（）
 	This feature allows for specifying a range of pages by using "pageStart" and "pageEnd" when adding watermarks. It also provides the ability to set multi-line tiles with the "isMultiline" option, as well as adjust the distance between tiles with the "rowSpace" and "columnSpace" options. 
 *	Programmatically paste annotation into a destination page
-	Relevant APIs: PDFPage::pasteAnnot(srcAnnot,position )
+	Relevant APIs:PDFPage::pasteAnnot(srcAnnot,position )
 *	Set default font properties for FreeText annotations
 	The default font for FreeText, which includes typewriter, callout, and textbox. can be set using either the PDFViewer::setDefaultAnnotConfig() method or by accessing the UI annotation properties menu and selecting "set current properties as default".
 *	Obtain data about mouseover stamp 
-	Relevant API: PDFViewCtrl:Stamp class  PDFUI::getStampService()
+	Relevant API: PDFViewCtrl:Stamp class PDFUI::getStampService()
 	With this new features, developers can now not only retrieve mouseover stamp information, but also monitor stamp state handler switching. This provides greater flexibility and control when working with stamps. For instance, developers can adjust the size of selected stamps before placing them on a page.
 *	Keep the formatting when copying and pasting text with hand tool
 	This feature is to preserve the formatting of text when pasting from sources like Word, WordPad, or a web page using the hand tool. The pasted text will be added as a FreeText annotation, with supported richText formatting including font color, size, bold, italic, underline, and strikeout. When pasting in the Web Viewer, any link URLs and images included in the copied content will be ignored. In case the font used in the copied content is not available in the Web Viewer, the default font used will be Helvetica.
 *	Show labels and values for Perimeter and Area measurements
-	Relevant APis:  Polygon::enableCaption, PolyLine::enableCaption
+	Relevant APis:Polygon::enableCaption, PolyLine::enableCaption
 *	PDFDoc.sign supports rotation
 	This feature allows the user to rotate the signature field to a desired angle (0|90|180|270) before adding it to the document.
 *	Access details on signed signature
@@ -36,15 +172,15 @@ NOTE: Microsoft Internet Explorer is no longer be supported starting from this v
 	Relevant API: PDFViewCtrl::stateHandlerManager
 	This version introduces an option to turn on/off the text selection with the hand tool. When hand text selection is enabled, the cursor changes to the text select shape when it hovers over a string of text, indicating that it is ready to select text with a mouse drag.
 *	Custom snapshot interaction
-	Relevant API and Classes:  PDFUI::setSnapshotInteractionClass(), UIExtension::Sanpshot, UIExtension::SnapshotInteraction
-	With this new feature support in this release, you can rewrite the snapshot interaction, and implement it as needed. 
+	Relevant API and Classes: PDFUI::setSnapshotInteractionClass(), UIExtension::Sanpshot, UIExtension::SnapshotInteraction
+	With this new feature support in this release, you can rewrite the snapshot interaction, and implement it as needed.
 *	UI Component state management
 	Relevant APIs: Component::keepState(), Component::revokeKeepState(),Component::isStateKept()
-	The visibility of UI components can be controlled by calling Component::show()/Component::hide(). But this shown/hidden action is always overridden by the SDK default behavior. To maintain these user changes, we provide state management APIs to hold the state and prevent the SDK from changing the state.  Below is an example showing how to hide the Apply menu for redaction and call keepState() to hold the current state. 
+	The visibility of UI components can be controlled by calling Component::show()/Component::hide(). But this shown/hidden action is always overridden by the SDK default behavior. To maintain these user changes, we provide state management APIs to hold the state and prevent the SDK from changing the state. Below is an example showing how to hide the Apply menu for redaction and call keepState() to hold the current state.
 *	Improvements to UI redaction component
 	The redaction component "Mark for Redaction" contains 3 drop-down options "Mark Text & Image", "Mark Area", and "Mark Page". These options were wrapped in one component and cannot be separated in previous versions. With this improvement, the options are separated into 3 elements in the component, and making it easier to customize.
 *	Collaboration Addon
-	This addon offers a range of build-in client and server functionalities that enable developers to implement collaboration, improve organization's productivity and streamline PDF document workflows.
+	This addon offers a range of build-in client and server functionalities that enable developers to implement collaboration, improve organization's productivity and streamline PDF document workflows.
 	
 *****API Changes*****
 The second parameter of PDFDoc::sign(signInfo, DigestSignHandler) has been updated:
@@ -80,14 +216,14 @@ Release Date: November 11, 2022
 *****Updates*****
 * Updated the event graphicsUpdated with a new parameter to get the current graphics object. 
 * Optimized the "Add text" feature to improve the graphics text edit with bold/italic.
-* Optimized the pen annotations so they could be created and handled rightly even in a delay period. 
+* Optimized the pen annotations so they could be created and handled rightly even in a delay period.
 
 *****Bug Fixes*****
 * Adding annotation resulted in garbled code when the custom entries contain Chinese characters. 
 * The double tap on Textbox in iPad Chrome wasn't correctly triggered. 
 * Certain form fields have no action set after being destroyed. 
 * The exportAnnotsToFDF() doesn't work when set the "annots" parameter. 
-* The page and thumbnail doesn't render correctly when call setPageBox to crop pages. 
+* The page and thumbnail doesn't render correctly when call setPageBox to crop pages.
 * Unable to edit the content text in the form Xobject containers in certain PDFs.
 
 What’s new in Foxit PDF SDK for Web 8.5.1

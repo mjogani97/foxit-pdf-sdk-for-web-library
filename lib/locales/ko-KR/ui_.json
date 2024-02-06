@@ -10,6 +10,7 @@
     "formatError": "파일 형식이 잘못되었거나 손상되었을 수 있습니다.",
     "securityError": "현재 PDF 문서는 일부 지원되지 않는 보안 처리기에 의해 암호화됩니다.",
     "unsupportedStamp": "이 파일 형식은 현재 지원되지 않습니다.",
+    "smallFile": "16MB 미만이어야 합니다.",
     "browserNotSupportDownload": "브라우저가 파일 다운로드를 지원하지 않습니다. 데스크톱 브라우저에서 다시 시도하십시오.",
     "imageInvalid": "이미지가 잘못되었습니다.",
     "browserRestriction": "이 작업은 저장되지만 브라우저 플랫폼의 제한으로 인해 Foxit PDF Editor Cloud에서 실행할 수 없습니다.",
@@ -460,6 +461,7 @@
       "page-title": "페이지 {{pageNumber}}",
       "group-title": "{{groupName}} {{count}}",
       "comment-dropdown": {
+        "reply": "응답",
         "copy-text": "텍스트 복사",
         "edit-text": "편집",
         "delete": "삭제",
@@ -858,55 +860,55 @@
       "italic": "기울임꼴",
       "underline": "밑줄",
       "strikethrough": "취소선",
-      "superscript": "위 첨자",
-      "subscript": "아래 첨자",
-      "characterSpacing": "문자 간격",
-      "rightToLeft": "오른쪽에서 왼쪽",
-      "leftToRight": "왼쪽에서 오른쪽"
+      "superscript": "위첨자",
+      "subscript": "아래첨자",
+      "characterSpacing": "자간",
+      "rightToLeft": "오른쪽에서 왼쪽으로",
+      "leftToRight": "왼쪽에서 오른쪽으로"
     },
     "paragraph": {
       "bullets": "글머리 기호",
       "numbers": "번호 매기기",
-      "alignLeft": "왼쪽으로 정렬",
-      "alignCenter": "중앙 정렬",
-      "alignRight": "오른쪽으로 정렬",
+      "alignLeft": "왼쪽 정렬",
+      "alignCenter": "가운데 정렬",
+      "alignRight": "오른쪽 정렬",
       "justify": "양쪽 정렬",
       "increaseIndent": "들여쓰기",
       "decreaseIndent": "내어쓰기",
       "lineSpacing": "줄 간격",
       "paragraphSpacing": "단락 간격",
       "wordSpacing": "단어 간격",
-      "characterScale": "문자 비율"
+      "characterScale": "문자 크기 변경"
     },
     "split": {
       "mergeText": "텍스트 병합",
-      "removeKerning": "간격 좁힘(커닝) 제거",
+      "removeKerning": "커닝 제거",
       "splitText": "텍스트 분할",
-      "convertToShape": "모양으로 변환"
+      "convertToShape": "도형으로 변환"
     },
     "arrange": {
       "pageCenter": {
-        "vertically": "세로",
-        "horizontally": "가로",
+        "vertically": "수직으로",
+        "horizontally": "수평으로",
         "both": "모두"
       },
       "alignment": {
-        "vertically": "세로",
-        "horizontally": "가로",
+        "vertically": "수직으로",
+        "horizontally": "수평으로",
         "left": "왼쪽",
         "right": "오른쪽",
         "top": "위",
         "bottom": "아래"
       },
       "distribute": {
-        "vertically": "세로",
-        "horizontally": "가로"
+        "vertically": "수직으로",
+        "horizontally": "수평으로"
       },
       "rotate": {
-        "clockwise": "개체를 오른쪽으로 회전",
-        "counterClockwise": "개체를 왼쪽으로 회전",
-        "flipHorizontally": "수평으로 뒤집습니다.",
-        "flipVertically": "수직으로 뒤집습니다.",
+        "clockwise": "개체를 시계 방향으로 회전",
+        "counterClockwise": "개체를 시계 반대 방향으로 회전",
+        "flipHorizontally": "수평으로 뒤집기",
+        "flipVertically": "수직으로 뒤집기",
         "customizeRotation": "회전 사용자 정의"
       },
       "zOrder": {
@@ -924,16 +926,18 @@
     },
     "shapeStyle": {
       "lineColor": "선 색상",
-      "fillColor": "채우기 색상",
+      "fillColor": "색 채우기",
       "lineWidth": "선 너비",
-      "dashType": "점선 유형",
-      "lineCap": "라인 캡",
+      "dashType": "대시 유형",
+      "lineCap": "선 캡",
       "lineJoin": "선 연결",
-      "miterLimit": "각진 연결 제한"
+      "miterLimit": "각진 연결 제한",
+      "sample": "보기",
+      "opacity": "불투명도:"
     },
     "shadingStyle": {
       "gradientStops": "그라데이션 중지",
-      "referenceLine": "기준선"
+      "referenceLine": "참조선"
     }
   },
   "screenshot": {
@@ -1076,7 +1080,7 @@
         "right": "오른쪽:",
         "top": "위:",
         "bottom": "아래:",
-        "width": "넓이:",
+        "width": "너비:",
         "height": "높이:",
         "required": "위치를 변경할 때 높이와 너비를 변경하지 마십시오."
       },
@@ -1142,6 +1146,7 @@
     },
     "warning": "경고",
     "error": {
+      "pleaseUncheckMultiLine": "다중 줄 텍스트에는 형식을 적용할 수 없습니다. 서식을 적용하려면 \"옵션\" 탭으로 이동하여 \"다중 줄\" 선택을 취소하십시오.",
       "noRedactionLicense": "현재 모듈은 라이센스가 없습니다",
       "noRedactionApplyPermission": "블랙마킹 적용이 허용되지 않습니다.",
       "fileFormatError": "파일 형식이 잘못되었습니다",
@@ -1174,7 +1179,8 @@
       "serialNum": "시리얼 넘버",
       "name": "이름:",
       "issue": "발행:",
-      "usage": "사용:",
+      "usage": "의도된 키 사용법:",
+      "extUsage": "확장된 키 사용법:",
       "from": "유효 기간 시작:",
       "to": "유효 기간 종료:",
       "email": "이메일 주소:",
@@ -1226,7 +1232,7 @@
       "height": "높이",
       "catagoryHolder": "범주를 선택하거나 입력하십시오.",
       "selectSource": "파일",
-      "selectLocal": "찾아보기...",
+      "selectLocal": "찾아보기",
       "addLink": "파일 URL을 입력하십시오",
       "categoryPlaceholder": "<새 카테고리 이름>",
       "namePlaceholder": "새로운 스탬프",
@@ -1577,6 +1583,7 @@
     "ok": "확인",
     "cancel": "취소",
     "alert-title": "",
+    "alert-message": "",
     "prompt-title": "",
     "prompt-message": "",
     "confirm-title": "",
@@ -1585,27 +1592,27 @@
   },
   "signDocument": {
     "nohandlers": "먼저 서명 처리기를 등록하십시오(PDFUI.registerSignatureHandler(...) 호출).",
-    "ap-title": "구성 서명 스타일",
+    "ap-title": "서명 스타일 구성",
     "title": "문서 서명",
     "sign-as": "다음으로 서명",
-    "property-title": "서명용 텍스트",
+    "property-title": "서명할 텍스트",
     "location": "위치",
     "reason": "사유",
     "lock-document": "서명 후 문서 잠금",
     "appearance": "모양",
     "background": "배경",
     "image-setting": "이미지 설정",
-    "text-setting": "텍스트 설정",
+    "text-setting": "텍스트 구성",
     "signed-by": "디지털 서명됨",
     "name": "이름",
-    "DN": "DN",
-    "tag": "태그 이미지",
+    "DN": "고유명",
+    "tag": "이미지",
     "date": "날짜",
     "version": "버전",
     "label": "레이블",
     "draw": "그리기",
     "no-left": "없음",
-    "owner": "소유자",
+    "owner": "이름",
     "permission": "서명후 승인된 동작",
     "noSpecified": "기본 설정 유지",
     "permNone": "변경이 허용되지 않음",
@@ -1613,7 +1620,8 @@
     "permAnnot": "주석 달기, 양식 채우기, 기존 서명 필드에 서명",
     "sign": "서명",
     "showSignProperty": "서명 속성 보이기...",
-    "certifyDoc": "문서 인증"
+    "certifyDoc": "문서 인증",
+    "notSupportPagingSeal": "서명 문서는 페이징 씰을 지원하지 않습니다."
   },
   "verifySign": {
     "title": "서명 검증 결과",
@@ -1736,7 +1744,7 @@
     "signatureAlgorithm": "서명 알고리즘:",
     "timestampDetailTitle": "타임스탬프 세부정보:",
     "timestampDes": "타임스탬프는 서명에 포함됩니다. 타임스탬프는 문서가 서명된 것처럼 서명됩니다. 타임스탬프 서명이 유효하려면 타임스탬프에 서명한 타임스탬프 기관을 신뢰해야 합니다.",
-    "timeStampShowCertificateDes": "타임스탬프 서명 검증과 관련하여 세부사항을 보려면 인증서 표시를 클릭하십시오. 신뢰하려면 신뢰할 수 있는 인증서에 추가를 클릭하십시오.",
+    "timeStampShowCertificateDes": "타임스탬프 서명 확인에 대한 세부 정보를 보려면 인증서 표시를 클릭합니다. 신뢰할 수 있는 인증서에 추가를 클릭하여 신뢰하십시오.",
     "timestampAuthority": "타임스탬프 권한:"
   },
   "certificate": {
@@ -1754,7 +1762,16 @@
     "trustForLabel": "서명이 성공하는 경우 이 인증서를 다음에 대해 신뢰:",
     "validatingSignaturesLabel": "서명 유효성 검사",
     "validatingCertifiedDocumentLabel": "인증 문서 검증",
-    "addToTrustedCertificatesBtn": "신뢰할 수 있는 인증서에 추가"
+    "addToTrustedCertificatesBtn": "신뢰할 수 있는 인증서에 추가",
+    "summary": "요약",
+    "revocation": "해지",
+    "notPerformed": "해지 확인이 수행되지 않았습니다.",
+    "uncheck": "선택한 인증서가 유효한지 확인할 수 없습니다.",
+    "details": "세부 사항",
+    "detailsInfo": "선택한 인증서는 트러스트 앵커이거나 트러스트 앵커 위의 인증서이거나 인증서 체인에서 트러스트 앵커 위의 인증서입니다(자세한 내용은 신뢰 탭 참조). 이러한 인증서에 대해서는 해지 확인이 수행되지 않으며 본질적으로 신뢰할 수 있는 것으로 간주됩니다.",
+    "notTrust": "선택한 인증서는 신뢰할 수 있는 앵커로 지정된 인증서에 연결되지 않습니다(자세한 내용은 신뢰 탭 참조). 그 결과 이 인증서에 대해 해지 확인이 수행되지 않았습니다.",
+    "signerDetail": "서명자 세부 정보",
+    "checkRevocation": "해지 확인"
   },
   "phantompdfOnlineTitle": "PDF Editor",
   "portfolio": {
@@ -2131,7 +2148,87 @@
       "newCode": "교정 코드"
     }
   },
+  "popupNote": {
+    "close": "팝업 노트 닫기",
+    "closeAll": "팝업 모두 닫기"
+  },
   "esign": {
     "tabTitle": "전자 서명"
+  },
+  "ai": {
+    "product": "AI 어시스턴트"
+  },
+  "colorPicker": {
+    "Title": "색상 선택",
+    "Ok": "확인",
+    "No": "취소",
+    "customColor": "사용자 정의 색상",
+    "customColorPropTitle": "색상표에 따라 사용자 정의 색상을 변경합니다.",
+    "customBorderColor": "테두리 색상",
+    "customFillColor": "색 채우기",
+    "noFillColor": "색 채우기 없음",
+    "editColor": "색상 변경"
+  },
+  "lang": {
+    "ar-001": "아랍어",
+    "ar-SA": "아랍어 사우디아라비아",
+    "bn-BD": "번글라 뱅라데시",
+    "bn-IN": "방글라 인도",
+    "ca-ES": "카탈로니아어",
+    "cs-CZ": "체코 체코 공화국",
+    "da-DK": "덴마크 덴마크어",
+    "de-AT": "독일 오스트리아",
+    "de-CH": "독일 스위스",
+    "de-DE": "독일어",
+    "el-GR": "그리스어",
+    "en-AU": "영어 호주",
+    "en-CA": "영어 캐나다",
+    "en-GB": "영국 영어",
+    "en-IE": "영어 아일랜드",
+    "en-IN": "영어 인도",
+    "en-NZ": "영어 뉴질랜드",
+    "en-US": "미국 영어",
+    "en-ZA": "영어 남아프리카 공화국",
+    "es-AR": "스페인어 아르헨티나",
+    "es-CL": "스페인어 칠레",
+    "es-CO": "스페인어 콜롬비아",
+    "es-ES": "스페인어",
+    "es-MX": "스페인어 멕시코",
+    "es-US": "스페인 미국",
+    "fi-FI": "핀란드 핀란드",
+    "fr-BE": "프랑스 벨기에어",
+    "fr-CA": "프랑스 캐나다",
+    "fr-CH": "프랑스 스위스",
+    "fr-FR": "프랑스어",
+    "he-IL": "헤브라이 이스라엘",
+    "hi-IN": "힌디어 인도",
+    "hu-HU": "헝가리 헝가리",
+    "hr-HR": "크로아티아어",
+    "id-ID": "인도네시아어",
+    "it-CH": "이탈리아 스위스",
+    "it-IT": "이탈리아어",
+    "ja-JP": "일본어",
+    "ko-KR": "한국어",
+    "ms-MY": "말레이어",
+    "nb-NO": "노르웨이어 보크몰 (Norwegian Bokmål)",
+    "nl-BE": "네덜란드 벨기에",
+    "nl-NL": "네덜란드의 네덜란드어",
+    "no-NO": "노르웨이 노르웨이",
+    "pl-PL": "폴란드어 폴란드",
+    "pt-BR": "포르투갈어 브라질어",
+    "pt-PT": "포르투갈어 포르투갈어",
+    "ro-RO": "루마니아 루마니아",
+    "ru-RU": "러시아어",
+    "sk-SK": "슬로바키아 슬로바키아",
+    "sv-SE": "스웨덴 스웨덴어",
+    "ta-IN": "인도 타밀어",
+    "ta-LK": "타밀 스리랑카",
+    "th-TH": "태국어",
+    "tr-TR": "터키 터키",
+    "uk-UA": "우크라이나어",
+    "vi-VN": "베트남어",
+    "zh-CN": "중국어",
+    "zh-HK": "중국 홍콩",
+    "zh-TW": "중국 대만"
   }
 }

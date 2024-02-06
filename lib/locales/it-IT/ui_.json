@@ -10,6 +10,7 @@
     "formatError": "Il formato del file potrebbe essere non valido o danneggiato.",
     "securityError": "Il documento PDF corrente è criptato da qualche gestore di sicurezza non supportato.",
     "unsupportedStamp": "Questo tipo di file non è attualmente supportato.",
+    "smallFile": "Dovrebbe essere inferiore a 16 MB.",
     "browserNotSupportDownload": "Il tuo browser non supporta il download di file. Riprova nel browser desktop.",
     "imageInvalid": "Immagine non valida.",
     "browserRestriction": "Questa azione sarà salvata, ma non può essere eseguita in Foxit PDF Editor Cloud a causa delle restrizioni della piattaforma del browser.",
@@ -221,7 +222,7 @@
         "title": "Aggiungi testo"
       },
       "comboField": {
-        "title": "Aggiungi campo combo"
+        "title": "Aggiungi campo combinato"
       },
       "predefinedText": {
         "text": "Testo predefinito",
@@ -460,6 +461,7 @@
       "page-title": "Pagina {{pageNumber}}",
       "group-title": "{{groupName}} {{count}}",
       "comment-dropdown": {
+        "reply": "Rispondi",
         "copy-text": "Copia testo",
         "edit-text": "Modifica",
         "delete": "Elimina",
@@ -741,7 +743,7 @@
       "opacity": "Opacità"
     },
     "fontCharacterSpacingDialog": {
-      "title": "Spaziatura caratteri",
+      "title": "Spaziatura dei caratteri",
       "info": "È possibile espandere o ridurre la riga di testo attraverso diverse spaziature caratteri:",
       "expandedBy": "Espansa di:",
       "point": "Punto",
@@ -856,7 +858,7 @@
     "textStyle": {
       "bold": "Grassetto",
       "italic": "Corsivo",
-      "underline": "Sottolinea",
+      "underline": "Sottolineato",
       "strikethrough": "Barrato",
       "superscript": "Apice",
       "subscript": "Pedice",
@@ -875,7 +877,7 @@
       "decreaseIndent": "Riduci indentazione",
       "lineSpacing": "Interlinea",
       "paragraphSpacing": "Spaziatura paragrafo",
-      "wordSpacing": "Distanza parole",
+      "wordSpacing": "Spaziatura delle parole",
       "characterScale": "Proporzioni caratteri"
     },
     "split": {
@@ -895,8 +897,8 @@
         "horizontally": "Orizzontalmente",
         "left": "Sinistra",
         "right": "Destra",
-        "top": "In alto",
-        "bottom": "In basso"
+        "top": "Alto",
+        "bottom": "Basso"
       },
       "distribute": {
         "vertically": "Verticalmente",
@@ -929,7 +931,9 @@
       "dashType": "Tipo di tratteggio",
       "lineCap": "Estremità della linea",
       "lineJoin": "Giunzione linea",
-      "miterLimit": "Limite smussatura"
+      "miterLimit": "Limite smussatura",
+      "sample": "Campione",
+      "opacity": "Opacità:"
     },
     "shadingStyle": {
       "gradientStops": "Interruzioni gradiente",
@@ -1053,7 +1057,7 @@
         "fillColor": "Colore riempimento: "
       },
       "options": {
-        "buttonStyle": "Stile del pulsante:",
+        "buttonStyle": "Stile pulsante:",
         "circle": "Cerchio",
         "check": "Verifica",
         "square": "Quadrato",
@@ -1074,8 +1078,8 @@
         "name": "Posizione",
         "left": "Sinistra:",
         "right": "Destra:",
-        "top": "Alto:",
-        "bottom": "Basso：",
+        "top": "Superiore:",
+        "bottom": "Inferiore:",
         "width": "Larghezza:",
         "height": "Altezza:",
         "required": "Non cambiare l'altezza e la larghezza quando viene modificata la posizione."
@@ -1142,6 +1146,7 @@
     },
     "warning": "Avviso",
     "error": {
+      "pleaseUncheckMultiLine": "Impossibile applicare il formato al testo multilinea. Per applicare il formato, andare alla scheda \"Opzioni\" e deselezionare \"Multilinea\".",
       "noRedactionLicense": "Il modulo corrente non dispone di licenza",
       "noRedactionApplyPermission": "Non sono consentite redazioni",
       "fileFormatError": "Il formato del file non è corretto",
@@ -1155,7 +1160,7 @@
       "validMessage": "Firma VALIDA, firmata da",
       "NotAvailable": "Non disponibile",
       "details": {
-        "signedBy": "Firmata da:",
+        "signedBy": "Firmato da:",
         "showCert": "Mostra certificato...",
         "reason": "Motivo:",
         "date": "Data:",
@@ -1175,6 +1180,7 @@
       "name": "Nome:",
       "issue": "Emesso da:",
       "usage": "Utilizzo:",
+      "extUsage": "Utilizzo esteso della chiave:",
       "from": "Valido da:",
       "to": "Valido fino a:",
       "email": "Indirizzo e-mail:",
@@ -1226,7 +1232,7 @@
       "height": "Altezza",
       "catagoryHolder": "Seleziona o inserisci una categoria.",
       "selectSource": "File",
-      "selectLocal": "Sfoglia...",
+      "selectLocal": "Sfoglia",
       "addLink": "Inserisci l'URL del file",
       "categoryPlaceholder": "<nominare una nuova categoria>",
       "namePlaceholder": "Nuovo timbro",
@@ -1577,6 +1583,7 @@
     "ok": "OK",
     "cancel": "Annulla",
     "alert-title": "",
+    "alert-message": "",
     "prompt-title": "",
     "prompt-message": "",
     "confirm-title": "",
@@ -1585,27 +1592,27 @@
   },
   "signDocument": {
     "nohandlers": "Registra prima i gestori di firma (chiamare PDFUI.registerSignatureHandler(...)).",
-    "ap-title": "Config. Stile firma",
+    "ap-title": "Configura stile firma",
     "title": "Firma documento",
     "sign-as": "Firma come",
-    "property-title": "Testo per la firma",
+    "property-title": "Configura testo",
     "location": "Posizione",
     "reason": "Motivo",
     "lock-document": "Blocca documento dopo la firma",
     "appearance": "Aspetto",
     "background": "Sfondo",
     "image-setting": "Impostazione dell'immagine",
-    "text-setting": "Impostazione del testo",
+    "text-setting": "Configura testo",
     "signed-by": "Firmato digitalmente da",
     "name": "Nome",
-    "DN": "DN",
-    "tag": "Immagine tag",
+    "DN": "Nome distinto",
+    "tag": "Immagine",
     "date": "Data",
     "version": "Versione",
-    "label": "Etichetta",
-    "draw": "Disegno",
+    "label": "Etichette",
+    "draw": "Disegna",
     "no-left": "Nessuno",
-    "owner": "Proprietario",
+    "owner": "Nome",
     "permission": "Azioni consentite dopo la firma",
     "noSpecified": "Mantieni l'impostazione predefinita",
     "permNone": "Non sono ammesse modifiche",
@@ -1613,7 +1620,8 @@
     "permAnnot": "Commenti, compilazione modulo, firma dei campi di firma esistenti",
     "sign": "Firma",
     "showSignProperty": "Mostra proprietà firma...",
-    "certifyDoc": "Certifica documento"
+    "certifyDoc": "Certifica documento",
+    "notSupportPagingSeal": "Il documento di firma non supporta il sigillo delle pagine."
   },
   "verifySign": {
     "title": "Risultato della verifica della firma",
@@ -1651,6 +1659,7 @@
     "verifyUnknown": "Il nuovo stato del documento è sconosciuto.",
     "changeLegal": "Il documento è stato modificato al di fuori dell'ambito della firma, ma la modifica è consentita.",
     "changeIllegal": "Il documento è stato modificato al di fuori dell'ambito della firma, e la modifica invalida la firma.",
+    "errorByteRange": "Vi sono errori nella formattazione o nelle informazioni contenute nella firma",
     "issuerInvalid_mac": "L'identità del firmatario non è valida.",
     "issuerInvalid": "Certificato del firmatario non valido",
     "issuerRevoke": "L'identità del firmatario non è attualmente valida, poiché il certificato è stato revocato dopo la verifica.",
@@ -1734,10 +1743,9 @@
     "hashAlgorithm": "Algoritmo di hash:",
     "signatureAlgorithm": "Algoritmo di firma:",
     "timestampDetailTitle": "Dettagli timestamp:",
-    "timestampDes": "Il timestamp è incorporato nella firma. I timestamp sono firmati come i documenti. Perché la firma di un timestamp sia valida, è necessario considerare attendibile l'autorità timestamp che ha firmato il timestamp.",
-    "timeStampShowCertificateDes": "Fai clic su Mostra certificato per visualizzare i dettagli relativi alla verifica della firma del timestamp. Fai clic su Aggiungi ai certificati attendibili per renderlo attendibile.",
-    "timestampAuthority": "Autorità timestamp:",
-    "errorByteRange": "Ci sono alcuni errori nella formattazione o nelle informazioni contenute nella firma"
+    "timestampDes": "Il timestamp è integrato nella firma. I timestamp sono firmati come i documenti. Affinché la firma di un timestamp sia valida, è necessario considerare attendibile l'autorità timestamp che ha firmato il timestamp.",
+    "timeStampShowCertificateDes": "Clicca su Mostra certificato per visualizzare i dettagli relativi alla verifica della firma del timestamp. Clicca su Aggiungi a certificati attendibili per considerarlo attendibile.",
+    "timestampAuthority": "Autorità timestamp:"
   },
   "certificate": {
     "manageTrustDlgTitle": "Gestire la fiducia della firma",
@@ -1754,7 +1762,16 @@
     "trustForLabel": "Se la firma riesce, considera attendibile questo certificato per:",
     "validatingSignaturesLabel": "Convalida delle firme",
     "validatingCertifiedDocumentLabel": "Convalida dei documenti certificati",
-    "addToTrustedCertificatesBtn": "Aggiungi ai certificati attendibili"
+    "addToTrustedCertificatesBtn": "Aggiungi ai certificati attendibili",
+    "summary": "Riepilogo",
+    "revocation": "Revoca",
+    "notPerformed": "Le verifiche sulla revoca non sono state eseguite",
+    "uncheck": "Impossibile determinare se il certificato selezionato è valido.",
+    "details": "Dettagli",
+    "detailsInfo": "Il certificato selezionato è un trust anchor o è un certificato sopra il trust anchor oppure è un certificato sopra il trust anchor nella catena di certificati (vedere la scheda Trust per i dettagli). Non vengono effettuati controlli di revoca per tali certificati, sono intrinsecamente considerati affidabili.",
+    "notTrust": "Il certificato selezionato non è concatenato a un certificato designato come trust anchor (vedere la scheda Attendibilità per dettagli). Pertanto, non sono state eseguite le verifiche di revoca su questo certificato.",
+    "signerDetail": "Dettagli firmatario",
+    "checkRevocation": "Verifica revoca"
   },
   "phantompdfOnlineTitle": "PDF Editor",
   "portfolio": {
@@ -2131,7 +2148,87 @@
       "newCode": "Codice redazione"
     }
   },
+  "popupNote": {
+    "close": "Chiudi nota popup",
+    "closeAll": "Chiudi tutti i popup"
+  },
   "esign": {
     "tabTitle": "Firma elettronica"
+  },
+  "ai": {
+    "product": "Assistente AI"
+  },
+  "colorPicker": {
+    "Title": "Color Picker",
+    "Ok": "OK",
+    "No": "Annulla",
+    "customColor": "Colore personalizzato",
+    "customColorPropTitle": "Modifica il colore personalizzato selezionato seguendo la tavolozza dei colori",
+    "customBorderColor": "Colore bordo",
+    "customFillColor": "Colore riempimento",
+    "noFillColor": "Nessun colore di riempimento",
+    "editColor": "Modifica colore"
+  },
+  "lang": {
+    "ar-001": "Arabo",
+    "ar-SA": "Arabo Arabia Saudita",
+    "bn-BD": "Bangla Bangladesh",
+    "bn-IN": "Bangla India",
+    "ca-ES": "Catalano",
+    "cs-CZ": "Ceco Repubblica Ceca",
+    "da-DK": "Danese Danimarca",
+    "de-AT": "Tedesco Austria",
+    "de-CH": "Svizzera tedesca",
+    "de-DE": "Tedesco",
+    "el-GR": "Greco",
+    "en-AU": "Inglese Australia",
+    "en-CA": "Canada Inglese",
+    "en-GB": "Inglese Regno Unito",
+    "en-IE": "Inglese Irlanda",
+    "en-IN": "Inglese India",
+    "en-NZ": "Inglese Nuova Zelanda",
+    "en-US": "Inglese Stati Uniti",
+    "en-ZA": "Inglese Sudafrica",
+    "es-AR": "Spagnolo Argentina",
+    "es-CL": "Spagnolo Cile",
+    "es-CO": "Spagna Colombia",
+    "es-ES": "Spagnolo",
+    "es-MX": "Spagnolo Messico",
+    "es-US": "Spagnolo Stati Uniti",
+    "fi-FI": "Finlandese Finlandia",
+    "fr-BE": "Belgio francese",
+    "fr-CA": "Canada francese",
+    "fr-CH": "Svizzera francese",
+    "fr-FR": "Francese",
+    "he-IL": "Israele Ebraico",
+    "hi-IN": "Hindi India",
+    "hu-HU": "Ungheria Ungherese",
+    "hr-HR": "Croato",
+    "id-ID": "Indonesiano",
+    "it-CH": "Svizzera italiana",
+    "it-IT": "Italiano",
+    "ja-JP": "Giapponese",
+    "ko-KR": "Coreano",
+    "ms-MY": "Malese",
+    "nb-NO": "Norvegese Bokmål",
+    "nl-BE": "Olandese Belgio",
+    "nl-NL": "Olandese Paesi Bassi",
+    "no-NO": "Norvegese Norvegia",
+    "pl-PL": "Polacco Polonia",
+    "pt-BR": "Portoghese Brasile",
+    "pt-PT": "Portoghese Portogallo",
+    "ro-RO": "Rumeno Romania",
+    "ru-RU": "Russo",
+    "sk-SK": "Slovacchia Slovacchia",
+    "sv-SE": "Svedese Svezia",
+    "ta-IN": "Tamil India",
+    "ta-LK": "Tamil Sri Lanka",
+    "th-TH": "Tailandese",
+    "tr-TR": "Turchia turca",
+    "uk-UA": "Ucraino",
+    "vi-VN": "Vietnamita",
+    "zh-CN": "Cinese",
+    "zh-HK": "Cinese Hong Kong",
+    "zh-TW": "Cinese Taiwan"
   }
 }

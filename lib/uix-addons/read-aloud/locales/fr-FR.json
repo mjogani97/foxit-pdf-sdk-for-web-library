@@ -48,11 +48,16 @@
       "text": "Reprendre",
       "desc": "Reprendre Maj+Ctrl+C",
       "descSub": "Reprendre la lecture à voix haute"
+    },
+    "voice": {
+      "text": "Voix",
+      "desc": "Voix",
+      "descSub": "Sélectionner la voix"
     }
   },
   "error": {
     "document-not-openned": "Impossible d'effectuer la lecture à voix haute, car aucun document n'est ouvert",
     "permDenyCopyContent": "Vous n'avez pas l'autorisation de copier le contenu du document.",
-    "interrupted": "Remarque : Le synthétiseur de synthèse vocale a été interrompu par une autre page. Pour reprendre la synthèse vocale, cliquez simplement à nouveau sur le bouton \"Lire la page actuelle\" ou \"Lire à partir de la page actuelle\". Si le problème persiste, veuillez fermer toutes les autres pages ou applications susceptibles d'utiliser l'audio."
+    "interrupted": "Remarque : le synthétiseur Text-to-Speech a été interrompu par une autre page. Pour reprendre la lecture du texte, cliquez simplement à nouveau sur le bouton « Lire la page active » ou sur « Lire à partir de la page active ». Si le problème persiste, fermez toutes les autres pages ou application susceptibles d'utiliser l'audio."
   }
 }

@@ -25,7 +25,6 @@
     }
   },
   "alert": {
-    "title": "WEB SDK DEMO",
     "typeText": "'<在此輸入以插入文字>'",
     "categoryText": "'<在這裡輸入以命名新類別>'",
     "templateText": "'<在這裡輸入以命名新範本>'",
@@ -35,6 +34,8 @@
     "fileError": "文件為空。",
     "nameError": "名稱是必填欄位。",
     "templateNameError": "此名稱的戳記已存在，請重新命名要匯入的戳記。",
-    "spaceError": "空格不能作為類別名。"
+    "spaceError": "空格不能作為類別名。",
+    "sameName": "名稱為'${1}'的印章已存在。",
+    "specialError": "特殊字符無效。"
   }
 }

@@ -3,17 +3,17 @@
     "editFontWeight": "Bold",
     "editFontItalic": "Italic",
     "editFontColor": "Font Color",
-    "addText": "Add text",
+    "addText": "Add Text",
     "underline": "Underline",
-    "alignLeft": "Align left",
-    "alignCenter": "Align center",
+    "alignLeft": "Align Left",
+    "alignCenter": "Align Center",
     "alignJustify": "Justify",
-    "wordSpacing": "Word spacing",
-    "lineSpacing": "Line spacing",
-    "characterScale": "Character scale"
+    "wordSpacing": "Word Spacing",
+    "lineSpacing": "Line Spacing",
+    "characterScale": "Character Scale"
   },
   "dropdowns": {
     "editFontFamily": "Font",
-    "editFontSize": "Font size"
+    "editFontSize": "Font Size"
   }
 }

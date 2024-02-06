@@ -296,8 +296,8 @@
       "name": "Positie",
       "left": "Links:",
       "right": "Rechts:",
-      "top": "Bovenaan:",
-      "bottom": "Onderaan:",
+      "top": "Boven:",
+      "bottom": "Onder:",
       "width": "Breedte:",
       "height": "Hoogte:",
       "required": "Wijzig de hoogte en breedte niet wanneer de positie wordt gewijzigd."

@@ -12,7 +12,7 @@
       "title": "Fonctions JavaScript",
       "name": "Nom du script",
       "close": "Fermer",
-      "add": "Ajouter…",
+      "add": "Ajouter...",
       "edit": "Éditer...",
       "delete": "Supprimer"
     }
@@ -34,7 +34,7 @@
       "doc-will-print": "Le document sera imprimé",
       "doc-did-print": "Le document a été imprimé",
       "doc-did-printed": "Document imprimé",
-      "enable-tip": "JavaScript est actuellement désactivé et ce document l'utilise pour certaines fonctionnalités. L'activation de JavaScript peut entraîner d'éventuels risques de sécurité."
+      "enable-tip": "JavaScript est actuellement désactivé et ce document l'utilise pour certaines fonctionnalités. L'activation de JavaScript peut entraîner des risques pour la sécurité."
     }
   },
   "javascript-console": {

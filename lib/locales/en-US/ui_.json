@@ -10,6 +10,7 @@
     "formatError": "The file format may be invalid or corrupted.",
     "securityError": "The current PDF document is encrypted by some unsupported security handler.",
     "unsupportedStamp": "This file type isn't supported now.",
+    "smallFile": "It should be less than 16MB.",
     "browserNotSupportDownload": "Your browser does not support files downloading. Please try again in desktop browser.",
     "imageInvalid": "Image invalid.",
     "browserRestriction": "This action will be saved, but cannot be executed in Foxit PDF Editor Cloud due to the restrictions of the browser platform.",
@@ -157,23 +158,23 @@
         "title": "Loupe"
       },
       "sign": {
-        "title": "Ink signature",
+        "title": "Ink Signature",
         "name": "PDF Sign"
       },
       "roundRect": {
         "title": "Round Rectangle"
       },
       "nextPage": {
-        "title": "Next page"
+        "title": "Next Page"
       },
       "previousPage": {
-        "title": "Previous page"
+        "title": "Previous Page"
       },
       "firstPage": {
-        "title": "First page"
+        "title": "First Page"
       },
       "lastPage": {
-        "title": "Last page"
+        "title": "Last Page"
       },
       "stamp": {
         "title": "Stamp"
@@ -182,46 +183,46 @@
         "title": "Create"
       },
       "add-image": {
-        "title": "Add image"
+        "title": "Add Image"
       },
       "find-replace": {
         "title": "Search & Replace"
       },
       "changeColor": {
-        "title": "Change color"
+        "title": "Change Color"
       },
       "textField": {
-        "title": "Text field"
+        "title": "Text Field"
       },
       "comboBox": {
-        "title": "Combo box"
+        "title": "Combo Box"
       },
       "listBox": {
-        "title": "List box"
+        "title": "List Box"
       },
       "pushButton": {
-        "title": "Push button"
+        "title": "Push Button"
       },
       "checkBox": {
-        "title": "Check box"
+        "title": "Check Box"
       },
       "RadioButton": {
-        "title": "Radio button"
+        "title": "Radio Button"
       },
       "signatureField": {
-        "title": "Signature field"
+        "title": "Signature Field"
       },
       "redact": {
         "title": "Redaction"
       },
       "pushButtonField": {
-        "title": "Push Button field"
+        "title": "Push Button Field"
       },
       "addText": {
         "title": "Add Text"
       },
       "comboField": {
-        "title": "Add Combo Filed"
+        "title": "Add Combo Field"
       },
       "predefinedText": {
         "text": "Predefined Text",
@@ -460,6 +461,7 @@
       "page-title": "Page {{pageNumber}}",
       "group-title": "{{groupName}} {{count}}",
       "comment-dropdown": {
+        "reply": "Reply",
         "copy-text": "Copy text",
         "edit-text": "Edit",
         "delete": "Delete",
@@ -860,7 +862,7 @@
       "strikethrough":"Strikethrough",
       "superscript":"Superscript",
       "subscript":"Subscript",
-      "characterSpacing":"Character spacing",
+      "characterSpacing":"Character Spacing",
       "rightToLeft":"Right to Left",
       "leftToRight":"Left to Right"
     },
@@ -929,7 +931,9 @@
       "dashType":"Dash Type",
       "lineCap":"Line Cap",
       "lineJoin":"Line Join",
-      "miterLimit":"Miter Limit"
+      "miterLimit":"Miter Limit",
+      "sample":"Sample",
+      "opacity":"Opacity:"
     },
     "shadingStyle":{
       "gradientStops":"Gradient Stops",
@@ -1142,6 +1146,7 @@
     },
     "warning": "Warning",
     "error": {
+      "pleaseUncheckMultiLine": "Cannot apply format to Multi-line Text. If you want to apply format, please go to \"Options\" Tab and uncheck \"Multi-line\".",
       "noRedactionLicense": "The current module is not licensed",
       "noRedactionApplyPermission": "No redaction applies allowed",
       "fileFormatError": "File format is incorrect",
@@ -1174,7 +1179,8 @@
       "serialNum": "Serial number:",
       "name": "Name:",
       "issue": "Issued by:",
-      "usage": "Usage:",
+      "usage": "Intended Key Usage:",
+      "extUsage": "Extended Key Usage:",
       "from": "Valid from:",
       "to": "Valid to:",
       "email": "Email Address:",
@@ -1226,7 +1232,7 @@
       "height": "Height",
       "catagoryHolder": "Select or input a category.",
       "selectSource": "File",
-      "selectLocal": "Browse...",
+      "selectLocal": "Browse",
       "addLink": "Enter File URL",
       "categoryPlaceholder": "<to name a new category>",
       "namePlaceholder": "New Stamp",
@@ -1586,27 +1592,27 @@
   },
   "signDocument": {
     "nohandlers": "Please register signing handlers first (Call PDFUI.registerSignatureHandler(...)).",
-    "ap-title": "Config Signature Style",
+    "ap-title": "Configure Signature Style",
     "title": "Sign Document",
     "sign-as": "Sign As",
-    "property-title": "Text for Signing",
+    "property-title": "Text For Signing",
     "location": "Location",
     "reason": "Reason",
     "lock-document": "Lock Document After Signing",
     "appearance": "Appearance",
     "background": "Background",
     "image-setting": "Image Setting",
-    "text-setting": "Text Setting",
+    "text-setting": "Configure Text",
     "signed-by": "Digitally signed by",
     "name": "Name",
-    "DN": "DN",
-    "tag": "Tag Image",
+    "DN": "Distinguished name",
+    "tag": "Image",
     "date": "Date",
     "version": "Version",
-    "label": "Label",
-    "draw": "Drawing",
+    "label": "Labels",
+    "draw": "Draw",
     "no-left": "None",
-    "owner": "Owner",
+    "owner": "Name",
     "permission": "Permitted Actions After Signed",
     "noSpecified": "Keep default",
     "permNone": "No Changes allowed",
@@ -1614,7 +1620,8 @@
     "permAnnot": "Commenting, filling form, signing existing signature fields",
     "sign": "Sign",
     "showSignProperty":"Show Signature Properties...",
-    "certifyDoc": "Certify Document"
+    "certifyDoc": "Certify Document",
+    "notSupportPagingSeal": "The sign document does not support paging seal."
   },
   "verifySign": {
     "title":"Result of verifying signature",
@@ -1769,7 +1776,16 @@
     "trustForLabel": "If signature succeeds, trust this certificate for:",
     "validatingSignaturesLabel": "Validating Signatures",
     "validatingCertifiedDocumentLabel": "Validating Certified Documents",
-    "addToTrustedCertificatesBtn": "Add to Trusted Certificates"
+    "addToTrustedCertificatesBtn": "Add to Trusted Certificates",
+    "summary":"Summary",
+    "revocation":"Revocation",
+    "notPerformed":"Revocation checks were not performed",
+    "uncheck":"Could not determine whether the selected certificate is valid.",
+    "details":"Details",
+    "detailsInfo":"The selected certificate is either a trust anchor or is a certificate above the trust anchor or is a certificate above the trust anchor in the certificate chain (see the Trust tab for details). No revocation checks are done for such certificates, they are inherently considered trustworthy.",
+    "notTrust":"The selected certificate does not chain up to a certificate designated as a trusted anchor (see the Trust Tab for details). The result is that revocation checks were not performed on this certificate.",
+    "signerDetail":"Signer Details",
+    "checkRevocation":"Check Revocation"
   },
   "phantompdfOnlineTitle": "PDF Editor",
   "portfolio": {
@@ -2146,7 +2162,87 @@
           "newCode":"Redaction Code"
       }
   },
+  "popupNote": {
+    "close": "Close Popup Note",
+    "closeAll": "Close All Popups"
+  },
   "esign":{
     "tabTitle":"Electronic Signature"
+  },
+  "ai":{
+    "product":"AI Assistant"
+  },
+  "colorPicker": {
+    "Title": "ColorPicker", 
+    "Ok": "OK",
+    "No": "Cancel", 
+    "customColor": "Custom Color", 
+    "customColorPropTitle": "Modify the selected Custom Color by following color palette",
+    "customBorderColor": "Border Color",
+    "customFillColor": "Fill Color",
+    "noFillColor": "No Fill Color",
+    "editColor": "Edit Color"
+  },
+  "lang": {
+    "ar-001": "Arabic",
+    "ar-SA": "Arabic Saudi Arabia",
+    "bn-BD": "Bangla Bangladesh",
+    "bn-IN": "Bangla India",
+    "ca-ES": "Catalan",
+    "cs-CZ": "Czech Czech Republic",
+    "da-DK": "Danish Denmark",
+    "de-AT": "German Austria",
+    "de-CH": "German Switzerland",
+    "de-DE": "German",
+    "el-GR": "Greek",
+    "en-AU": "English Australia",
+    "en-CA": "English Canada",
+    "en-GB": "English United Kingdom",
+    "en-IE": "English Ireland",
+    "en-IN": "English India",
+    "en-NZ": "English New Zealand",
+    "en-US": "English United States",
+    "en-ZA": "English South Africa",
+    "es-AR": "Spanish Argentina",
+    "es-CL": "Spanish Chile",
+    "es-CO": "Spanish Columbia",
+    "es-ES": "Spanish",
+    "es-MX": "Spanish Mexico",
+    "es-US": "Spanish United States",
+    "fi-FI": "Finnish Finland",
+    "fr-BE": "French Belgium",
+    "fr-CA": "French Canada",
+    "fr-CH": "French Switzerland",
+    "fr-FR": "French",
+    "he-IL": "Hebrew Israel",
+    "hi-IN": "Hindi India",
+    "hu-HU": "Hungarian Hungary",
+    "hr-HR": "Croatian",
+    "id-ID": "Indonesian",
+    "it-CH": "Italian Switzerland",
+    "it-IT": "Italian",
+    "ja-JP": "Japanese",
+    "ko-KR": "Korean",
+    "ms-MY": "Malay",
+    "nb-NO": "Norwegian Bokmål",
+    "nl-BE": "Dutch Belgium",
+    "nl-NL": "Dutch The Netherlands",
+    "no-NO": "Norwegian Norway",
+    "pl-PL": "Polish Poland",
+    "pt-BR": "Portuguese Brazil",
+    "pt-PT": "Portuguese Portugal",
+    "ro-RO": "Romanian Romania",
+    "ru-RU": "Russian",
+    "sk-SK": "Slovak Slovakia",
+    "sv-SE": "Swedish Sweden",
+    "ta-IN": "Tamil India",
+    "ta-LK": "Tamil Sri Lanka",
+    "th-TH": "Thai",
+    "tr-TR": "Turkish Turkey",
+    "uk-UA": "Ukrainian",
+    "vi-VN": "Vietnamese",
+    "zh-CN": "Chinese",
+    "zh-HK": "Chinese HongKong",
+    "zh-TW": "Chinese Taiwan"
   }
 }

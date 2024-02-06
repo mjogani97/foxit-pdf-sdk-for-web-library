@@ -16,7 +16,7 @@ The following section gives an introduction on how to run this example. You will
 
 ## Start service
 
-- Go to `/server/pkcs7` on your command window.
+- Go to `/server/signature-server-for-win` on your command window.
 - Run `npm i` to install dependencies.
 - Run `node ./index.js` to start service which will listen on `7777` port. _Note: The port can be changed in the `index.js` file._
 

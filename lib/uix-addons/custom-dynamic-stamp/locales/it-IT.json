@@ -4,37 +4,38 @@
   },
   "dialog": {
     "header": "Crea timbro dinamico personalizzato",
-    "backgroundColor": "Colore di sfondo:",
+    "backgroundColor": "Colore sfondo:",
     "template": "Modello:",
-    "templatePlaceholder": "digitare qui per nominare un nuovo modello",
+    "templatePlaceholder": "scrivi qui per assegnare un nome a un nuovo modello",
     "browse": "Sfoglia",
     "category": "Categoria:",
-    "categoryPlaceholder": "digitare qui per nominare una nuova categoria",
+    "categoryPlaceholder": "scrivi qui per assegnare un nome a una nuova categoria",
     "name": "Nome:",
     "font": "Carattere:",
     "stampText": "Testo del timbro:",
-    "stampTextPlaceholder": "digitare qui per inserire il testo",
+    "stampTextPlaceholder": "scrivi qui per inserire un testo",
     "fontSize": "Dimensioni carattere:",
     "color": "Colore:",
     "stampTextType": {
-      "customText": "digitare qui per inserire il testo",
-      "name": "nome dell'autore",
-      "nameDateTime": "nome dell'autore, data e ora",
+      "customText": "scrivi qui per inserire un testo",
+      "name": "nome autore",
+      "nameDateTime": "nome autore, data e ora",
       "dateTime": "data e ora",
       "date": "data"
     }
   },
   "alert": {
-    "title": "DIMOSTRAZIONE DELL'SDK WEB",
-    "typeText": "'<type here to insert text> '",
-    "categoryText": "'<type here to name a new category> '",
-    "templateText": "'<type here to name a new template> '",
-    "textError": "${1} è un testo predefinito, devi selezionarne uno dal menu a tendina o crearne uno nuovo.",
-    "categoryError": "${1} è una categoria predefinita e non può essere utilizzata per timbri personalizzati, scegli una categoria diversa.",
-    "templateError": "${1} è un modello predefinito e non può essere utilizzato per timbri personalizzati, scegli un modello diverso.",
+    "typeText": "'<scrivi qui per inserire il testo>'",
+    "categoryText": "'<scrivi qui per assegnare un nome a una nuova categoria>'",
+    "templateText": "'< scrivi qui per assegnare un nome a un nuovo modello>'",
+    "textError": "${1} è un testo predefinito: devi selezionarne uno dal menu a discesa o crearne uno nuovo.",
+    "categoryError": "${1} è una categoria predefinita e non può essere utilizzata per timbri personalizzati. Scegliere una categoria diversa.",
+    "templateError": "${1} è un modello predefinito e non può essere utilizzato per timbri personalizzati. Scegliere un modello diverso.",
     "fileError": "Il file è vuoto.",
     "nameError": "Il nome è obbligatorio.",
     "templateNameError": "Esiste già un timbro con questo nome. Rinominare il timbro da importare.",
-    "spaceError": "Lo spazio non può essere nella categoria."
+    "spaceError": "Lo spazio non può essere nella categoria.",
+    "sameName": "Il timbro di nome \"${1}\" esiste già.",
+    "specialError": "I caratteri speciali non sono validi."
   }
 }

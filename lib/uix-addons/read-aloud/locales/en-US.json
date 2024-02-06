@@ -48,6 +48,11 @@
       "text": "Resume",
       "desc": "Resume Shift+Ctrl+C",
       "descSub": "Resume reading out loud"
+    },
+    "voice": {
+      "text": "Voice",
+      "desc": "Voice",
+      "descSub": "Select Voice"
     }
   },
   "error": {

@@ -51,7 +51,7 @@
   "security": {
     "desc": "Sicherheit",
     "noProtection": "Kein Schutz",
-    "passwordProtection": "Kennwortschutz",
+    "passwordProtection": "Passwortschutz",
     "certificateProtection": "Zertifikatsschutz",
     "setting": "Einstellungen ändern",
     "summary": "Zusammenfassung der Dokumenteinschränkungen",

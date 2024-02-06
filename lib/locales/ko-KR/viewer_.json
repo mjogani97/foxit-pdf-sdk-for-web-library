@@ -57,7 +57,7 @@
       "zoomin": "확대",
       "zoomout": "축소",
       "clockwise": "오른쪽으로 회전",
-      "anticlockwise": "왼쪽으로 회전"
+      "anticlockwise": "시계 반대 방향으로 회전"
     },
     "measurement": {
       "complete": "측정 완료",

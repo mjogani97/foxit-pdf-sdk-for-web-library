@@ -22,12 +22,100 @@ export declare type UIXModule = __internal__.UIXModule;
 export declare const XViewerUI: typeof __internal__.XViewerUI;
 export declare type XViewerUI = __internal__.XViewerUI;
 
+export declare type SignatureFlowOptions = __internal__.SignatureFlowOptions;
+export declare type SignatureInfomation = __internal__.SignatureInfomation;
 export declare type Snapshot = __internal__.Snapshot;
 
 export declare const UIEvents: typeof __internal__.UIEvents;
 export declare type UIEvents = __internal__.UIEvents;
 
 export declare const modular: typeof __internal__.modular;
+
+export declare namespace addons {
+  namespace advanced_edit {
+    namespace find_replace {
+      export import FindReplaceAddon = __internal__.FindReplaceAddon;
+
+      export import FindReplaceController = __internal__.FindReplaceController;
+    }
+
+    namespace page_editor {
+      export import AddImageAdvController = __internal__.AddImageAdvController;
+
+      export import AddShapesController = __internal__.AddShapesController;
+
+      export import AddTextController = __internal__.AddTextController;
+
+      export import EditObjectController = __internal__.EditObjectController;
+
+      export import EditTextController = __internal__.EditTextController;
+
+      export import ImageGraphicObject = __internal__.ImageGraphicObject;
+
+      export import ImageGraphicObjectProperties = __internal__.ImageGraphicObjectProperties;
+
+      export import JoinSplitController = __internal__.JoinSplitController;
+
+      export import PageGraphicsObject = __internal__.PageGraphicsObject;
+
+      export import PageGraphicsObjectProperties = __internal__.PageGraphicsObjectProperties;
+
+      export import PathGraphicObject = __internal__.PathGraphicObject;
+
+      export import PathGraphicObjectProperties = __internal__.PathGraphicObjectProperties;
+
+      export import ShadingGraphicObject = __internal__.ShadingGraphicObject;
+
+      export import ShadingGraphicObjectProperties = __internal__.ShadingGraphicObjectProperties;
+
+      export import TextGraphicObject = __internal__.TextGraphicObject;
+
+      export import TextGraphicObjectProperties = __internal__.TextGraphicObjectProperties;
+    }
+
+    export import PageEditorAddon = __internal__.PageEditorAddon;
+  }
+
+  namespace digital_stamp {
+    export import DigitalStampSize = __internal__.DigitalStampSize;
+
+    export import DigitalStampTemplate = __internal__.DigitalStampTemplate;
+
+    export import IdentityInfo = __internal__.IdentityInfo;
+  }
+
+  namespace path_objects {
+    export import AddCirclePathObjectController = __internal__.AddCirclePathObjectController;
+
+    export import AddLinePathObjectController = __internal__.AddLinePathObjectController;
+
+    export import AddRoundRectPathObjectController = __internal__.AddRoundRectPathObjectController;
+
+    export import AddSquarePathObjectController = __internal__.AddSquarePathObjectController;
+
+    export import EditAllObjectsController = __internal__.EditAllObjectsController;
+  }
+
+  namespace text_object {
+    export import AddTextStateController = __internal__.AddTextStateController;
+
+    export import BoldStyleController = __internal__.BoldStyleController;
+
+    export import ItalicStyleController = __internal__.ItalicStyleController;
+  }
+
+  export import CustomDynamicStampAddon = __internal__.CustomDynamicStampAddon;
+
+  export import DigitalStampUIXAddon = __internal__.DigitalStampUIXAddon;
+
+  export import PrintUIXAddon = __internal__.PrintUIXAddon;
+
+  export import ReadAloudAddon = __internal__.ReadAloudAddon;
+
+  export import Thumbnail = __internal__.Thumbnail;
+
+  export import UndoRedoAddon = __internal__.UndoRedoAddon;
+}
 
 export declare namespace components {
   namespace widgets {
@@ -287,270 +375,4 @@ export declare namespace appearances {
   export import ribbon = __internal__.RibbonAppearance;
 }
 
-export namespace PDFViewCtrl {
-  namespace shared {
-    export import Color = __internal__.Color;
-
-    export import getRanges = __internal__.getRanges;
-
-    export import getUnitByName = __internal__.getUnitByName;
-  }
-
-  namespace stamp {
-    export import StampInfo = __internal__.StampInfo;
-
-    export import StampService = __internal__.StampService;
-  }
-
-  namespace add_ons {
-    namespace PDFViewCtrl_CreateAnnotAddonModule {
-      export import CreateAnnotAddon = __internal__.CreateAnnotAddon;
-    }
-  }
-
-  namespace collab {
-    export import AddMarkedStateCollaborationData = __internal__.AddMarkedStateCollaborationData;
-
-    export import AddMarkedStateOperationData = __internal__.AddMarkedStateOperationData;
-
-    export import AddReplyCollaborationData = __internal__.AddReplyCollaborationData;
-
-    export import AddReplyOperationData = __internal__.AddReplyOperationData;
-
-    export import AddReviewStateCollaborationData = __internal__.AddReviewStateCollaborationData;
-
-    export import AddReviewStateOperationData = __internal__.AddReviewStateOperationData;
-
-    export import CollaborationCommunicator = __internal__.CollaborationCommunicator;
-
-    export import CollaborationData = __internal__.CollaborationData;
-
-    export import CollaborationDataHandler = __internal__.CollaborationDataHandler;
-
-    export import CollaborationSessionInfo = __internal__.CollaborationSessionInfo;
-
-    export import CreateAnnotationCollaborationData = __internal__.CreateAnnotationCollaborationData;
-
-    export import CreateAnnotationOperationData = __internal__.CreateAnnotationOperationData;
-
-    export import ImportAnnotationsFileCollaborationData = __internal__.ImportAnnotationsFileCollaborationData;
-
-    export import ImportAnnotationsFileOperationData = __internal__.ImportAnnotationsFileOperationData;
-
-    export import MoveAnnotsBetweenPageCollaborationData = __internal__.MoveAnnotsBetweenPageCollaborationData;
-
-    export import MoveAnnotsBetweenPageOperationData = __internal__.MoveAnnotsBetweenPageOperationData;
-
-    export import PPOInsertPageCollaborationData = __internal__.PPOInsertPageCollaborationData;
-
-    export import PPOInsertPageOperationData = __internal__.PPOInsertPageOperationData;
-
-    export import PPOMovePageCollaborationData = __internal__.PPOMovePageCollaborationData;
-
-    export import PPOMovePageOperationData = __internal__.PPOMovePageOperationData;
-
-    export import PPORemovePageCollaborationData = __internal__.PPORemovePageCollaborationData;
-
-    export import PPORemovePageOperationData = __internal__.PPORemovePageOperationData;
-
-    export import PPORemovePagesCollaborationData = __internal__.PPORemovePagesCollaborationData;
-
-    export import PPORemovePagesOperationData = __internal__.PPORemovePagesOperationData;
-
-    export import PPORotatePageCollaborationData = __internal__.PPORotatePageCollaborationData;
-
-    export import PPORotatePageOperationData = __internal__.PPORotatePageOperationData;
-
-    export import RemoveAnnotationCollaborationData = __internal__.RemoveAnnotationCollaborationData;
-
-    export import RemoveAnnotationOperationData = __internal__.RemoveAnnotationOperationData;
-
-    export import RemoveReplyCollaborationData = __internal__.RemoveReplyCollaborationData;
-
-    export import RemoveReplyOperationData = __internal__.RemoveReplyOperationData;
-
-    export import UpdateAnnotationCollaborationData = __internal__.UpdateAnnotationCollaborationData;
-
-    export import UpdateAnnotationOperationData = __internal__.UpdateAnnotationOperationData;
-
-    export import UpdateAnnotContentCollaborationData = __internal__.UpdateAnnotContentCollaborationData;
-
-    export import UpdateAnnotContentOperationData = __internal__.UpdateAnnotContentOperationData;
-
-    export import UserCustomizeCollaborationData = __internal__.UserCustomizeCollaborationData;
-
-    export import WebSocketCommunicator = __internal__.WebSocketCommunicator;
-
-    export import COLLABORATION_ACTION = __internal__.COLLABORATION_ACTION;
-  }
-
-  namespace renderers {
-    namespace annotsRender {
-      export import AnnotRender = __internal__.AnnotRender;
-
-      export import ViewerAnnotManager = __internal__.ViewerAnnotManager;
-    }
-
-    export import PDFDocRender = __internal__.PDFDocRender;
-
-    export import PDFPageRender = __internal__.PDFPageRender;
-  }
-
-  namespace stateHandler {
-    export import HandStateHandlerConfig = __internal__.HandStateHandlerConfig;
-
-    export import IStateHandler = __internal__.IStateHandler;
-
-    export import StampStateHandlerParams = __internal__.StampStateHandlerParams;
-
-    export import StateHandlerManager = __internal__.StateHandlerManager;
-
-    export import StateHandlerConfig = __internal__.StateHandlerConfig;
-  }
-
-  namespace pdfjs {
-    export import ActionCallback = __internal__.ActionCallback;
-
-    export import AlertOptions = __internal__.AlertOptions;
-  }
-
-  namespace overlayComparison {
-    export import BlendColorResolverOptions = __internal__.BlendColorResolverOptions;
-
-    export import CombinePixelsOptions = __internal__.CombinePixelsOptions;
-
-    export import ImageData = __internal__.ImageData;
-
-    export import OverlayComparisonOptions = __internal__.OverlayComparisonOptions;
-
-    export import OverlayComparisonOptionsService = __internal__.OverlayComparisonOptionsService;
-
-    export import OverlayComparisonService = __internal__.OverlayComparisonService;
-
-    export import OverlayComparisonTransformationOptions = __internal__.OverlayComparisonTransformationOptions;
-
-    export import DiffColor = __internal__.DiffColor;
-
-    export import BlendColorResolver = __internal__.BlendColorResolver;
-
-    export import CombinePixelsOptionsKey = __internal__.CombinePixelsOptionsKey;
-
-    export import OnOptionChangeCallback = __internal__.OnOptionChangeCallback;
-  }
-
-  namespace constants {
-    export import ANNOTATION_PERMISSION = __internal__.ANNOTATION_PERMISSION;
-
-    export import MouseEventObjectType = __internal__.MouseEventObjectType;
-
-    export import OPEN_FILE_TYPE = __internal__.OPEN_FILE_TYPE;
-
-    export import PagePointType = __internal__.PagePointType;
-
-    export import SNAP_MODE = __internal__.SNAP_MODE;
-
-    export import STATE_HANDLER_NAMES = __internal__.STATE_HANDLER_NAMES;
-
-    export import ViewerEvents = __internal__.ViewerEvents;
-  }
-
-  namespace interfaces {
-    export import Activatable = __internal__.Activatable;
-
-    export import AnnotTooltip = __internal__.AnnotTooltip;
-
-    export import OpenFileParameter = __internal__.OpenFileParameter;
-
-    export import PDFDocRendering = __internal__.PDFDocRendering;
-
-    export import PDFPageRendering = __internal__.PDFPageRendering;
-
-    export import PDFViewerRendering = __internal__.PDFViewerRendering;
-
-    export import PrintProgressBar = __internal__.PrintProgressBar;
-
-    export import ScrollWrap = __internal__.ScrollWrap;
-
-    export import TextSelectionTool = __internal__.TextSelectionTool;
-  }
-
-  namespace annotCompontents {
-    export import AnnotComponent = __internal__.AnnotComponent;
-
-    export import MarkupAnnotComponent = __internal__.MarkupAnnotComponent;
-  }
-
-  namespace readAloud {
-    export import AbstractPDFTextToSpeechSynthesis = __internal__.AbstractPDFTextToSpeechSynthesis;
-
-    export import PDFTextToSpeechSynthesis = __internal__.PDFTextToSpeechSynthesis;
-
-    export import PDFTextToSpeechSynthesisTemplate = __internal__.PDFTextToSpeechSynthesisTemplate;
-
-    export import PDFTextToSpeechUtterance = __internal__.PDFTextToSpeechUtterance;
-
-    export import ReadAloudOptions = __internal__.ReadAloudOptions;
-
-    export import ReadAloudService = __internal__.ReadAloudService;
-
-    export import ReadAloudTextInformation = __internal__.ReadAloudTextInformation;
-
-    export import PDFTextToSpeechSynthesisStatus = __internal__.PDFTextToSpeechSynthesisStatus;
-  }
-
-  namespace creation {
-    export import CreateAnnotationService = __internal__.CreateAnnotationService;
-
-    export import CreateFreeTextCalloutService = __internal__.CreateFreeTextCalloutService;
-  }
-
-  namespace viewerui {
-    export import IContextMenu = __internal__.IContextMenu;
-
-    export import IFloatingTooltip = __internal__.IFloatingTooltip;
-
-    export import IViewerUI = __internal__.IViewerUI;
-
-    export import TinyViewerUI = __internal__.TinyViewerUI;
-  }
-
-  namespace viewMode {
-    export import IViewMode = __internal__.IViewMode;
-
-    export import ViewModeManager = __internal__.ViewModeManager;
-  }
-
-  namespace DeviceInfo {
-    export import isDesktop = __internal__.isDesktop;
-
-    export import isMobile = __internal__.isMobile;
-
-    export import isTablet = __internal__.isTablet;
-  }
-
-  namespace Log {
-    export import LoggerFactory = __internal__.LoggerFactory;
-
-    export import Log_Levels = __internal__.Log_Levels;
-  }
-
-  export import ActivationGroup = __internal__.ActivationGroup;
-
-  export import AnnotationAuthorityManager = __internal__.AnnotationAuthorityManager;
-
-  export import AnnotationPermission = __internal__.AnnotationPermission;
-
-  export import Disposable = __internal__.Disposable;
-
-  export import DivScrollWrap = __internal__.DivScrollWrap;
-
-  export import PDFViewer = __internal__.PDFViewer;
-
-  export import SnapshotServer = __internal__.SnapshotServer;
-
-  export import UserPermission = __internal__.UserPermission;
-
-  export import GetAnnotPermissionsCallback = __internal__.GetAnnotPermissionsCallback;
-
-  export import CustomScrollWrap = __internal__.CustomScrollWrap;
-}
+export * as PDFViewCtrl from './PDFViewCtrl';

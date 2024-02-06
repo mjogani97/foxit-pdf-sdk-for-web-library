@@ -48,11 +48,16 @@
       "text": "Riprendi",
       "desc": "Riprendi Maiusc+Ctrl+C",
       "descSub": "Riprendi la lettura ad alta voce"
+    },
+    "voice": {
+      "text": "Voce",
+      "desc": "Voce",
+      "descSub": "Seleziona la voce"
     }
   },
   "error": {
     "document-not-openned": "Impossibile leggere ad alta voce perché non vi sono documenti aperti",
     "permDenyCopyContent": "Non si dispone dell'autorizzazione per la copia del contenuto da questo documento.",
-    "interrupted": "Nota: la sintesi vocale è stata interrotta da un'altra pagina. Per riprendere la sintesi vocale, è sufficiente fare nuovamente clic sul pulsante \"Leggi pagina corrente\" o \"Leggi dalla pagina corrente\". Se il problema persiste, chiudi tutte le altre pagine o applicazioni che potrebbero utilizzare l'audio."
+    "interrupted": "Nota: la sintesi vocale è stata interrotta da un'altra pagina. Per riprendere la sintesi vocale è sufficiente fare nuovamente clic sul pulsante \"Leggi la pagina corrente\" o \"Leggi dalla pagina corrente\". Se il problema persiste, chiudi tutte le altre pagine o applicazioni che potrebbero utilizzare l'audio."
   }
 }

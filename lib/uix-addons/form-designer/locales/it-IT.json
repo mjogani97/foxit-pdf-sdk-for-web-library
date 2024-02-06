@@ -296,8 +296,8 @@
       "name": "Posizione",
       "left": "Sinistra:",
       "right": "Destra:",
-      "top": "Alto:",
-      "bottom": "Basso：",
+      "top": "Superiore:",
+      "bottom": "Inferiore:",
       "width": "Larghezza:",
       "height": "Altezza:",
       "required": "Non cambiare l'altezza e la larghezza quando viene modificata la posizione."

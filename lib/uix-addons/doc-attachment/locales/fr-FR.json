@@ -1,7 +1,7 @@
 {
   "dialog": {
     "title": "Pièce jointe",
-    "addFiles": "Ajouter des fichiers…",
+    "addFiles": "Ajouter des fichiers...",
     "addTip": "Ajoutez des documents à la liste ci-dessous.",
     "okTip": "Une fois tous les documents ajoutés, appuyez sur OK.",
     "fileName": "Nom de fichier",

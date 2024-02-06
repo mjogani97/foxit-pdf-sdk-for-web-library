@@ -46,7 +46,7 @@
       "run": "Uitvoeren",
       "clear": "Wissen",
       "close": "Sluiten",
-      "exec": "Console : exec",
+      "exec": "Console: exec",
       "fail": "Regel:",
       "success": "Wordt met succes uitgevoerd."
     },

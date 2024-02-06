@@ -10,13 +10,14 @@
     "formatError": "文件格式可能无效或损坏。",
     "securityError": "当前的PDF文档已由某些不受支持的安全处理程序加密。",
     "unsupportedStamp": "这种文件类型当前不支持。",
+    "smallFile": "其应该小于 16MB。",
     "browserNotSupportDownload": "您的浏览器不支持文件下载。请在桌面浏览器中重试。",
     "imageInvalid": "图像无效。",
     "browserRestriction": "该操作将被保存，但由于浏览器平台的限制，无法在福昕高级PDF编辑器网页版中执行。",
     "setLayerVisibleTips": "所选动作的目标图层状态将设置为当前状态。",
     "browserRestriction-actionTriggered": "该操作已被触发，但由于浏览器平台的限制，无法在福昕高级PDF编辑器网页版中执行。",
     "browserRestriction-actionTriggered-websdk": "该操作已被触发，但由于浏览器平台的限制，无法执行。",
-    "fullscreen": "文档视图将福昕高级PDF编辑器切换至全屏模式。文档在该模式下看起来可能像是处于其它应用程序中，包括请求您个人信息的应用程序。您是否允许文档自动进入全屏模式？\n"
+    "fullscreen": "文档视图将福昕高级PDF编辑器切换至全屏模式。文档在该模式下看起来可能像是处于其它应用程序中，包括请求您个人信息的应用程序。您是否允许文档自动进入全屏模式？"
   },
   "toolbar": {
     "tabs": {
@@ -157,7 +158,7 @@
         "title": "放大镜"
       },
       "sign": {
-        "title": "墨水签名",
+        "title": "手写签名",
         "name": "PDF签名"
       },
       "roundRect": {
@@ -392,7 +393,7 @@
       "untitled": "无标题",
       "confirm": {
         "title": "",
-        "content": "您确定要将书签目标设置为当前位置吗？\n",
+        "content": "您确定要将书签目标设置为当前位置吗？",
         "confirmButton": "是",
         "cancelButton": "否",
         "notAgain": "不再显示"
@@ -418,7 +419,7 @@
         "noComment": "文档中不存在任何注释。",
         "result": "结果/总计：",
         "loadmore": "加载更多",
-        "nomore": "没有找到更多匹配项。\n",
+        "nomore": "没有找到更多匹配项。",
         "waiting": "搜索...",
         "loadall": "加载所有注释",
         "loadall-nomore": "没有匹配的注释",
@@ -457,9 +458,10 @@
         "status": "状态",
         "checkmark": "对勾标记状态"
       },
-      "page-title": " 第{{pageNumber}}页",
+      "page-title": "第{{pageNumber}}页",
       "group-title": "{{groupName}} {{count}}",
       "comment-dropdown": {
+        "reply": "回复",
         "copy-text": "复制文本",
         "edit-text": "编辑",
         "delete": "删除",
@@ -604,8 +606,8 @@
         "printOverrides": "此图层已被禁用，因为已应用打印优先。",
         "exportOverrides": "此图层已被禁用，因为已应用导出优先。",
         "layerOverrides": "此图层已被禁用，因为已应用图层优先。",
-        "merge": " 福昕高级PDF编辑器无法合并图层。请先选择您想要合并的图层。",
-        "mergeInto": " 福昕高级PDF编辑器网页版无法合并图层。请选择要合并到的图层。",
+        "merge": "福昕高级PDF编辑器无法合并图层。请先选择您想要合并的图层。",
+        "mergeInto": "福昕高级PDF编辑器网页版无法合并图层。请选择要合并到的图层。",
         "mergeConfirm": "该操作是不可逆的，您想继续吗？"
       }
     },
@@ -633,7 +635,7 @@
       "modified": "修改时间",
       "locationInDocument": "在文档中位置",
       "attachmentsTab": "附件标签",
-      "pageNumber": " 第{{pageNumber}}页",
+      "pageNumber": "第{{pageNumber}}页",
       "descriptionColon": "说明： ",
       "editAttachmentDescription": "编辑附件说明",
       "safeModeDownload": "该文档正在尝试将文件下载到您的计算机。您想继续吗？",
@@ -648,7 +650,7 @@
       "title": "域",
       "tooltip": "管理表单控件",
       "loadall": "加载所有域",
-      "page-title": " 第{{pageNumber}}页",
+      "page-title": "第{{pageNumber}}页",
       "display-order": "显示次序",
       "set-order": "设置标签顺序",
       "order": {
@@ -693,7 +695,7 @@
         "showProperties": "显示签名属性...",
         "signDoc": "签署文档",
         "certifyDoc": "认证文档",
-        "goTo": "转到签名域",
+        "goTo": " 转到签名域",
         "addVerificationInformation": "添加验证信息"
       },
       "dialog": {
@@ -809,7 +811,7 @@
     },
     "shadingStyleGradientStopsDialog": {
       "gradientStops": "渐变光圈",
-      "color": "颜色：",
+      "color": "颜色： ",
       "location": "位置： "
     },
     "measure": {
@@ -929,7 +931,9 @@
       "dashType": "虚线样式",
       "lineCap": "线段端口",
       "lineJoin": "线条联结",
-      "miterLimit": "斜面限制"
+      "miterLimit": "斜面限制",
+      "sample": "范例",
+      "opacity": "不透明度："
     },
     "shadingStyle": {
       "gradientStops": "渐变光圈",
@@ -970,7 +974,7 @@
         "color": "颜色："
       },
       "selectAction": {
-        "thread": "阅读文章",
+        "thread": "阅读文章 ",
         "exmenu": "执行菜单项",
         "goto": "跳转到页面视图",
         "file": "打开/执行文件",
@@ -1029,7 +1033,7 @@
       "general": {
         "name": "名称： ",
         "commonProperties": "常规设置",
-        "formField": "表单域：",
+        "formField": "表单域： ",
         "visible": "可见",
         "hidden": "隐藏",
         "visibleButUnprintable": "可见但不可打印",
@@ -1039,18 +1043,18 @@
       },
       "appearance": {
         "bordersAndColors": "边框和颜色",
-        "lineStyle": "线型：",
+        "lineStyle": "线型： ",
         "solid": "实线",
         "dashed": "虚线",
         "beveled": "斜面",
         "inset": "凹陷",
         "underline": "下划线",
-        "thickness": "线宽：",
+        "thickness": "线宽： ",
         "thin": "细",
         "medium": "中",
         "thick": "粗",
-        "borderColor": "边框颜色：",
-        "fillColor": "填充色："
+        "borderColor": "边框颜色： ",
+        "fillColor": "填充色： "
       },
       "options": {
         "buttonStyle": "按钮类型：",
@@ -1142,6 +1146,7 @@
     },
     "warning": "警告",
     "error": {
+      "pleaseUncheckMultiLine": "无法应用该格式到多行文本。如果您想继续应用该格式，请切换到“选项”面板，取消选择“多行”。",
       "noRedactionLicense": "当前模块无授权",
       "noRedactionApplyPermission": "不允许应用密文",
       "fileFormatError": "文件格式错误",
@@ -1172,9 +1177,10 @@
     "signCertification": {
       "title": "证书信息",
       "serialNum": "序列号：",
-      "name": "名称： ",
+      "name": "名称：",
       "issue": "颁发者：",
-      "usage": "用途：",
+      "usage": "主要目标用途：",
+      "extUsage": "预期的主要用途：",
       "from": "生效日期：",
       "to": "失效日期：",
       "email": "邮箱地址：",
@@ -1226,7 +1232,7 @@
       "height": "高度：",
       "catagoryHolder": "选择或输入一个类别。",
       "selectSource": "文件",
-      "selectLocal": "浏览...",
+      "selectLocal": "浏览",
       "addLink": "输入文件URL",
       "categoryPlaceholder": "<定义新类别>",
       "namePlaceholder": "新图章",
@@ -1577,6 +1583,7 @@
     "ok": "确定",
     "cancel": "取消",
     "alert-title": "",
+    "alert-message": "",
     "prompt-title": "",
     "prompt-message": "",
     "confirm-title": "",
@@ -1595,17 +1602,17 @@
     "appearance": "外观",
     "background": "背景",
     "image-setting": "图像设置",
-    "text-setting": "文本设置",
+    "text-setting": "配置文本",
     "signed-by": "签署者",
     "name": "名称",
-    "DN": "DN",
-    "tag": "标签图像",
+    "DN": "辨别名",
+    "tag": "图像",
     "date": "日期",
     "version": "版本",
     "label": "标签",
-    "draw": "绘图",
+    "draw": "绘制",
     "no-left": "无",
-    "owner": "所有者",
+    "owner": "名称",
     "permission": "签署后允许采取的动作",
     "noSpecified": "保持默认",
     "permNone": "不允许更改",
@@ -1613,7 +1620,8 @@
     "permAnnot": "注释、填写表单、签署已存在的数字签名域",
     "sign": "签名",
     "showSignProperty": "显示签名属性...",
-    "certifyDoc": "认证文档"
+    "certifyDoc": "认证文档",
+    "notSupportPagingSeal": "该签名文档不支持骑缝章。"
   },
   "verifySign": {
     "title": "签名验证结果",
@@ -1707,7 +1715,7 @@
     "validityUnknownInfo": "签名有效性未知。",
     "validInfo_certify": "文档认证有效，由 {{signerInfo}}签名。",
     "invalidInfo_certify": "签名无效。",
-    "incredibleInfo": "该数字签名文档有漏洞，请联系文档提供者。 ",
+    "incredibleInfo": "该数字签名文档有漏洞，请联系文档提供者。",
     "signaturePropertiesTitle": "签名属性",
     "validPropertiesUnknownInfo": "签名有效性未知。",
     "validPropertiesInfo": "签名有效，由{{signerInfo}}签名。",
@@ -1732,11 +1740,11 @@
     "advancedPropertiesTitle": "高级签名属性",
     "signatureDetailTitle": "签名细节：",
     "createdUsingBy": "签名是使用{{creatorName}}创建的。",
-    "hashAlgorithm": "Hash算法： ",
+    "hashAlgorithm": "Hash算法：",
     "signatureAlgorithm": "签名算法：",
     "timestampDetailTitle": "时间戳细节：",
-    "timestampDes": "时间戳是嵌入在签名内的。当文档被签署时，时间戳也被签署。对于一个用于验证的时间戳签名，您必须用可信任的时间戳服务器机构来签署时间戳。",
-    "timeStampShowCertificateDes": "点击“显示证书”查看关于时间戳签名验证的细节。点击“添加至可信任的证书”使其可信赖。",
+    "timestampDes": "时间戳是嵌入在签名内的。时间戳的签名方式与文档的签名方式相同。要使时间戳签名有效，您必须信任签署时间戳的时间戳授权机构。",
+    "timeStampShowCertificateDes": "点击“显示证书”查看关于时间戳签名验证的细节。点击“添加为可信任证书”使其可信赖。",
     "timestampAuthority": "时间戳服务机构："
   },
   "certificate": {
@@ -1754,7 +1762,16 @@
     "trustForLabel": "如果签名验证成功， 将该证书用于以下用途：",
     "validatingSignaturesLabel": "验证签名",
     "validatingCertifiedDocumentLabel": "正在验证认证文档",
-    "addToTrustedCertificatesBtn": "添加为可信任证书"
+    "addToTrustedCertificatesBtn": "添加为可信任证书",
+    "summary": "摘要",
+    "revocation": "吊销",
+    "notPerformed": "吊销检查未执行",
+    "uncheck": "无法确认所选定的证书是否有效。",
+    "details": "详细信息",
+    "detailsInfo": "所选定证书要么是信任锚，要么是证书链上信任锚点之上的证书（详细信息请参阅信任选项卡）。对于这样的证书，不会进行吊销检查，它们本质上被认为是值得信赖的。",
+    "notTrust": "所选定的证书没有链接到指定为可信锚的证书（请参阅信任选项卡以获得详细信息）。因此，未对本证书执行吊销检查。",
+    "signerDetail": "签名者细节",
+    "checkRevocation": "检查吊销"
   },
   "phantompdfOnlineTitle": "PDF编辑器",
   "portfolio": {
@@ -1791,7 +1808,7 @@
     },
     "properties-dialog": {
       "title": "文件包属性",
-      "fields": "域：",
+      "fields": "域： ",
       "defaultField": {
         "FileName": "名称",
         "Description": "说明",
@@ -1807,11 +1824,11 @@
       "hide": "隐藏",
       "add": "添加",
       "delete": "删除",
-      "sortBy": "排序依据：",
-      "sortOrder": "排序顺序：",
+      "sortBy": "排序依据： ",
+      "sortOrder": "排序顺序： ",
       "ascending": "升序",
       "descending": "降序",
-      "initialView": "初始视图：",
+      "initialView": "初始视图： ",
       "top": "顶部",
       "left": "左",
       "minimized": "最小化",
@@ -1819,7 +1836,7 @@
       "ok": "确定",
       "cancel": "取消",
       "addField": "添加域",
-      "enterNewFieldName": "输入新域的名字：",
+      "enterNewFieldName": "输入新域的名字： ",
       "addTip": "您选择的域名已被使用。 请选择一个唯一的域名称。",
       "addTip1": "重复的键值。请选择一个其他的域名。",
       "deleteTip": "删除域将删除该域以及所有与该域关联的数据。您确定要删除该域吗？"
@@ -1848,7 +1865,7 @@
       "button-tip": "跳转到下一个文件"
     },
     "newFolder": "新文件夹",
-    "enterNewFolderName": "输入新文件夹的名字：",
+    "enterNewFolderName": "输入新文件夹的名字： ",
     "addFolderTip": "该文件包已经包含一个名称为“{{- folderName}}”的文件夹。",
     "addFolderTip1": "该文件包已经包含了一个名称为“{{- folderName}}”的文件夹。\n您是否想要替换已存在的文件夹“{{- folderName}}”及其所包含的所有文件?",
     "addFolderTip2": "这些字符不能用在文件名中：\n\\/:*?\"<>|",
@@ -2131,7 +2148,87 @@
       "newCode": "密文代码"
     }
   },
+  "popupNote": {
+    "close": "关闭注释弹出框",
+    "closeAll": "关闭所有注释"
+  },
   "esign": {
     "tabTitle": "电子签章"
+  },
+  "ai": {
+    "product": "AI助手"
+  },
+  "colorPicker": {
+    "Title": "选色器",
+    "Ok": "确定",
+    "No": "取消",
+    "customColor": "自定义颜色",
+    "customColorPropTitle": "通过以下调色板修改选中的自定义颜色",
+    "customBorderColor": "边框颜色",
+    "customFillColor": "填充色",
+    "noFillColor": "无填充色",
+    "editColor": "编辑颜色"
+  },
+  "lang": {
+    "ar-001": "阿拉伯语",
+    "ar-SA": "阿拉伯语（沙特阿拉伯）",
+    "bn-BD": "孟加拉（孟加拉国）",
+    "bn-IN": "印度孟加拉",
+    "ca-ES": "加泰罗尼亚语",
+    "cs-CZ": "捷克（捷克共和国）",
+    "da-DK": "丹麦语（丹麦）",
+    "de-AT": "德国（奥地利）",
+    "de-CH": "德国（瑞士）",
+    "de-DE": "德语",
+    "el-GR": "希腊语",
+    "en-AU": "英语（澳大利亚）",
+    "en-CA": "英语（加拿大）",
+    "en-GB": "英语（英国）",
+    "en-IE": "英语（爱尔兰）",
+    "en-IN": "英语（印度）",
+    "en-NZ": "英语（新西兰）",
+    "en-US": "英语（美国）",
+    "en-ZA": "英语（南非）",
+    "es-AR": "西班牙语（阿根廷）",
+    "es-CL": "西班牙语（智利）",
+    "es-CO": "西班牙语（哥伦比亚）",
+    "es-ES": "西班牙语",
+    "es-MX": "西班牙语（墨西哥）",
+    "es-US": "西班牙语（美国）",
+    "fi-FI": "芬兰语（芬兰）",
+    "fr-BE": "法语（比利时）",
+    "fr-CA": "法语（加拿大）",
+    "fr-CH": "法语（瑞士）",
+    "fr-FR": "法语",
+    "he-IL": "希伯来语（以色列）",
+    "hi-IN": "印地语（印度）",
+    "hu-HU": "匈牙利语（匈牙利）",
+    "hr-HR": "克罗地亚语",
+    "id-ID": "印度尼西亚语",
+    "it-CH": "意大利语（瑞士）",
+    "it-IT": "意大利语",
+    "ja-JP": "日语",
+    "ko-KR": "韩语",
+    "ms-MY": "马来语",
+    "nb-NO": "挪威语",
+    "nl-BE": "荷兰语（比利时）",
+    "nl-NL": "荷兰语（荷兰）",
+    "no-NO": "挪威语 挪威",
+    "pl-PL": "波兰语 波兰",
+    "pt-BR": "葡萄牙语（巴西）",
+    "pt-PT": "葡萄牙语（葡萄牙）",
+    "ro-RO": "罗马尼亚语（罗马尼亚）",
+    "ru-RU": "俄语",
+    "sk-SK": "斯洛伐克语（斯洛伐克）",
+    "sv-SE": "瑞典语（瑞典）",
+    "ta-IN": "泰米尔语（印度）",
+    "ta-LK": "泰米尔语（斯里兰卡）",
+    "th-TH": "泰语",
+    "tr-TR": "土耳其语（土耳其）",
+    "uk-UA": "乌克兰语",
+    "vi-VN": "越南语",
+    "zh-CN": "中文",
+    "zh-HK": "中文（香港）",
+    "zh-TW": "中文（台湾）"
   }
 }

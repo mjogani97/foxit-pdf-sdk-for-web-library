@@ -23,10 +23,10 @@
     "crop": "Recadrer des pages...",
     "rotate": "Faire pivoter des pages...",
     "extract": "Extraire des pages...",
-    "swap": "Permuter des pages…",
+    "swap": "Permuter des pages...",
     "move": "Déplacer des pages...",
     "split": "Scinder le document...",
-    "properties": "Propriétés…",
+    "properties": "Propriétés...",
     "replace": "Remplacer des pages...",
     "formatNumbering": "Format des numéros de page...",
     "pageTransitions": "Transitions de page"
@@ -54,8 +54,8 @@
     }
   },
   "loadingProgress": {
-    "embedding": "Incorporation des vignettes…",
-    "removing": "Suppression des vignettes…"
+    "embedding": "Incorporation des vignettes...",
+    "removing": "Suppression des vignettes..."
   },
   "retry": {
     "title": "Le fichier « ${filename} » est protégé. Entrez le mot de passe d'ouverture du document.",

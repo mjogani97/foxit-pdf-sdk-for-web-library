@@ -34,7 +34,7 @@
       "doc-will-print": "文書を印刷する",
       "doc-did-print": "文書を印刷した",
       "doc-did-printed": "文書が印刷された",
-      "enable-tip": "この文書では JavaScript を一部の機能に使用していますが、JavaScript は現在無効になっています。JavaScriptを有効にすると、潜在的なセキュリティリスクが発生する可能性があります。"
+      "enable-tip": "この文書は一部の機能に JavaScript を使用していますが、JavaScript は現在無効になっています。JavaScriptを有効にすると、潜在的なセキュリティリスクが発生する可能性があります。"
     }
   },
   "javascript-console": {
@@ -46,7 +46,7 @@
       "run": "実行",
       "clear": "消去",
       "close": "閉じる",
-      "exec": "コンソール : exec",
+      "exec": "コンソール: exec",
       "fail": "行:",
       "success": "正常に実行しました。"
     },

@@ -1,5 +1,8 @@
 import { __internal__ } from './index';
 
+declare const ActionCallbackManager: typeof __internal__.ActionCallbackManager;
+declare type ActionCallbackManager = __internal__.ActionCallbackManager;
+
 declare const ActivationGroup: typeof __internal__.ActivationGroup;
 declare type ActivationGroup = __internal__.ActivationGroup;
 
@@ -28,9 +31,6 @@ declare type UserPermission = __internal__.UserPermission;
 export declare type GetAnnotPermissionsCallback =
   __internal__.GetAnnotPermissionsCallback;
 
-declare const CustomScrollWrap: typeof __internal__.CustomScrollWrap;
-declare type CustomScrollWrap = __internal__.CustomScrollWrap;
-
 declare namespace PDF {
   namespace coordinates {
     export import DevicePoint = __internal__.DevicePoint;
@@ -55,6 +55,8 @@ declare namespace PDF {
   namespace actions {
     export import Action = __internal__.Action;
 
+    export import EmbeddedGotoAction = __internal__.EmbeddedGotoAction;
+
     export import GoToAction = __internal__.GoToAction;
 
     export import HideAction = __internal__.HideAction;
@@ -62,6 +64,8 @@ declare namespace PDF {
     export import JavaScriptAction = __internal__.JavaScriptAction;
 
     export import ResetFormAction = __internal__.ResetFormAction;
+
+    export import SubmitFormAction = __internal__.SubmitFormAction;
 
     export import URIAction = __internal__.URIAction;
   }
@@ -237,6 +241,8 @@ declare namespace PDF {
 
     export import MK_Properties = __internal__.MK_Properties;
 
+    export import NewWindowFlag = __internal__.NewWindowFlag;
+
     export import Note_Icon = __internal__.Note_Icon;
 
     export import page_Number_Format = __internal__.page_Number_Format;
@@ -339,12 +345,28 @@ declare namespace PDF {
   export import TextObject = __internal__.TextObject;
 }
 
+declare namespace DeviceInfo {
+  export import isDesktop = __internal__.isDesktop;
+
+  export import isMobile = __internal__.isMobile;
+
+  export import isTablet = __internal__.isTablet;
+}
+
+declare namespace Log {
+  export import LoggerFactory = __internal__.LoggerFactory;
+
+  export import Log_Levels = __internal__.Log_Levels;
+}
+
 declare namespace shared {
   export import Color = __internal__.Color;
 
   export import getRanges = __internal__.getRanges;
 
   export import getUnitByName = __internal__.getUnitByName;
+
+  export import setThemeColor = __internal__.setThemeColor;
 }
 
 declare namespace stamp {
@@ -498,6 +520,8 @@ declare namespace constants {
 
   export import PagePointType = __internal__.PagePointType;
 
+  export import PROGRESS_STATUS = __internal__.PROGRESS_STATUS;
+
   export import SNAP_MODE = __internal__.SNAP_MODE;
 
   export import STATE_HANDLER_NAMES = __internal__.STATE_HANDLER_NAMES;
@@ -508,7 +532,11 @@ declare namespace constants {
 declare namespace interfaces {
   export import Activatable = __internal__.Activatable;
 
+  export import AnnotComponentConfig = __internal__.AnnotComponentConfig;
+
   export import AnnotTooltip = __internal__.AnnotTooltip;
+
+  export import CustomOptionsUpdater = __internal__.CustomOptionsUpdater;
 
   export import OpenFileParameter = __internal__.OpenFileParameter;
 
@@ -518,9 +546,13 @@ declare namespace interfaces {
 
   export import PDFViewerRendering = __internal__.PDFViewerRendering;
 
-  export import PrintProgressBar = __internal__.PrintProgressBar;
+  export import ProgressComponent = __internal__.ProgressComponent;
+
+  export import RegisterPrintHandlerCallback = __internal__.RegisterPrintHandlerCallback;
 
   export import ScrollWrap = __internal__.ScrollWrap;
+
+  export import SubmitFormActionCallback = __internal__.SubmitFormActionCallback;
 
   export import TextSelectionTool = __internal__.TextSelectionTool;
 }
@@ -555,6 +587,24 @@ declare namespace creation {
   export import CreateFreeTextCalloutService = __internal__.CreateFreeTextCalloutService;
 }
 
+declare namespace storage {
+  export import IndexedDBStorageDriver = __internal__.IndexedDBStorageDriver;
+
+  export import LocalStorageDriver = __internal__.LocalStorageDriver;
+
+  export import PDFViewerStorageContext = __internal__.PDFViewerStorageContext;
+
+  export import StorageContext = __internal__.StorageContext;
+
+  export import StorageDriver = __internal__.StorageDriver;
+
+  export import StorageDriverChangeEvent = __internal__.StorageDriverChangeEvent;
+
+  export import StorageDriverRemoveEvent = __internal__.StorageDriverRemoveEvent;
+
+  export import StorageFeature = __internal__.StorageFeature;
+}
+
 declare namespace viewerui {
   export import IContextMenu = __internal__.IContextMenu;
 
@@ -569,18 +619,4 @@ declare namespace viewMode {
   export import IViewMode = __internal__.IViewMode;
 
   export import ViewModeManager = __internal__.ViewModeManager;
-}
-
-declare namespace DeviceInfo {
-  export import isDesktop = __internal__.isDesktop;
-
-  export import isMobile = __internal__.isMobile;
-
-  export import isTablet = __internal__.isTablet;
-}
-
-declare namespace Log {
-  export import LoggerFactory = __internal__.LoggerFactory;
-
-  export import Log_Levels = __internal__.Log_Levels;
 }

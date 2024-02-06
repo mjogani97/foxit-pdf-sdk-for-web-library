@@ -34,7 +34,7 @@
       "doc-will-print": "Dokument wird gedruckt",
       "doc-did-print": "Dokument wurde gedruckt",
       "doc-did-printed": "Dokument gedruckt",
-      "enable-tip": "JavaScript ist derzeit deaktiviert und wird im Dokument für einige Funktionen verwendet. Die Aktivierung von JavaScript kann einige Sicherheitsrisiken bergen."
+      "enable-tip": "JavaScript ist aktuell deaktiviert und dieses Dokument verwendet JavaScript für einige Funktionen. Die Aktivierung von JavaScript birgt potenzielle Sicherheitsrisiken."
     }
   },
   "javascript-console": {

@@ -34,7 +34,7 @@
       "doc-will-print": "Il documento verrà stampato",
       "doc-did-print": "Il documento è stato stampato",
       "doc-did-printed": "Documento stampato",
-      "enable-tip": "JavaScript è attualmente disabilitato e questo documento lo utilizza per alcune funzioni. Abilitare JavaScript può portare ad alcuni potenziali rischi per la sicurezza."
+      "enable-tip": "JavaScript è attualmente disattivato e questo documento lo utilizza per alcune funzionalità. L'attivazione di JavaScript può comportare alcuni potenziali rischi per la sicurezza."
     }
   },
   "javascript-console": {
@@ -46,7 +46,7 @@
       "run": "Esegui",
       "clear": "Cancella",
       "close": "Chiudi",
-      "exec": "Console : exec",
+      "exec": "Console: exec",
       "fail": "Linea:",
       "success": "Esecuzione corretta."
     },

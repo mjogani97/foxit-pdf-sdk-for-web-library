@@ -25,7 +25,6 @@
     }
   },
   "alert": {
-    "title": "WEB SDK DEMO",
     "typeText": "'<在此处键入以插入文本>'",
     "categoryText": "'<在此处键入新类别>'",
     "templateText": "'<在此处键入以命名新模板>'",
@@ -35,6 +34,8 @@
     "fileError": "文件为空。",
     "nameError": "名称是必需的。",
     "templateNameError": "图章名已存在，请重命名要导入的图章。",
-    "spaceError": "类别名中不能有空格。"
+    "spaceError": "类别名中不能有空格。",
+    "sameName": "名称为'${1}'的图章已存在。",
+    "specialError": "特殊字符无效。"
   }
 }

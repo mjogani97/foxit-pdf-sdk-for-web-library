@@ -20,8 +20,8 @@
       "descSub": "Leer texto solo de la página actual"
     },
     "read-from-current-page": {
-      "text": "Leer de la página actual",
-      "desc": "Leer de la página actual Shift+Ctrl+ B",
+      "text": "Leer desde página actual",
+      "desc": "Leer desde página actual Shift+Ctrl+ B",
       "descSub": "Leer texto desde la página actual hasta el final del documento"
     },
     "stop": {
@@ -48,11 +48,16 @@
       "text": "Continuar",
       "desc": "Continuar Shift+Ctrl+C",
       "descSub": "Reiniciar lectura en voz alta"
+    },
+    "voice": {
+      "text": "Voz",
+      "desc": "Voz",
+      "descSub": "Seleccione la voz"
     }
   },
   "error": {
     "document-not-openned": "No se puede leer en voz alta porque no hay documento abierto",
     "permDenyCopyContent": "No tiene permiso para copiar el contenido de este documento.",
-    "interrupted": "Nota: El sintetizador de texto a voz ha sido interrumpido por otra página. Para reanudar la conversión de texto a voz, simplemente haga clic en el botón 'Leer página actual' o 'Leer desde página actual' nuevamente. Si el problema persiste, cierre cualquier otra página o aplicación que pueda estar usando audio."
+    "interrupted": "Nota: Otra página interrumpió el sintetizador de texto a voz. Para reanudar la función de texto a voz, simplemente haga clic de nuevo en el botón \"Leer página actual\" o \"Leer desde página actual\". Si el problema persiste, cierre cualquier otra página o aplicación que pueda estar utilizando el audio."
   }
 }

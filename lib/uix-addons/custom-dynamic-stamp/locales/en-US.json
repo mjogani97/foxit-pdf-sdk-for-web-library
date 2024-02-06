@@ -25,7 +25,6 @@
         }
     },
     "alert":{
-        "title":"WEB SDK DEMO",
         "typeText":"'<type here to insert text>'",
         "categoryText":"'<type here to name a new category>'",
         "templateText":"'<type here to name a new template>'",
@@ -36,6 +35,7 @@
         "nameError":"Name is required.",
         "templateNameError":"There is a stamp with this name, please rename the stamp which will be imported.",
         "spaceError": "Space can't be in category.",
+        "sameName": "The stamp that name '${1}' is already exists.",
         "specialError": "Special characters is invalid."
     }
 }

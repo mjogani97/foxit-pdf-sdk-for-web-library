@@ -6,6 +6,7 @@
   "removePageAlert": "您不能删除全部的页面。至少要留下1页。",
   "embedAllPageThumbnail": "您确定要在文档中嵌入所有页面缩略图吗？",
   "removeEmbeddedPageThumbnail": "您确定要从文档中删除所有嵌入的页面缩略图吗？",
+  "insertFailed": "无法插入到当前文档中。请稍后再试。",
   "contextmenu": {
     "copy": "复制",
     "paste": "粘贴",
@@ -64,6 +65,5 @@
     "zoom-in": "放大",
     "zoom-out": "缩小"
   },
-  "pasteErrorAlertMsg": "打开CopyPages_tmp.pdf时出错。此文件已损坏，无法修复。",
-  "insertFailed": "无法插入到当前文档中。请稍后再试。"
+  "pasteErrorAlertMsg": "打开CopyPages_tmp.pdf时出错。此文件已损坏，无法修复。"
 }

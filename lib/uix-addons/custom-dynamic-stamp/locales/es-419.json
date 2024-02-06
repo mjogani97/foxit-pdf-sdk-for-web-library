@@ -12,7 +12,7 @@
     "categoryPlaceholder": "escriba aquí para nombrar una nueva categoría",
     "name": "Nombre:",
     "font": "Fuente:",
-    "stampText": "Texto sello:",
+    "stampText": "Texto de sello:",
     "stampTextPlaceholder": "escriba aquí para insertar texto",
     "fontSize": "Tamaño de fuente:",
     "color": "Color:",
@@ -25,16 +25,17 @@
     }
   },
   "alert": {
-    "title": "DEMO DEL SDK WEB",
-    "typeText": "'<type here to insert text> '",
-    "categoryText": "'<type here to name a new category> '",
-    "templateText": "'<type here to name a new template> '",
+    "typeText": "'<escriba aquí para insertar texto>'",
+    "categoryText": "'<escriba aquí para nombrar una nueva categoría>'",
+    "templateText": "'<escriba aquí para nombrar una nueva plantilla>'",
     "textError": "${1} es un texto predefinido, debe seleccionar uno del menú desplegable o crear uno nuevo.",
-    "categoryError": "${1} es una categoría predefinida y no se puede usar para sellos personalizados, elija una categoría diferente.",
-    "templateError": "${1} es una plantilla predefinida y no se puede usar para sellos personalizados, elija una plantilla diferente.",
+    "categoryError": "${1} es una categoría predefinida y no se puede utilizar para los sellos personalizados, elija una categoría diferente.",
+    "templateError": "${1} es una plantilla predefinida y no se puede utilizar para los sellos personalizados, elija una plantilla diferente.",
     "fileError": "El archivo está vacío.",
-    "nameError": "Se requiere el nombre.",
+    "nameError": "El nombre es obligatorio.",
     "templateNameError": "Hay un sello con este nombre. Cambie el nombre del sello que se importará.",
-    "spaceError": "El espacio no puede estar en la categoría."
+    "spaceError": "No puede haber espacio en la categoría.",
+    "sameName": "Ya existe el sello que nombra '${1}'.",
+    "specialError": "Los caracteres especiales no son válidos."
   }
 }

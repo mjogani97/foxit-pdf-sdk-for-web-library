@@ -294,12 +294,12 @@
       "picas": "パイカ",
       "millimeters": "ミリ",
       "name": "配置",
-      "left": "左：",
-      "right": "右：",
-      "top": "上：",
-      "bottom": "下：",
-      "width": "幅：",
-      "height": "高さ：",
+      "left": "左:",
+      "right": "右:",
+      "top": "上:",
+      "bottom": "下:",
+      "width": "幅:",
+      "height": "高さ:",
       "required": "位置を変更する場合、高さと幅を変更しない"
     },
     "selection": {

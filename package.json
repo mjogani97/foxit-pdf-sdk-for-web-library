@@ -1,6 +1,6 @@
 {
     "name": "@foxitsoftware/foxit-pdf-sdk-for-web-library",
-    "version": "9.0.4",
+    "version": "9.2.1",
     "description": "Foxit pdf sdk for web.",
     "author": "Foxit Software Inc.",
     "main": "./lib/UIExtension.full.js",

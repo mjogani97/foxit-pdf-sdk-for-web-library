@@ -10,11 +10,12 @@
     "formatError": "De bestandsindeling is mogelijk ongeldig of beschadigd.",
     "securityError": "Het huidige PDF-document is versleuteld door een niet ondersteunde beveiligingsdienst.",
     "unsupportedStamp": "Dit bestandstype wordt momenteel niet ondersteund.",
+    "smallFile": "Het moet minder dan 16 MB zijn.",
     "browserNotSupportDownload": "Uw browser ondersteunt het downloaden van bestanden niet. Probeer het opnieuw in de desktopbrowser.",
     "imageInvalid": "Afbeelding ongeldig:",
-    "browserRestriction": "Deze actie zal opgeslagen worden, maar kan niet uitgevoerd worden in Foxit PDF EditorCloud vanwege beperkingen van het browserplatform.",
+    "browserRestriction": "Deze actie zal opgeslagen worden, maar kan niet uitgevoerd worden in Foxit PDF Editor Cloud vanwege beperkingen van het browserplatform.",
     "setLayerVisibleTips": "De status van de doellaag van de geselecteerde actie wordt ingesteld op de huidige status.",
-    "browserRestriction-actionTriggered": "De actie werd geactiveerd, maar kan niet uitgevoerd worden in Foxit PDF EditorCloud vanwege beperkingen van het browserplatform.",
+    "browserRestriction-actionTriggered": "De actie werd geactiveerd, maar kan niet uitgevoerd worden in Foxit PDF Editor Cloud vanwege beperkingen van het browserplatform.",
     "browserRestriction-actionTriggered-websdk": "De actie werd geactiveerd, maar kan niet uitgevoerd worden vanwege beperkingen van het browserplatform.",
     "fullscreen": "Dit document probeert Foxit PDF Editor op volledig scherm weer te geven. In deze modus is het mogelijk documenten te presenteren die er als andere toepassingen uitzien, inclusief toepassingen waarvoor uw persoonlijke gegevens zijn vereist. Wilt u toestaan dat via dit document de volledige schermmodus automatisch wordt ingeschakeld?"
   },
@@ -221,7 +222,7 @@
         "title": "Tekst toevoegen"
       },
       "comboField": {
-        "title": "Keuzelijst met invoervak toevoegen"
+        "title": "Combinatieveld toevoegen"
       },
       "predefinedText": {
         "text": "Voorgedefinieerde tekst",
@@ -460,6 +461,7 @@
       "page-title": "Pagina {{pageNumber}}",
       "group-title": "{{groupName}} {{count}}",
       "comment-dropdown": {
+        "reply": "Antwoord",
         "copy-text": "Tekst kopiëren",
         "edit-text": "Bewerken",
         "delete": "Verwijderen",
@@ -749,7 +751,7 @@
       "warning": "Sorry, de waarden moeten tussen {{min}} en {{max}} zijn."
     },
     "paragraphWordSpacingDialog": {
-      "title": "Woordruimte",
+      "title": "Afstand tussen woorden",
       "info": "U kunt de tekstregel uitbreiden of comprimeren door gebruik te maken van verschillende woordruimtes:",
       "expandedBy": "Uitbreiden met:",
       "point": "Punt",
@@ -866,7 +868,7 @@
     },
     "paragraph": {
       "bullets": "Opsommingstekens",
-      "numbers": "Nummers",
+      "numbers": "Cijfers",
       "alignLeft": "Links uitlijnen",
       "alignCenter": "Centreren",
       "alignRight": "Rechts uitlijnen",
@@ -875,7 +877,7 @@
       "decreaseIndent": "Inspringing verkleinen",
       "lineSpacing": "Regelafstand",
       "paragraphSpacing": "Alinea-afstand",
-      "wordSpacing": "Woordruimte",
+      "wordSpacing": "Afstand tussen woorden",
       "characterScale": "Tekenschaal"
     },
     "split": {
@@ -903,15 +905,15 @@
         "horizontally": "Horizontaal"
       },
       "rotate": {
-        "clockwise": "Objecten met de klok mee draaien",
-        "counterClockwise": "Roteer objecten tegen de klok in",
+        "clockwise": "Objecten rechtsom draaien",
+        "counterClockwise": "Objecten linksom draaien",
         "flipHorizontally": "Horizontaal draaien",
         "flipVertically": "Verticaal draaien",
         "customizeRotation": "Draaien aanpassen"
       },
       "zOrder": {
-        "sendToBack": "Naar achteren",
-        "sendToFront": "Naar voren"
+        "sendToBack": "Naar achter brengen",
+        "sendToFront": "Naar voor brengen"
       }
     },
     "effect": {
@@ -929,7 +931,9 @@
       "dashType": "Type streepje",
       "lineCap": "Regelmarkering",
       "lineJoin": "Lijnbinding",
-      "miterLimit": "Versteklimiet"
+      "miterLimit": "Versteklimiet",
+      "sample": "Voorbeeld",
+      "opacity": "Transparantie:"
     },
     "shadingStyle": {
       "gradientStops": "Kleurovergangsbeëindigingen",
@@ -1074,8 +1078,8 @@
         "name": "Positie",
         "left": "Links:",
         "right": "Rechts:",
-        "top": "Bovenaan:",
-        "bottom": "Onderaan:",
+        "top": "Boven:",
+        "bottom": "Onder:",
         "width": "Breedte:",
         "height": "Hoogte:",
         "required": "Wijzig de hoogte en breedte niet wanneer de positie wordt gewijzigd."
@@ -1142,6 +1146,7 @@
     },
     "warning": "Waarschuwing",
     "error": {
+      "pleaseUncheckMultiLine": "Kan opmaak niet toepassen op tekst met meerdere regels. Indien u de opmaak wilt toepassen gaat u naar het tabblad 'Opties' en schakelt u 'Meerdere regels' uit.",
       "noRedactionLicense": "De huidige module is niet gelicentieerd",
       "noRedactionApplyPermission": "Toepassen van redacties niet toegestaan",
       "fileFormatError": "Bestandsindeling onjuist",
@@ -1175,6 +1180,7 @@
       "name": "Naam:",
       "issue": "Vrijgegeven door:",
       "usage": "Gebruik:",
+      "extUsage": "Uitgebreid sleutelgebruik:",
       "from": "Geldig van:",
       "to": "Geldig tot:",
       "email": "E-mailadres:",
@@ -1226,7 +1232,7 @@
       "height": "Hoogte",
       "catagoryHolder": "Invoer of categorie selecteren.",
       "selectSource": "Bestand",
-      "selectLocal": "Bladeren...",
+      "selectLocal": "Bladeren",
       "addLink": "Voer de URL van het bestand in",
       "categoryPlaceholder": "<een nieuwe categorie een naam geven>",
       "namePlaceholder": "Nieuwe stempel",
@@ -1577,6 +1583,7 @@
     "ok": "OK",
     "cancel": "Annuleren",
     "alert-title": "",
+    "alert-message": "",
     "prompt-title": "",
     "prompt-message": "",
     "confirm-title": "",
@@ -1585,27 +1592,27 @@
   },
   "signDocument": {
     "nohandlers": "Registreer eerst de ondertekenende verwerkers (Call PDFUI.registerSignatureHandler(...)).",
-    "ap-title": "Handtekeningsstijl configureren",
+    "ap-title": "Handtekeningstijl configureren",
     "title": "Document ondertekenen",
     "sign-as": "Ondertekenen als",
-    "property-title": "Tekst voor ondertekening",
+    "property-title": "Tekst configureren",
     "location": "Locatie",
     "reason": "Reden",
     "lock-document": "Document vergrendelen na ondertekening",
     "appearance": "Vormgeving",
     "background": "Achtergrond",
     "image-setting": "Instelling van de afbeelding",
-    "text-setting": "Instelling van de tekst",
+    "text-setting": "Tekst configureren",
     "signed-by": "Digitaal ondertekend door",
     "name": "Naam",
-    "DN": "DN",
-    "tag": "Tag afbeelding",
+    "DN": "Distinguished Name",
+    "tag": "Afbeelding",
     "date": "Datum",
     "version": "Versie",
-    "label": "Label",
+    "label": "Labels",
     "draw": "Tekenen",
     "no-left": "Geen",
-    "owner": "Eigenaar",
+    "owner": "Naam",
     "permission": "Toegestane acties na ondertekening",
     "noSpecified": "Standaard bewaren",
     "permNone": "Geen wijzigingen toegestaan",
@@ -1613,7 +1620,8 @@
     "permAnnot": "Opmerkingen toevoegen, formulier invullen en bestaande handtekeningvelden ondertekenen",
     "sign": "Ondertekenen",
     "showSignProperty": "Eigenschappen handtekening weergeven...",
-    "certifyDoc": "Document certificeren"
+    "certifyDoc": "Document certificeren",
+    "notSupportPagingSeal": "Documenten ondertekenen ondersteunt verzegeling van bladeren niet."
   },
   "verifySign": {
     "title": "Resultaat van verificatie handtekening",
@@ -1651,6 +1659,7 @@
     "verifyUnknown": "De status van het gewijzigde document is onbekend.",
     "changeLegal": "Het document werd gewijzigd buiten het toepassingsgebied van de handtekening, maar de wijziging is toegestaan.",
     "changeIllegal": "Het document werd gewijzigd buiten het toepassingsgebied van de handtekening en de wijziging maakt de handtekening ongeldig.",
+    "errorByteRange": "Er zijn enkele fouten in de indeling of informatie in de handtekening",
     "issuerInvalid_mac": "De identiteit van de ondertekenaar is ongeldig.",
     "issuerInvalid": "Certificaat van ondertekenaar is ongeldig",
     "issuerRevoke": "De identiteit van de ondertekenaar was op dit moment ongeldig, omdat het certificaat na controle is ingetrokken.",
@@ -1734,10 +1743,9 @@
     "hashAlgorithm": "Hash-algoritme:",
     "signatureAlgorithm": "Handtekeningsalgoritme:",
     "timestampDetailTitle": "Details van tijdstempel:",
-    "timestampDes": "Tijdstempel wordt ingesloten in de handtekening en wordt net als documenten ondertekend. Een tijdstempelhandtekening is pas geldig als u de tijdstempelautoriteit hebt vertrouwd die de tijdstempel heeft ondertekend.",
-    "timeStampShowCertificateDes": "Klik op Certificaat weergeven voor details over het verifiëren van de tijdstempelhandtekening. Klik op Toevoegen aan vertrouwde certificaten, om deze te vertrouwen.",
-    "timestampAuthority": "Tijdstempelautoriteit:",
-    "errorByteRange": "Er zijn enkele fouten in de opmaak of informatie in de handtekening"
+    "timestampDes": "Tijdstempels worden ingesloten in de handtekening en worden net als documenten ondertekend. Een tijdstempelhandtekening is pas geldig als u de tijdstempelautoriteit hebt vertrouwd die de tijdstempel heeft ondertekend.",
+    "timeStampShowCertificateDes": "Klik op Certificaat weergeven voor details over het verifiëren van de tijdstempelhandtekening. Klik op Toevoegen aan vertrouwde certificaten om deze te vertrouwen.",
+    "timestampAuthority": "Tijdstempelautoriteit:"
   },
   "certificate": {
     "manageTrustDlgTitle": "Vertrouwen van handtekening beheren",
@@ -1754,7 +1762,16 @@
     "trustForLabel": "Als het ondertekenen is gelukt, kunt u dit certificaat vertrouwen geven aan:",
     "validatingSignaturesLabel": "Handtekeningen valideren",
     "validatingCertifiedDocumentLabel": "Gecertificeerde documenten goedkeuren",
-    "addToTrustedCertificatesBtn": "Toegevoegd aan vertrouwde certificaten"
+    "addToTrustedCertificatesBtn": "Toegevoegd aan vertrouwde certificaten",
+    "summary": "Samenvatting",
+    "revocation": "Intrekking",
+    "notPerformed": "Er zijn geen intrekkingscontroles uitgevoerd",
+    "uncheck": "Kan niet bepalen of het geselecteerde certificaat geldig is.",
+    "details": "Details",
+    "detailsInfo": "Het geselecteerde certificaat is een vertrouwensanker of is een certificaat boven het vertrouwensanker of is een certificaat boven het vertrouwensanker in de certificaatketen (zie het tabblad Vertrouwen voor details). Er worden geen intrekkingscontroles uitgevoerd voor dergelijke certificaten, ze worden inherent als betrouwbaar beschouwd.",
+    "notTrust": "Het geselecteerde certificaat is niet gekoppeld aan een certificaat dat is aangewezen als vertrouwd anker (zie het tabblad Vertrouwen voor meer informatie). Het resultaat is dat er geen intrekkingscontroles zijn uitgevoerd op dit certificaat.",
+    "signerDetail": "Details ondertekenaar",
+    "checkRevocation": "Intrekking controleren"
   },
   "phantompdfOnlineTitle": "PDF Editor",
   "portfolio": {
@@ -2131,7 +2148,87 @@
       "newCode": "Redactiecode"
     }
   },
+  "popupNote": {
+    "close": "Pop-upnotitie sluiten",
+    "closeAll": "Alle pop-ups sluiten"
+  },
   "esign": {
     "tabTitle": "Elektronische handtekening"
+  },
+  "ai": {
+    "product": "AI-assistent"
+  },
+  "colorPicker": {
+    "Title": "Kleur kiezer",
+    "Ok": "OK",
+    "No": "Annuleren",
+    "customColor": "Aangepaste kleur",
+    "customColorPropTitle": "Wijzig de geselecteerde aangepaste kleur door het kleurenpalet te volgen",
+    "customBorderColor": "Randkleur",
+    "customFillColor": "Opvulkleur",
+    "noFillColor": "Geen vulkleur",
+    "editColor": "Kleur bewerken"
+  },
+  "lang": {
+    "ar-001": "Arabisch",
+    "ar-SA": "Arabisch Saudi-Arabië",
+    "bn-BD": "Bangla Bangladesh",
+    "bn-IN": "Bangla India",
+    "ca-ES": "Catalaans",
+    "cs-CZ": "Tsjechisch Tsjechië",
+    "da-DK": "Deens Denemarken",
+    "de-AT": "Duits Oostenrijk",
+    "de-CH": "Duits Zwitserland",
+    "de-DE": "Duits",
+    "el-GR": "Grieks",
+    "en-AU": "Engels Australië",
+    "en-CA": "Engels Canada",
+    "en-GB": "Nederlands Nederland",
+    "en-IE": "Engels Ierland",
+    "en-IN": "Engels India",
+    "en-NZ": "Engels Nieuw-Zeeland",
+    "en-US": "Engels Verenigde Staten",
+    "en-ZA": "Nederlands Zuid-Afrika",
+    "es-AR": "Spaans Argentinië",
+    "es-CL": "Spaans Chili",
+    "es-CO": "Spaans Columbia",
+    "es-ES": "Spaans",
+    "es-MX": "Spaans Mexico",
+    "es-US": "Spaanse Verenigde Staten",
+    "fi-FI": "Fins Finland",
+    "fr-BE": "Frans België",
+    "fr-CA": "Frans-Canada",
+    "fr-CH": "Frans Zwitserland",
+    "fr-FR": "Frans",
+    "he-IL": "Hebreeuws Israël",
+    "hi-IN": "Hindi India",
+    "hu-HU": "Hongaars Hongarije",
+    "hr-HR": "Kroatisch",
+    "id-ID": "Indonesisch",
+    "it-CH": "Italiaans Zwitserland",
+    "it-IT": "Italiaans",
+    "ja-JP": "Japans",
+    "ko-KR": "Koreaans",
+    "ms-MY": "Maleisisch",
+    "nb-NO": "Noors Bokmål",
+    "nl-BE": "Nederlands België",
+    "nl-NL": "Nederlands Nederland",
+    "no-NO": "Noors Noorwegen",
+    "pl-PL": "Pools Polen",
+    "pt-BR": "Nederlands Nederland\n\nPortugees Brazilië",
+    "pt-PT": "Portugees Portugal",
+    "ro-RO": "Roemeens Roemenië",
+    "ru-RU": "Russisch",
+    "sk-SK": "Slovaaks Slowakije",
+    "sv-SE": "Zweeds Zweden",
+    "ta-IN": "Tamil India",
+    "ta-LK": "Tamil Sri Lanka",
+    "th-TH": "Thai",
+    "tr-TR": "Turkije in Turkije",
+    "uk-UA": "Oekraïens",
+    "vi-VN": "Vietnamees",
+    "zh-CN": "Chinees",
+    "zh-HK": "Chinees Hongkong",
+    "zh-TW": "Chinees Taiwan"
   }
 }

@@ -48,6 +48,11 @@
       "text": "繼續",
       "desc": "恢復 Shift+Ctrl+C",
       "descSub": "繼續大聲朗讀"
+    },
+    "voice": {
+      "text": "聲音",
+      "desc": "聲音",
+      "descSub": "選擇聲音"
     }
   },
   "error": {

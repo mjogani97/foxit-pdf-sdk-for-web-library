@@ -48,11 +48,16 @@
       "text": "Fortsetzen",
       "desc": "Fortsetzen Umschalt+Strg+C",
       "descSub": "Vorlesen wiederaufnehmen"
+    },
+    "voice": {
+      "text": "Stimme",
+      "desc": "Stimme",
+      "descSub": "Wählen Sie Stimme aus"
     }
   },
   "error": {
     "document-not-openned": "Laut Vorlesen ist nicht möglich, weil kein Dokument geöffnet ist.",
     "permDenyCopyContent": "Sie haben keine Berechtigung zum Kopieren vom Inhalt aus diesem Dokument.",
-    "interrupted": "Hinweis: Der Text-to-Speech-Synthesizer wurde durch eine andere Seite unterbrochen. Um die Text-zu-Sprache-Funktion fortzusetzen, klicken Sie einfach erneut auf die Schaltfläche „Aktuelle Seite lesen“ oder „Von aktueller Seite lesen“. Wenn das Problem weiterhin besteht, schließen Sie bitte alle anderen Seiten oder Anwendungen, die möglicherweise Audio verwenden."
+    "interrupted": "Hinweis: Der Sprachausgabegenerator ist von einer anderen Seite unterbrochen worden. Zum Fortsetzen der Sprachausgabe klicken Sie erneut auf die Taste „Ab aktueller Seite vorlesen“ oder „Aktuelle Seite vorlesen“. Besteht das Problem weiterhin, schließen Sie alle anderen Seiten oder Anwendungen, auf denen die Tonausgabe genutzt wird."
   }
 }

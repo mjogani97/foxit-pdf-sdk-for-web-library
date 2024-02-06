@@ -10,7 +10,7 @@
     "alignJustify": "Giustifica",
     "wordSpacing": "Spaziatura delle parole",
     "lineSpacing": "Interlinea",
-    "characterScale": "Scala dei caratteri"
+    "characterScale": "Proporzioni caratteri"
   },
   "dropdowns": {
     "editFontFamily": "Carattere",
