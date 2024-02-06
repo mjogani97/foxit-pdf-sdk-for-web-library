@@ -1,1 +1,1 @@
-# Foxit PDF
+# Foxit PDF SDK for web
