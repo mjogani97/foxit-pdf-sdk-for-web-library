@@ -1,1 +1,1 @@
-# foxit-pdf-sdk-for-web-library
+# Foxit PDF
